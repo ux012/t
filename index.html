@@ -83,12 +83,16 @@
   .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));padding:40px 0 90px}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:.22s ease;position:relative}
   .card:hover{transform:translateY(-4px);border-color:var(--gold-dim);box-shadow:0 18px 40px -22px rgba(0,0,0,.9),0 0 0 1px rgba(201,162,75,.12)}
+  /* 사진 영역: 비율 4 : 4.4 (= 10:11 세로형). 권장 이미지 800×880px */
   .photo{position:relative;aspect-ratio:4/4.4;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
   .grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
   .silhouette{position:absolute;right:-14px;bottom:-10px;font-size:140px;line-height:1;opacity:.10;filter:grayscale(1);user-select:none;pointer-events:none}
-  .photo-cap{position:relative;font-family:var(--ko-serif);font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.45;text-shadow:0 1px 8px rgba(0,0,0,.6)}
-  .badge-frame{position:absolute;top:14px;left:14px;z-index:2;font-family:var(--display);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:4px 9px;border-radius:3px}
-  .heat{position:absolute;top:13px;right:14px;z-index:2;display:flex;align-items:center;gap:6px;font-size:11px;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12)}
+  /* 실제 인물 이미지 (있을 때만 렌더). 그라데이션/실루엣 위를 cover로 덮음 */
+  .photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:1}
+  .photo-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to top, rgba(8,5,7,.62) 0%, rgba(8,5,7,.12) 38%, transparent 60%)}
+  .photo-cap{position:relative;z-index:3;font-family:var(--ko-serif);font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.45;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .badge-frame{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--display);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:4px 9px;border-radius:3px}
+  .heat{position:absolute;top:13px;right:14px;z-index:3;display:flex;align-items:center;gap:6px;font-size:11px;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12)}
   .heat .dot{width:7px;height:7px;border-radius:50%}
   .heat.on .dot{background:var(--heat);box-shadow:0 0 8px var(--heat)}
   .heat.off .dot{background:var(--muted2)}
@@ -108,8 +112,8 @@
   .stars .cnt{color:var(--muted2);font-size:11px;margin-left:4px}
   .open-link{font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-family:var(--display)}
   .card:hover .open-link{color:var(--gold)}
-  .flag{position:absolute;inset:0;border:1px solid var(--wine);border-radius:6px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(154,35,72,.25)}
-  .flag-tag{position:absolute;bottom:14px;left:14px;z-index:2;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#ffb9c8;background:rgba(122,29,58,.78);padding:4px 9px;border-radius:3px;font-family:var(--display)}
+  .flag{position:absolute;inset:0;border:1px solid var(--wine);border-radius:6px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(154,35,72,.25);z-index:4}
+  .flag-tag{position:absolute;bottom:14px;left:14px;z-index:4;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#ffb9c8;background:rgba(122,29,58,.78);padding:4px 9px;border-radius:3px;font-family:var(--display)}
 
   /* modal */
   .overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(5,3,5,.78);backdrop-filter:blur(6px);padding:clamp(16px,4vw,48px);overflow-y:auto}
@@ -117,6 +121,7 @@
   .sheet{width:min(720px,100%);background:var(--bg2);border:1px solid var(--line);border-radius:8px;overflow:hidden;animation:rise .32s cubic-bezier(.2,.8,.2,1);margin:auto}
   @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
   .sheet-head{position:relative;padding:30px clamp(22px,4vw,38px);border-bottom:1px solid var(--line);overflow:hidden}
+  .sheet-head.has-img{min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;background-position:center top;background-size:cover}
   .ph-no{position:relative;font-family:var(--display);font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.6);text-transform:uppercase}
   .ph-desc{position:relative;font-family:var(--ko-serif);font-size:13.5px;color:rgba(255,255,255,.85);margin-top:8px;max-width:80%;line-height:1.5}
   .close{position:absolute;top:18px;right:20px;z-index:5;width:34px;height:34px;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:18px;display:grid;place-items:center}
@@ -190,8 +195,8 @@
   .contact{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;border-bottom:1px solid rgba(51,39,47,.5);transition:.15s}
   .contact:hover{background:var(--surface)}
   .contact.active{background:var(--surface);box-shadow:inset 3px 0 0 var(--wine)}
-  .cavatar{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:18px;color:#fff;position:relative}
-  .cavatar .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg2)}
+  .cavatar{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:18px;color:#fff;position:relative;overflow:hidden}
+  .cavatar .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg2);z-index:2}
   .cavatar .od.on{background:var(--heat)}.cavatar .od.off{background:var(--muted2)}
   .cinfo{min-width:0;flex:1}
   .cinfo .cn{font-family:var(--ko-serif);font-size:14px;display:flex;justify-content:space-between;gap:6px}
@@ -206,6 +211,7 @@
   .thread-head .back{display:none;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
   .thread-head .nm{font-family:var(--ko-serif);font-size:15px}
   .thread-head .role-mini{font-size:11px;color:var(--gold)}
+  .thread-head .cavatar{overflow:hidden}
   .thread-body{flex:1;padding:22px 20px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:430px}
   .b{max-width:74%;padding:11px 15px;font-size:14px;line-height:1.55;border-radius:14px}
   .b.them{align-self:flex-start;background:var(--surface2);border:1px solid var(--line);border-bottom-left-radius:5px}
@@ -267,7 +273,7 @@
   .rec-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:28px}
   .rec{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:13px 15px;cursor:pointer;transition:.16s}
   .rec:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
-  .rec .ra{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:17px;color:#fff;flex:none}
+  .rec .ra{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:17px;color:#fff;flex:none;overflow:hidden}
   .rec .rn{font-family:var(--ko-serif);font-size:14px}
   .rec .rr{font-size:11.5px;color:var(--gold);margin-top:2px}
   .result-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
@@ -417,9 +423,14 @@
 </footer>
 
 <script>
-/* ============ CHARACTER DATA ============ */
+/* ============ CHARACTER DATA ============
+   img: 인물 이미지 경로. HTML 파일과 같은 위치에 images/ 폴더를 만들고 파일을 넣으세요.
+        권장 사이즈 800×880px (비율 4:4.4=10:11, 세로형), object-fit:cover 적용.
+        파일이 없으면 자동으로 기존 그라데이션 배경으로 폴백됩니다.
+============================================ */
 const DATA = [
   { nick:"카페라떼", real:"이지한", age:34, hw:"183cm · 78kg", tags:["오너","다정한 디그레이더","돔"], filters:["돔"],
+    img:"images/lee-jihan.jpg",
     accent:["#3a2a22","#6b4a35"], sil:"☕", frame:"#01 / 03", online:true, rating:0, count:0, flag:false, recTrait:["케어","디그레이딩"],
     photoDesc:"부드러운 갈색 눈, 짧고 단정한 갈색 머리. 카페 '온화'의 앞치마를 두른 온화한 다정훈남.",
     bio:"BDSM은 처음이지만, 다정하게 대해줄게요.",
@@ -430,6 +441,7 @@ const DATA = [
     replies:["천천히 와요, 안 급해요. 착하지.","오늘 하루는 어땠어요? 다 들어줄게요.","무리하지 말고, 힘들면 바로 말해줘요. 알겠죠?","라떼 한 잔 만들어 둘 테니까 편하게 와요."] },
 
   { nick:"오빠함믿어봐라", real:"마세진", age:42, hw:"189cm · 근육질 마초", tags:["스팽커","하드 디그레이더","브리딩"], filters:["스팽커"],
+    img:"images/ma-sejin.jpg",
     accent:["#3a1f1a","#7a3322"], sil:"🍲", frame:"#01 / 02", online:true, rating:4.6, count:4, flag:false, recTrait:["사디즘","디그레이딩"],
     photoDesc:"긴 흑발을 아래로 묶고 하얀 머리띠. 3대째 국밥집을 잇는 근육질 마초.",
     bio:"겉은 야생마라도, 내 사람한테는 따땃한 뚝배기 같은 놈입니더.",
@@ -441,6 +453,7 @@ const DATA = [
     replies:["아이고, 이제사 답하노. 밥은 묵었나.","오빠가 따끈하게 한 그릇 말아둘 테니 들어와라.","걱정 마라, 아프게는 안 한다. 다 봐가면서 한다 아이가.","니 오늘따라 와이리 이쁘노. 얼릉 온나."] },
 
   { nick:"페인킬러", real:"지선하", age:32, hw:"185cm · 잔근육", tags:["톱 도미넌트","하드코어 사디스트"], filters:["사디스트","돔"],
+    img:"images/ji-seonha.jpg",
     accent:["#1c1d24","#3c3f52"], sil:"🏍️", frame:"#01 / 04", online:false, rating:4.8, count:5, flag:false, recTrait:["사디즘","마조히즘"],
     photoDesc:"매끈한 잔근육에 블랙 셔츠, 어깨에 닿는 흑발과 은테 안경. 냉철한 인상, 오토바이가 취미. 부동산 사업가.",
     bio:"고통은 아름답다. 단, 완벽한 합의와 룰 아래에서만.",
@@ -452,6 +465,7 @@ const DATA = [
     replies:["한계랑 세이프워드부터 정하자. 그게 먼저야.","속이지 마. 그게 너를 지키는 유일한 룰이니까.","받아준 만큼은 책임진다. 그건 약속해.","오늘 컨디션 어때. 솔직하게."] },
 
   { nick:"키다리", real:"정해수", age:47, hw:"185cm · 76kg", tags:["대디돔","티징","훈육"], filters:["대디","돔"],
+    img:"images/jeong-haesu.jpg",
     accent:["#15161c","#2b2d3a"], sil:"🎩", frame:"#01 / 05", online:true, rating:4.7, count:5, flag:false, recTrait:["케어","펫"],
     photoDesc:"완벽한 수트 핏, 슬릭백 검은 머리, 서늘한 눈빛에 우아한 아우라. 정한그룹 전무.",
     bio:"다친 날개도, 꺾인 마음도. 이 아빠 품에서는 다 괜찮아진단다.",
@@ -463,6 +477,7 @@ const DATA = [
     replies:["우리 강아지, 밥은 챙겨 먹었어?","오늘 힘든 일 있었으면 다 말해도 돼. 아빠가 다 해줄게.","착하지. 예쁜 짓은 나한테만 하는 거야, 알지?","이리 온. 무릎에 앉아서 천천히 얘기해."] },
 
   { nick:"QuietBloom", real:"현석진", age:37, hw:"183cm", tags:["마스터","톱 도미넌트","디그레이더"], filters:["돔"],
+    img:"images/hyeon-seokjin.jpg",
     accent:["#1a1f1b","#33422f"], sil:"🌿", frame:"#01 / 03", online:false, rating:4.5, count:3, flag:false, recTrait:["디그레이딩","케어"],
     photoDesc:"단정한 베이지색 머리, 차분한 회색 눈. 누구에게나 호감을 사는 외모. 고등학교 교사",
     bio:"차분하게 스며들어, 당신의 세계를 온전히 지배하고 싶습니다.",
@@ -475,6 +490,7 @@ const DATA = [
     replies:["프로필 끝까지 읽어주셨네요. 흔치 않아서 기억에 남았어요.","저는 한 번 정하면, 그 사람한테 전부를 거는 편이라.","천천히 알아가요. 급할 거 없어요.","무엇이든 솔직하게 말해줘요. 그게 가장 중요하니까."] },
 
   { nick:"MidnightChef", real:"권대철", age:40, hw:"탄탄한 근육질", tags:["프라이멀 헌터","엣지플레이","롤플레잉"], filters:["프라이멀"],
+    img:"images/kwon-daecheol.jpg",
     accent:["#231a14","#4d3320"], sil:"🥃", frame:"#01 / 03", online:true, rating:4.4, count:4, flag:false, recTrait:["프라이멀","롤플레이"],
     photoDesc:"목을 덮는 갈색 슬릭백 헤어, 갈색 눈, 살짝 어두운 피부에 탄탄한 근육질. 심야 고급 이자카야 사장 겸 셰프.",
     bio:"씨발, 오늘 냄새 와이리 좋노. 술 한잔하고 밤새 나랑 미친 짓 안 할래?",
@@ -486,6 +502,7 @@ const DATA = [
     replies:["와… 이 시간에 연락 온 게 와이래 반갑노.","가게 마감했다. 한잔하러 안 올래?","오늘은 무슨 컨셉으로 놀아줄까. 정해놨나?","천천히 와라. 도망가도 어차피 잡힌다 아이가."] },
 
   { nick:"리가", real:"최재욱", age:42, hw:"거구 · 근육질", tags:["리가(결박)","웨이트돔","억압플레이"], filters:["결박"],
+    img:"images/choi-jaeuk.jpg",
     accent:["#16181a","#2c3034"], sil:"🔗", frame:"#01 / 02", online:false, rating:4.7, count:3, flag:false, recTrait:["바운디지","케어"],
     photoDesc:"눈을 덮는 앞머리, 목을 덮는 흑발, 검은 눈. 작업복 차림의 창고형 철물점 사장. 게으른 맹수 같은 무표정.",
     bio:"…내 옆에 가만히 있어라. 도망 안 가면 절대 안 다치게 한다.",
@@ -497,6 +514,7 @@ const DATA = [
     replies:["…메시지 봤다.","말 많은 거 안 좋아한다. 대신 옆에 두면 안 놓는다.","가만있어라. 다 내가 한다.","니 다칠까 봐 그란다. 알제."] },
 
   { nick:"알아서기어", real:"차지혁", age:29, hw:"186cm · 마른 근육", tags:["하드돔","브랫테이머"], filters:["돔","주의"],
+    img:"images/cha-jihyeok.jpg",
     accent:["#0f0c10","#241a2a"], sil:"⛓️", frame:"#01 / 04", online:true, rating:1.8, count:5, flag:true, recTrait:[],
     photoDesc:"애쉬그레이 젖은 머리, 연갈색 삼백안, 입술·눈썹·배꼽 피어싱. 목부터 손등까지 블랙워크 타투, 오픈 셔츠와 실버 체인의 퇴폐미.",
     bio:"딴 새끼 생각했어? 완전 개보지네. — 장난이고, 나쁜 남자 스타일 어떤데?",
@@ -509,6 +527,13 @@ const DATA = [
     secret:{role:"톡식 사디스트 / 하드코어 디그레이딩 (프로필 비공개)", txt:"※실제 성향은 프로필에 절대 노출되지 않음. 동의 없는 한계 돌파, 세이프워드 묵살, 러브밤빙 후 방치·읽씹로 스스로 매달리게 만드는 <b>심리적 학대 스페셜리스트</b>. 상대가 안정적인 타돔에게 정착하려 하면 스토킹·협박으로 파멸적 집착. — 이 카드는 시스템상 ⚠ 주의 플래그 처리됨."},
     replies:["왜 읽씹해. 딴 새끼 만나느라 바빴어?","장난이고~ 보고 싶었어. 한 번만 보자, 진짜 한 번만.","너 내 거잖아. 어디 가려고.","화났어? 미안. 한 번만 더 믿어줘, 응?"] }
 ];
+
+/* 인물 이미지를 원형/배너 등에 공통으로 렌더하는 헬퍼. 로드 실패 시 이모지 실루엣으로 폴백. */
+function avatarInner(p){
+  return p.img
+    ? `<img src="${p.img}" alt="${p.real}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" onerror="this.replaceWith(document.createTextNode('${p.sil}'))">`
+    : p.sil;
+}
 
 /* ============ ROUTER ============ */
 const VIEWS = ['explore','lounge','messages','profile'];
@@ -535,10 +560,11 @@ function cardHTML(p,i){
     ${p.flag?'<div class="flag"></div>':''}
     <div class="photo" style="background:${grad}">
       <div class="grain"></div><div class="silhouette">${p.sil}</div>
+      ${p.img?`<img class="photo-img" src="${p.img}" alt="${p.real}" onerror="this.remove()"><div class="photo-scrim"></div>`:''}
       <span class="badge-frame">📷 ${p.frame}</span>
       <span class="heat ${p.online?'on':'off'}"><span class="dot"></span>${p.online?'접속 중':'미접속'}</span>
       ${p.flag?'<span class="flag-tag">⚠ 주의 플래그</span>':''}
-      <div class="photo-cap">${p.photoDesc}</div>
+      ${p.img?'':`<div class="photo-cap">${p.photoDesc}</div>`}
     </div>
     <div class="card-body">
       <div class="name-row"><span class="nick">${p.nick}</span><span class="meta">${p.age} · ${p.hw.split(' · ')[0]}</span></div>
@@ -561,9 +587,12 @@ function renderGrid(){
 }
 function sheetHTML(p,i){
   const grad=`linear-gradient(150deg, ${p.accent[1]}, ${p.accent[0]})`;
+  // 이미지가 있으면 상단 배너에 cover 배경 + 어두운 스크림(글자 가독성), 없으면 그라데이션
+  const headBg = p.img
+    ? `background:linear-gradient(to top, rgba(8,5,7,.88), rgba(8,5,7,.18)), url('${p.img}'), ${grad};`
+    : `background:${grad};`;
   const secret=p.secret?`<details class="secret"><summary>🔒 스포 — 비공개 성향 보기</summary><div class="inner"><b>${p.secret.role}</b><br>${p.secret.txt}</div></details>`:'';
-  return `<div class="sheet-head" style="background:${grad}"><div class="grain"></div>
-      <div class="close" onclick="closeSheet()">×</div>
+  return `<div class="sheet-head ${p.img?'has-img':''}" style="${headBg}"><div class="close" onclick="closeSheet()">×</div>
       <span class="ph-no">📷 ${p.frame}</span><div class="ph-desc">${p.photoDesc}</div></div>
     <div class="sheet-id">
       <span class="heat ${p.online?'on':'off'}" style="position:static;display:inline-flex;margin-bottom:10px"><span class="dot"></span>${p.online?'접속 중':'미접속'}</span>
@@ -702,7 +731,7 @@ function renderContacts(){
     const last=convos[i][convos[i].length-1];
     const grad=`linear-gradient(135deg,${p.accent[1]},${p.accent[0]})`;
     return `<div class="contact" data-i="${i}" onclick="openThread(${i})">
-      <div class="cavatar" style="background:${grad}">${p.sil}<span class="od ${p.online?'on':'off'}"></span></div>
+      <div class="cavatar" style="background:${grad}">${avatarInner(p)}<span class="od ${p.online?'on':'off'}"></span></div>
       <div class="cinfo">
         <div class="cn"><span>${p.nick}</span>${p.flag?'<span class="badge" style="background:var(--wine-soft)">⚠</span>':''}</div>
         <div class="cp">${last.me?'나: ':''}${last.text}</div>
@@ -720,7 +749,7 @@ function openThread(i){
   thread.innerHTML=`
     <div class="thread-head">
       <button class="back" onclick="backToContacts()">‹</button>
-      <div class="cavatar" style="width:36px;height:36px;font-size:15px;background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${p.sil}</div>
+      <div class="cavatar" style="width:36px;height:36px;font-size:15px;background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${avatarInner(p)}</div>
       <div><div class="nm">${p.nick}</div><div class="role-mini">${p.tags[0]} · ${p.online?'접속 중':'미접속'}</div></div>
     </div>
     <div class="thread-body" id="thread-body"></div>
@@ -844,7 +873,6 @@ function renderQuestion(){
     </div>`;
 }
 function answer(oi){
-  // remove previous answer's scores if re-answering
   if(answers[qIndex]!==null){
     const prev=QUESTIONS[qIndex].opts[answers[qIndex]].s;
     for(const k in prev)scores[k]=(scores[k]||0)-prev[k];
@@ -882,17 +910,14 @@ function showResult(){
   else if(sub>dom){base="서브미시브";baseEm="🎀";baseDesc="믿는 사람에게 자신을 맡기고 따를 때 깊은 만족과 안정을 느끼는 성향이에요. 좋은 주인을 알아보는 눈이 가장 큰 무기입니다.";}
   else {base="스위치";baseEm="🔀";baseDesc="지배와 복종 사이를 오가는 균형형이에요. 상대에 따라 색이 달라지는 타입입니다.";}
 
-  // 상위 테마 (care 제외)
   const themeKeys=Object.keys(THEMES).filter(k=>(scores[k]||0)>0).sort((a,b)=>(scores[b]||0)-(scores[a]||0));
   const top=themeKeys.slice(0,3);
   const primaryName = top.length? themeName(top[0], base) : "";
 
-  // 포지션에 맞춰 이름 붙인 태그
   let roleTags=[base];
   top.forEach(k=>roleTags.push(themeName(k, base)));
   roleTags=[...new Set(roleTags)];
 
-  // 막대 (애프터케어는 별도 척도)
   const barData=[
     {l:"주도 ↔ 복종", a:"도미넌트", b:"서브미시브", twoSided:true, v: 50 + (dom-sub)*11},
     {l:"양육·돌봄 (대디↔리틀)", a:"낮음", b:"높음", v: (scores.nurture||0)*15+8},
@@ -902,7 +927,6 @@ function showResult(){
     {l:"애프터케어 중시", a:"낮음", b:"높음", v: (scores.care||0)*15+10},
   ].map(x=>({...x,v:Math.max(5,Math.min(95,x.v))}));
 
-  // 추천: 상위 테마 → 캐릭터 recTrait 매칭
   const recMap={nurture:["케어","펫"],pain:["사디즘","마조히즘"],bondage:["바운디지"],degr:["디그레이딩"],primal:["프라이멀","롤플레이"],pet:["펫"],role:["롤플레이"],brat:[]};
   let recScores=DATA.map((p,i)=>{
     if(p.flag) return {i,sc:-99};
@@ -913,7 +937,6 @@ function showResult(){
   let recs=recScores.filter(r=>r.sc>0).slice(0,3).map(r=>r.i);
   if(recs.length<2){ DATA.forEach((p,i)=>{ if(!p.flag && recs.length<2 && !recs.includes(i)) recs.push(i); }); }
 
-  // 제목: 섭이면 "리틀 서브", 돔이면 "대디돔" 식으로 포지션과 모순 없게
   let myLabel;
   if(base==="스위치") myLabel = primaryName? `${primaryName} 스위치` : "스위치";
   else if(primaryName) myLabel = `${primaryName} ${base}`;
@@ -943,7 +966,7 @@ function showResult(){
       <div class="rec-title">— 당신과 잘 맞을 후보 —</div>
       <div class="rec-list">
         ${recs.map(i=>{const p=DATA[i];return `<div class="rec" onclick="openSheet(${i})">
-          <div class="ra" style="background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${p.sil}</div>
+          <div class="ra" style="background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${avatarInner(p)}</div>
           <div><div class="rn">${p.nick}</div><div class="rr">${p.tags[0]}</div></div></div>`;}).join('')}
       </div>
       <div class="result-actions">
