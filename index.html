@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAMING — BDSM 매칭</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,500&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --bg:#0E0A0D; --bg2:#140E12; --surface:#1B141A; --surface2:#241B22;
+    --line:#33272F; --wine:#9A2348; --wine-soft:#7a1d3a;
+    --gold:#C9A24B; --gold-dim:#8d7335; --heat:#E8527A;
+    --text:#EFE6E2; --muted:#9D8B92; --muted2:#6E5E66;
+    --ko-serif:"Noto Serif KR",serif; --display:"Bodoni Moda",serif;
+    --body:"Pretendard","Noto Serif KR",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(154,35,72,.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(201,162,75,.08), transparent 55%),
+      var(--bg);
+    color:var(--text); font-family:var(--body); line-height:1.6;
+    -webkit-font-smoothing:antialiased; letter-spacing:.01em; min-height:100vh;
+  }
+  ::selection{background:var(--wine);color:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+
+  /* top bar */
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,5vw,64px);background:rgba(14,10,13,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+  .brand .chain{font-size:18px}
+  .wordmark{font-family:var(--display);font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:.42em;text-indent:.42em;color:var(--text)}
+  .nav{display:flex;align-items:center;gap:6px}
+  .nav button{background:none;border:none;color:var(--muted);font-family:var(--body);font-size:14px;
+    cursor:pointer;padding:8px 14px;border-radius:6px;transition:.18s;letter-spacing:.02em}
+  .nav button:hover{color:var(--text)}
+  .nav button.active{color:var(--gold);background:rgba(201,162,75,.08)}
+  .nav .me{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--wine),var(--gold-dim));
+    display:grid;place-items:center;font-size:13px;color:#fff;border:1px solid var(--line);cursor:pointer;margin-left:6px}
+  .nav .me.active{box-shadow:0 0 0 2px var(--gold)}
+
+  .view{display:none;animation:fade .4s ease}
+  .view.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* hero */
+  .hero{padding:clamp(48px,8vw,104px) 0 clamp(30px,4vw,48px)}
+  .eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.46em;font-size:11.5px;color:var(--gold);margin-bottom:24px}
+  .hero h1{font-family:var(--ko-serif);font-weight:600;font-size:clamp(32px,6vw,72px);line-height:1.08;letter-spacing:-.01em;margin-bottom:24px}
+  .hero h1 em{font-family:var(--display);font-style:italic;font-weight:500;color:var(--gold)}
+  .hero h1 .one{color:var(--heat)}
+  .hero p.lede{max-width:560px;color:var(--muted);font-size:16px;border-left:2px solid var(--wine);padding-left:18px}
+  .stat-row{display:flex;flex-wrap:wrap;gap:30px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line)}
+  .stat .n{font-family:var(--display);font-size:28px;font-weight:700}
+  .stat .l{font-size:12px;color:var(--muted2);letter-spacing:.12em;text-transform:uppercase}
+
+  /* section heading */
+  .sec-head{padding:clamp(40px,7vw,80px) 0 26px}
+  .sec-head .eyebrow{margin-bottom:14px}
+  .sec-head h2{font-family:var(--ko-serif);font-size:clamp(26px,4vw,42px);font-weight:600}
+  .sec-head p{color:var(--muted);margin-top:10px;max-width:560px}
+
+  /* controls (explore) */
+  .controls{position:sticky;top:69px;z-index:40;background:rgba(14,10,13,.82);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .controls-inner{padding:16px clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:14px;max-width:1240px;margin:0 auto}
+  .search{flex:1 1 220px;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 18px;color:var(--muted)}
+  .search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:var(--body);font-size:14px}
+  .search input::placeholder{color:var(--muted2)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12.5px;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:7px 15px;border-radius:999px;cursor:pointer;transition:.18s;white-space:nowrap}
+  .chip:hover{border-color:var(--gold-dim);color:var(--text)}
+  .chip.active{background:var(--wine);border-color:var(--wine);color:#fff}
+
+  /* grid + cards */
+  .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));padding:40px 0 90px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:.22s ease;position:relative}
+  .card:hover{transform:translateY(-4px);border-color:var(--gold-dim);box-shadow:0 18px 40px -22px rgba(0,0,0,.9),0 0 0 1px rgba(201,162,75,.12)}
+  .photo{position:relative;aspect-ratio:4/4.4;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+  .grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+  .silhouette{position:absolute;right:-14px;bottom:-10px;font-size:140px;line-height:1;opacity:.10;filter:grayscale(1);user-select:none;pointer-events:none}
+  .photo-cap{position:relative;font-family:var(--ko-serif);font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.45;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .badge-frame{position:absolute;top:14px;left:14px;z-index:2;font-family:var(--display);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);padding:4px 9px;border-radius:3px}
+  .heat{position:absolute;top:13px;right:14px;z-index:2;display:flex;align-items:center;gap:6px;font-size:11px;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12)}
+  .heat .dot{width:7px;height:7px;border-radius:50%}
+  .heat.on .dot{background:var(--heat);box-shadow:0 0 8px var(--heat)}
+  .heat.off .dot{background:var(--muted2)}
+  .heat.on{color:#ffd2df}.heat.off{color:var(--muted2)}
+  .card-body{padding:18px 20px 22px}
+  .name-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .nick{font-family:var(--ko-serif);font-size:20px;font-weight:600}
+  .meta{font-size:12.5px;color:var(--muted2)}
+  .realname{font-size:12px;color:var(--gold);font-family:var(--display);font-style:italic}
+  .roles{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0 12px}
+  .role{font-size:11.5px;color:var(--gold);border:1px solid var(--gold-dim);padding:4px 10px;border-radius:3px;background:rgba(201,162,75,.06)}
+  .bio{font-size:13.5px;color:var(--muted);min-height:42px}
+  .card-foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+  .stars{font-size:13px;letter-spacing:1px}
+  .stars .s-full{color:var(--gold)}.stars .s-empty{color:var(--muted2)}
+  .stars .num{font-family:var(--display);color:var(--text);margin-left:7px;font-size:13px;font-weight:600}
+  .stars .cnt{color:var(--muted2);font-size:11px;margin-left:4px}
+  .open-link{font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-family:var(--display)}
+  .card:hover .open-link{color:var(--gold)}
+  .flag{position:absolute;inset:0;border:1px solid var(--wine);border-radius:6px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(154,35,72,.25)}
+  .flag-tag{position:absolute;bottom:14px;left:14px;z-index:2;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#ffb9c8;background:rgba(122,29,58,.78);padding:4px 9px;border-radius:3px;font-family:var(--display)}
+
+  /* modal */
+  .overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(5,3,5,.78);backdrop-filter:blur(6px);padding:clamp(16px,4vw,48px);overflow-y:auto}
+  .overlay.show{display:flex;align-items:flex-start;justify-content:center}
+  .sheet{width:min(720px,100%);background:var(--bg2);border:1px solid var(--line);border-radius:8px;overflow:hidden;animation:rise .32s cubic-bezier(.2,.8,.2,1);margin:auto}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  .sheet-head{position:relative;padding:30px clamp(22px,4vw,38px);border-bottom:1px solid var(--line);overflow:hidden}
+  .ph-no{position:relative;font-family:var(--display);font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.6);text-transform:uppercase}
+  .ph-desc{position:relative;font-family:var(--ko-serif);font-size:13.5px;color:rgba(255,255,255,.85);margin-top:8px;max-width:80%;line-height:1.5}
+  .close{position:absolute;top:18px;right:20px;z-index:5;width:34px;height:34px;border-radius:50%;cursor:pointer;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:18px;display:grid;place-items:center}
+  .close:hover{background:var(--wine);border-color:var(--wine)}
+  .sheet-id{padding:22px clamp(22px,4vw,38px) 6px}
+  .sheet-id .nick{font-size:26px}
+  .sheet-id .meta{font-size:13.5px;margin-top:4px}
+  .sheet-body{padding:8px clamp(22px,4vw,38px) 26px}
+  .field{padding:16px 0;border-bottom:1px solid var(--line)}
+  .field:last-child{border-bottom:none}
+  .field .k{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .field .v{font-size:14.5px;color:var(--text)}
+  .field .v .lim{color:#e69aab}
+  .reviews{display:flex;flex-direction:column;gap:12px}
+  .review{background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:13px 15px}
+  .review .who{font-family:var(--display);font-style:italic;font-size:12px;color:var(--gold-dim);margin-bottom:5px}
+  .review .txt{font-size:13.5px;color:var(--muted)}
+  .secret{margin-top:14px;border:1px dashed var(--wine);border-radius:5px;background:rgba(122,29,58,.10)}
+  .secret summary{cursor:pointer;list-style:none;padding:11px 15px;font-size:12px;letter-spacing:.08em;color:#e69aab;font-family:var(--display);display:flex;align-items:center;gap:8px}
+  .secret summary::-webkit-details-marker{display:none}
+  .secret[open] summary{border-bottom:1px dashed var(--wine)}
+  .secret .inner{padding:13px 15px;font-size:13.5px;color:var(--muted)}
+  .secret .inner b{color:#e69aab;font-weight:500}
+  .actions{display:flex;gap:10px;padding:18px clamp(22px,4vw,38px) 26px;border-top:1px solid var(--line)}
+  .btn{flex:1;text-align:center;padding:13px;border-radius:5px;cursor:pointer;font-size:13.5px;letter-spacing:.04em;transition:.18s;border:1px solid transparent;font-family:var(--body)}
+  .btn.pass{background:transparent;border-color:var(--line);color:var(--muted)}
+  .btn.pass:hover{border-color:var(--muted);color:var(--text)}
+  .btn.msg{background:var(--wine);color:#fff}
+  .btn.msg:hover{background:#b22a55}
+  .btn.rate{background:transparent;border-color:var(--gold-dim);color:var(--gold)}
+  .btn.rate:hover{background:rgba(201,162,75,.12)}
+  .empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted2)}
+  .empty .big{font-family:var(--ko-serif);font-size:22px;color:var(--muted);margin-bottom:8px}
+
+  /* ---------- LOUNGE / community ---------- */
+  .lounge-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .lounge-tabs .chip{font-size:13px}
+  .post{background:var(--surface);border:1px solid var(--line);border-radius:7px;margin-bottom:16px;overflow:hidden;transition:.18s}
+  .post:hover{border-color:#41323b}
+  .post-top{padding:18px 22px 0;display:flex;align-items:center;gap:11px}
+  .pavatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:15px;color:#fff;flex:none}
+  .pmeta{display:flex;flex-direction:column}
+  .pmeta .pa{font-family:var(--ko-serif);font-size:14px;color:var(--text)}
+  .pmeta .pt{font-size:11.5px;color:var(--muted2);font-family:var(--display);letter-spacing:.04em}
+  .ptag{margin-left:auto;font-size:11px;color:var(--gold);border:1px solid var(--gold-dim);padding:3px 10px;border-radius:999px;background:rgba(201,162,75,.06)}
+  .ptag.warn{color:#ffb9c8;border-color:var(--wine-soft);background:rgba(122,29,58,.14)}
+  .post h3{padding:14px 22px 0;font-family:var(--ko-serif);font-size:18px;font-weight:600;line-height:1.4}
+  .post .pbody{padding:8px 22px 0;color:var(--muted);font-size:14px;line-height:1.7;white-space:pre-line}
+  .post-foot{padding:14px 22px 16px;display:flex;align-items:center;gap:18px}
+  .pact{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted2);cursor:pointer;background:none;border:none;font-family:var(--body)}
+  .pact:hover{color:var(--gold)}
+  .pact.liked{color:var(--heat)}
+  .comments{display:none;border-top:1px solid var(--line);background:var(--bg2);padding:6px 22px 12px}
+  .comments.show{display:block;animation:fade .25s ease}
+  .cmt{display:flex;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .cmt:last-of-type{border-bottom:none}
+  .cmt .ca{width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;color:#fff}
+  .cmt .cwho{font-family:var(--ko-serif);font-size:12.5px;color:var(--text)}
+  .cmt .ctxt{font-size:13.5px;color:var(--muted);margin-top:2px}
+  .cmt .ctime{font-size:10.5px;color:var(--muted2);font-family:var(--display);margin-left:7px}
+  .cmt-write{display:flex;gap:8px;padding:12px 0 4px}
+  .cmt-write input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 15px;color:var(--text);font-family:var(--body);font-size:13px;outline:none}
+  .cmt-write button{background:var(--wine);border:none;color:#fff;border-radius:999px;padding:0 16px;cursor:pointer;font-family:var(--body);font-size:13px}
+
+  /* ---------- MESSAGES ---------- */
+  .msg-layout{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;min-height:560px;background:var(--surface)}
+  .contacts{border-right:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column}
+  .contacts-head{padding:18px 20px;border-bottom:1px solid var(--line)}
+  .contacts-head .t{font-family:var(--ko-serif);font-size:16px}
+  .contacts-head .s{font-size:12px;color:var(--muted2);margin-top:3px}
+  .contact{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;border-bottom:1px solid rgba(51,39,47,.5);transition:.15s}
+  .contact:hover{background:var(--surface)}
+  .contact.active{background:var(--surface);box-shadow:inset 3px 0 0 var(--wine)}
+  .cavatar{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:18px;color:#fff;position:relative}
+  .cavatar .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg2)}
+  .cavatar .od.on{background:var(--heat)}.cavatar .od.off{background:var(--muted2)}
+  .cinfo{min-width:0;flex:1}
+  .cinfo .cn{font-family:var(--ko-serif);font-size:14px;display:flex;justify-content:space-between;gap:6px}
+  .cinfo .cn .badge{font-size:10px;color:#fff;background:var(--wine);border-radius:999px;padding:1px 7px;font-family:var(--body)}
+  .cinfo .cp{font-size:12px;color:var(--muted2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+
+  .thread{display:flex;flex-direction:column}
+  .thread-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;color:var(--muted2)}
+  .thread-empty .big{font-family:var(--ko-serif);font-size:22px;color:var(--muted);margin-bottom:10px}
+  .thread-empty .em{font-size:46px;margin-bottom:18px;opacity:.5}
+  .thread-head{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--bg2)}
+  .thread-head .back{display:none;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+  .thread-head .nm{font-family:var(--ko-serif);font-size:15px}
+  .thread-head .role-mini{font-size:11px;color:var(--gold)}
+  .thread-body{flex:1;padding:22px 20px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:430px}
+  .b{max-width:74%;padding:11px 15px;font-size:14px;line-height:1.55;border-radius:14px}
+  .b.them{align-self:flex-start;background:var(--surface2);border:1px solid var(--line);border-bottom-left-radius:5px}
+  .b.me{align-self:flex-end;background:var(--wine);color:#fff;border-bottom-right-radius:5px}
+  .b .tt{display:block;font-family:var(--display);font-size:9.5px;letter-spacing:.1em;opacity:.6;margin-bottom:3px}
+  .typing{align-self:flex-start;color:var(--muted2);font-size:13px;font-style:italic}
+  .composer2{display:flex;gap:9px;padding:14px 18px;border-top:1px solid var(--line);background:var(--bg2)}
+  .composer2 input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:12px 18px;color:var(--text);font-family:var(--body);font-size:14px;outline:none}
+  .composer2 input:focus{border-color:var(--gold-dim)}
+  .composer2 button{background:var(--wine);border:none;color:#fff;border-radius:999px;padding:0 22px;cursor:pointer;font-family:var(--body);font-size:14px}
+  .composer2 button:hover{background:#b22a55}
+
+  /* ---------- PROFILE + TEST ---------- */
+  .me-card{display:flex;flex-wrap:wrap;gap:26px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px clamp(22px,4vw,36px);margin-bottom:28px}
+  .me-photo{width:120px;height:120px;border-radius:14px;background:linear-gradient(150deg,var(--wine),#2b2030);display:grid;place-items:center;font-size:46px;color:#fff;flex:none;position:relative;overflow:hidden}
+  .me-info{flex:1;min-width:220px}
+  .me-info .mn{font-family:var(--ko-serif);font-size:24px;font-weight:600}
+  .me-info .mh{font-size:13px;color:var(--muted2);margin-top:3px}
+  .me-orient{margin-top:14px}
+  .me-orient .lab{font-family:var(--display);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+  .me-orient .val{font-size:15px}
+  .me-orient .roles{margin-top:8px}
+  .unset{color:var(--muted2);font-style:italic}
+
+  .test-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .test-intro{padding:clamp(28px,5vw,48px);text-align:center}
+  .test-intro .em{font-size:42px;margin-bottom:16px}
+  .test-intro h3{font-family:var(--ko-serif);font-size:24px;font-weight:600;margin-bottom:10px}
+  .test-intro p{color:var(--muted);max-width:480px;margin:0 auto 24px;font-size:14.5px}
+  .start-btn{display:inline-block;background:var(--wine);color:#fff;border:none;padding:14px 34px;border-radius:6px;font-family:var(--body);font-size:15px;cursor:pointer;letter-spacing:.02em;transition:.18s}
+  .start-btn:hover{background:#b22a55}
+  .test-progress{height:3px;background:var(--line)}
+  .test-progress .bar{height:100%;background:linear-gradient(90deg,var(--wine),var(--gold));transition:width .3s}
+  .q-wrap{padding:clamp(26px,4vw,40px)}
+  .q-count{font-family:var(--display);font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+  .q-text{font-family:var(--ko-serif);font-size:clamp(19px,2.6vw,24px);font-weight:600;line-height:1.45;margin-bottom:24px}
+  .opts{display:flex;flex-direction:column;gap:11px}
+  .opt{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:16px 18px;color:var(--text);font-family:var(--body);font-size:14.5px;cursor:pointer;transition:.16s;line-height:1.5}
+  .opt:hover{border-color:var(--gold-dim);background:var(--surface2);transform:translateX(3px)}
+  .q-nav{display:flex;justify-content:space-between;margin-top:24px}
+  .q-nav button{background:none;border:1px solid var(--line);color:var(--muted);padding:9px 18px;border-radius:6px;cursor:pointer;font-family:var(--body);font-size:13px}
+  .q-nav button:hover{color:var(--text);border-color:var(--muted)}
+  .q-nav button:disabled{opacity:.35;cursor:default}
+
+  .result{padding:clamp(28px,5vw,48px)}
+  .result .em{font-size:50px;text-align:center;margin-bottom:6px}
+  .result .rlab{text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .result h3{text-align:center;font-family:var(--ko-serif);font-size:clamp(28px,4vw,40px);font-weight:700;margin:8px 0 6px}
+  .result .sub{text-align:center;color:var(--muted);font-style:italic;font-family:var(--display);margin-bottom:24px}
+  .result .desc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--wine);border-radius:6px;padding:18px 20px;color:var(--text);font-size:14.5px;line-height:1.75;margin-bottom:22px}
+  .bars{display:flex;flex-direction:column;gap:14px;margin-bottom:26px}
+  .bar-row .bl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:5px}
+  .bar-row .bl b{color:var(--gold);font-weight:500}
+  .bar-track{height:8px;background:var(--surface);border-radius:999px;overflow:hidden}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--wine),var(--gold));border-radius:999px;transition:width .8s ease}
+  .rtraits{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+  .rtraits .role{font-size:12.5px}
+  .rec-title{font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:14px}
+  .rec-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:28px}
+  .rec{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:13px 15px;cursor:pointer;transition:.16s}
+  .rec:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
+  .rec .ra{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:17px;color:#fff;flex:none}
+  .rec .rn{font-family:var(--ko-serif);font-size:14px}
+  .rec .rr{font-size:11.5px;color:var(--gold);margin-top:2px}
+  .result-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .result-actions button{font-family:var(--body);font-size:14px;padding:13px 24px;border-radius:6px;cursor:pointer;border:1px solid transparent}
+  .apply-btn{background:var(--wine);color:#fff}.apply-btn:hover{background:#b22a55}
+  .retake-btn{background:transparent;border-color:var(--line);color:var(--muted)}.retake-btn:hover{color:var(--text);border-color:var(--muted)}
+
+  footer{border-top:1px solid var(--line);padding:34px clamp(20px,5vw,64px);text-align:center;color:var(--muted2);font-size:12px}
+  footer .wordmark{font-size:15px;letter-spacing:.4em;color:var(--muted);display:inline-block;margin-bottom:8px}
+
+  @media(max-width:760px){
+    .msg-layout{grid-template-columns:1fr}
+    .contacts{display:flex}
+    .contacts.hide-mobile{display:none}
+    .thread.show-mobile{display:flex}
+    .thread{display:none}
+    .thread-head .back{display:block}
+  }
+  @media(max-width:560px){ .nav button:not(.me-tab){padding:8px 9px;font-size:13px} }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand" onclick="go('explore')">
+    <span class="chain">⛓️</span><span class="wordmark">TAMING</span>
+  </div>
+  <nav class="nav">
+    <button data-v="explore" class="active" onclick="go('explore')">탐색</button>
+    <button data-v="lounge" onclick="go('lounge')">라운지</button>
+    <button data-v="messages" onclick="go('messages')">메시지</button>
+    <div class="me me-tab" data-v="profile" onclick="go('profile')">난</div>
+  </nav>
+</header>
+
+<!-- ===================== EXPLORE ===================== -->
+<section class="view show" id="view-explore">
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Find your one</div>
+      <h1>여덟 명의 후보,<br>그리고 <span class="one">단 한 명</span>의 <em>주인.</em></h1>
+      <p class="lede">최대한 많이 만나고, 별점과 후기를 남기고, 시간을 두고 신중하게. 다중 매칭은 허용됩니다 — 정착은 한 사람에게만.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">8</div><div class="l">접속 가능 후보</div></div>
+        <div class="stat"><div class="n">∞</div><div class="l">자유 메시지</div></div>
+        <div class="stat"><div class="n">읽씹</div><div class="l">답장 의무 없음</div></div>
+        <div class="stat"><div class="n">Safeword</div><div class="l">언제든 우선</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="controls-inner">
+      <label class="search"><span>🔍</span>
+        <input id="search" type="text" placeholder="닉네임 · 성향 · 취향으로 검색…" autocomplete="off"></label>
+      <div class="chips" id="chips">
+        <span class="chip active" data-f="all">전체</span>
+        <span class="chip" data-f="돔">돔/마스터</span>
+        <span class="chip" data-f="대디">대디돔</span>
+        <span class="chip" data-f="사디스트">사디스트</span>
+        <span class="chip" data-f="스팽커">스팽커</span>
+        <span class="chip" data-f="결박">결박/리가</span>
+        <span class="chip" data-f="프라이멀">프라이멀</span>
+        <span class="chip" data-f="주의">⚠ 주의</span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="grid" id="grid-list"></div></div>
+</section>
+
+<!-- ===================== LOUNGE ===================== -->
+<section class="view" id="view-lounge">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The Lounge</div>
+      <h2>라운지</h2>
+      <p>익명으로 경험을 나누고, 질문하고, 서로를 지키는 공간. 모든 글은 합의와 안전을 전제로 합니다.</p>
+    </div>
+    <div class="lounge-tabs" id="lounge-tabs">
+      <span class="chip active" data-c="all">전체</span>
+      <span class="chip" data-c="입문">입문 Q&A</span>
+      <span class="chip" data-c="케어">애프터케어</span>
+      <span class="chip" data-c="안전">안전 · 주의</span>
+      <span class="chip" data-c="후기">후기 문화</span>
+      <span class="chip" data-c="잡담">잡담</span>
+    </div>
+    <div id="post-list" style="padding-bottom:80px"></div>
+  </div>
+</section>
+
+<!-- ===================== MESSAGES ===================== -->
+<section class="view" id="view-messages">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Messages</div>
+      <h2>메시지</h2>
+      <p>누구에게 메시지를 보내시겠습니까? 왼쪽에서 상대를 고르면 대화가 시작됩니다. 답장은 의무가 아니에요 — 읽씹도 허용.</p>
+    </div>
+    <div class="msg-layout" style="margin-bottom:80px">
+      <aside class="contacts" id="contacts">
+        <div class="contacts-head">
+          <div class="t">누구에게 보낼까요?</div>
+          <div class="s">대화 상대를 선택하세요</div>
+        </div>
+        <div id="contact-list"></div>
+      </aside>
+      <section class="thread" id="thread">
+        <div class="thread-empty" id="thread-empty">
+          <div class="em">💌</div>
+          <div class="big">대화를 시작해 보세요</div>
+          <div>왼쪽 목록에서 상대를 선택하면<br>여기에 대화창이 열립니다.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROFILE ===================== -->
+<section class="view" id="view-profile">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">My Profile</div>
+      <h2>내 프로필</h2>
+      <p>아직 성향이 비어 있다면, 테스트로 채워 보세요. 결과는 언제든 프로필에 반영할 수 있습니다.</p>
+    </div>
+    <div class="me-card">
+      <div class="me-photo">난</div>
+      <div class="me-info">
+        <div class="mn">나 (You)</div>
+        <div class="mh">프로필 미완성 · 사진 0/3</div>
+        <div class="me-orient">
+          <div class="lab">⛓️ 내 BDSM 성향</div>
+          <div class="val" id="my-orient"><span class="unset">아직 설정되지 않았어요 — 아래 테스트로 알아보세요.</span></div>
+          <div class="roles" id="my-roles"></div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card" id="test-card" style="margin-bottom:80px"></div>
+  </div>
+</section>
+
+<div class="overlay" id="overlay"><div class="sheet" id="sheet"></div></div>
+
+<footer>
+  <div class="wordmark">TAMING</div>
+  <div>가입 시 사진·신체정보·성향·취향 등록 필수 · 모든 만남은 합의와 세이프워드 위에서.</div>
+  <div style="margin-top:6px;color:var(--muted2)">© TAMING — 픽션 캐릭터 매칭 데모.</div>
+</footer>
+
+<script>
+/* ============ CHARACTER DATA ============ */
+const DATA = [
+  { nick:"카페라떼", real:"이지한", age:34, hw:"183cm · 78kg", tags:["오너","다정한 디그레이더","돔"], filters:["돔"],
+    accent:["#3a2a22","#6b4a35"], sil:"☕", frame:"#01 / 03", online:true, rating:4.9, count:3, flag:false, recTrait:["케어","디그레이딩"],
+    photoDesc:"부드러운 갈색 눈, 짧고 단정한 갈색 머리. 카페 '온화'의 앞치마를 두른 온화한 다정훈남.",
+    bio:"BDSM은 처음이지만, 다정함은 타고났습니다.",
+    kink:"상대를 '귀여운 펫'처럼 다룹니다. 억압도 폭력도 없이, 다정한 스킨십과 목줄로 지배하고 아껴주며 쾌감을 나눠요. 웃으며 건네는 수치심 — \"이런 꼴로 느끼고, 강아지 같네, 예뻐요.\"",
+    limit:"폭력 · 일방적 억압 · 세이프워드 묵살",
+    intro:"평범한 연애만 해오다 2년 전 이별 후, 테스트로 제 성향을 알게 됐어요. 떨리지만 설레요. 세이프워드를 들으면 즉시 본래의 저로 돌아가 꽉 안아드릴게요.",
+    reviews:[{who:"익명 A",txt:"뉴비라더니 오너 역할이 본능적으로 완벽함. 애프터케어 들어갈 때 체온으로 달래주는 게 진짜 미쳤어요."},
+             {who:"익명 B",txt:"존댓말로 수치 주는데 하나도 안 무서움. 오히려 안심됨. 세이프워드에 엄청 예민하게 반응해줌."}],
+    replies:["천천히 와요, 안 급해요. 착하지.","오늘 하루는 어땠어요? 다 들어줄게요.","무리하지 말고, 힘들면 바로 말해줘요. 알겠죠?","라떼 한 잔 만들어 둘 테니까 편하게 와요."] },
+
+  { nick:"오빠믿어봐라", real:"마세진", age:42, hw:"189cm · 근육질 마초", tags:["스팽커","하드 디그레이더","브리딩"], filters:["스팽커"],
+    accent:["#3a1f1a","#7a3322"], sil:"🍲", frame:"#01 / 02", online:true, rating:4.6, count:4, flag:false, recTrait:["사디즘","디그레이딩"],
+    photoDesc:"긴 흑발을 아래로 묶고 하얀 머리띠. 3대째 국밥집을 잇는 근육질 마초, 겉은 거칠어도 속은 순애보.",
+    bio:"겉은 마초, 속은 순애. 구수한 경상도 사투리로 챙겨주는 사람.",
+    kink:"손과 도구로 엉덩이·허벅지가 붉어질 때까지 스팽킹. 원초적인 칭찬으로 수치심을 줍니다 — \"씨받이처럼 잘 받암거네.\" 강렬한 브리딩 욕구가 있어요.",
+    limit:"세이프워드 무시 · 합의 없는 도구 · 차가운 무관심",
+    intro:"전 여친과 오래 만나고 헤어진 뒤, 억눌린 걸 혼자 풀다 한계가 왔심더. 나랑 잘 맞는 디엣 파트너 찾을라꼬 가입했다. 짐승처럼 굴다가도 세이프워드엔 즉시 멈춘다, 약속함.",
+    reviews:[{who:"익명 A",txt:"\"오빠가 마이 아프게 했나, 미안타\" 하면서 맞은 데 살살 문질러주는데 그 갭에 무너짐."},
+             {who:"익명 B",txt:"입은 천박한데 손은 다정함. 땀범벅으로 달래주는 애프터케어가 의외로 섬세."}],
+    replies:["아이고, 이제사 답하노. 밥은 묵었나.","오빠가 따끈하게 한 그릇 말아둘 테니 들어와라.","걱정 마라, 아프게는 안 한다. 다 봐가면서 한다 아이가.","니 오늘따라 와이리 이쁘노. 얼릉 온나."] },
+
+  { nick:"페인킬러", real:"지선하", age:32, hw:"185cm · 잔근육", tags:["톱 도미넌트","하드코어 사디스트"], filters:["사디스트","돔"],
+    accent:["#1c1d24","#3c3f52"], sil:"🏍️", frame:"#01 / 04", online:false, rating:4.8, count:5, flag:false, recTrait:["사디즘","마조히즘"],
+    photoDesc:"매끈한 잔근육에 블랙 셔츠, 어깨에 닿는 흑발과 은테 안경. 냉철한 인상, 오토바이가 취미.",
+    bio:"가학의 미학. 그러나 룰과 세이프워드는 목숨처럼.",
+    kink:"채찍·핀휠·패들로 육체적 고통을 주고 몸에 붉은 자국을 남기는 데 탐닉합니다. 고통 속에 헐떡이는 표정에서 카타르시스를 느껴요. 자비 없는 하드플레이 — 그래서 더욱 룰에 철저합니다.",
+    limit:"룰 위반 · 세이프워드 기만 · 자기 한계 속이기",
+    intro:"수위가 하드코어한 만큼 역설적으로 안전을 최우선합니다. 전 파트너가 케어에 중독돼 한계를 속이다 서브드롭으로 기절한 적이 있어요. 생명줄을 속이는 건 절대 용납 안 합니다. 받아준 만큼은 꿀 떨어지게 케어합니다.",
+    reviews:[{who:"익명 A",txt:"하드한데 무섭지 않은 이유 = 사전 협의가 끝장나게 철저함. 자국 남기고 나선 케어가 진짜 다정."},
+             {who:"익명 B",txt:"룰 어기니까 그날로 칼같이 정리당함. \"브레이크 고장 난 차엔 안 타.\" 무섭지만 신뢰감 최고."}],
+    replies:["한계랑 세이프워드부터 정하자. 그게 먼저야.","속이지 마. 그게 너를 지키는 유일한 룰이니까.","받아준 만큼은 책임진다. 그건 약속해.","오늘 컨디션 어때. 솔직하게."] },
+
+  { nick:"키다리", real:"정해수", age:47, hw:"185cm · 76kg", tags:["대디돔","티징","훈육"], filters:["대디","돔"],
+    accent:["#15161c","#2b2d3a"], sil:"🎩", frame:"#01 / 05", online:true, rating:4.7, count:5, flag:false, recTrait:["케어","펫"],
+    photoDesc:"완벽한 수트 핏, 슬릭백 검은 머리, 서늘한 눈빛에 우아한 아우라. 정한그룹 전무, 개인자산 8천억+.",
+    bio:"기댈 수 있는 어른. \"우리 강아지, 이리 온.\"",
+    kink:"아가 다루듯 합니다. 삽입 전까지 애간장 태우는 티징, 이마 키스와 다정한 눈맞춤. 행위 중에도 끝없이 칭찬하며 작고 어린 존재로 다뤄 정서적으로 완전히 기대게 만들어요. 잘못해도 \"아빠가 그렇게 가르쳤어?\" 하고 웃어넘긴 뒤, 가벼운 체벌 후 더 다정하게 안아줍니다.",
+    limit:"감정 없는 거래 취급 · 다른 사람 앞에서의 무례 · 약속 어기기",
+    intro:"혼외자로 태어나 감정을 죽이고 그룹을 장악했습니다. 정략결혼은 3년 만에 끝났고요. 제 다정함을 온전히 받아먹을 한 마리 '아기새'를 기다립니다. 블랙카드 포함 무한 지원 — 대신 예쁜 짓은 나한테만.",
+    reviews:[{who:"익명 A",txt:"세상 다정함의 끝판왕. 일상도 꿈도 다 받쳐주는데, 가끔 적당히 옥죄는 게 오히려 안정감."},
+             {who:"익명 B",txt:"다 퍼주는데 바운더리는 분명함. 다른 사람 얘기하면 은근히 질투. \"아빠가 다 해주잖아\" 모드."}],
+    replies:["우리 강아지, 밥은 챙겨 먹었어?","오늘 힘든 일 있었으면 다 말해도 돼. 아빠가 다 해줄게.","착하지. 예쁜 짓은 나한테만 하는 거야, 알지?","이리 온. 무릎에 앉아서 천천히 얘기해."] },
+
+  { nick:"QuietBloom", real:"현석진", age:37, hw:"183cm", tags:["마스터","톱 도미넌트","디그레이더"], filters:["돔"],
+    accent:["#1a1f1b","#33422f"], sil:"🌿", frame:"#01 / 03", online:false, rating:4.5, count:3, flag:false, recTrait:["디그레이딩","케어"],
+    photoDesc:"단정한 베이지색 머리, 차분한 회색 눈. 누구에게나 호감 사는 외모의 여유로운 고등학교 교사.",
+    bio:"평생을 바칠 단 한 명을 찾는 순애보. 다정하지만 조금 어려운 사람.",
+    kink:"마스터로서 슬레이브를 길들이는 관계를 원합니다. 다정하게, 그러나 분명하게. 세이프워드엔 즉각 중단하고, 절대 룰을 어기지 않아요. 천천히 한계를 함께 넓혀갑니다.",
+    limit:"세이프워드 묵살 · 가벼운 관계 · 룰 위반",
+    intro:"인기는 많았지만 모든 걸 바칠 상대를 만난 적이 없어, 오랜 공백 끝에 다시 앱을 깔았습니다. 한 사람에게 전부를 바치는 사람이에요. 애프터케어는 확실합니다.",
+    reviews:[{who:"익명 A",txt:"길들이는 손길이 다정한데 묘하게 거리감 있음. 빠지면 끝없이 헌신해줄 것 같은 느낌."},
+             {who:"익명 B",txt:"룰은 칼같이 지킴. 세이프워드 한마디에 바로 멈춰줘서 안심하고 맡길 수 있었음."}],
+    secret:{role:"지배적 공유자 (네토라세)", txt:"※초반엔 거부감을 줄이려 숨기고 마스터/디그레이더 플레이로 길들임. 타인에게 파트너를 공유하되 철저히 본인이 세팅·감독하며, <b>마지막 마무리는 무조건 자신이 직접</b> 한다. 순애 각성 시엔 거부 반응에 극도로 예민해지며 \"사랑해, 내 전부야\" 맹목적 헌신으로 전환."},
+    replies:["프로필 끝까지 읽어주셨네요. 흔치 않아서 기억에 남았어요.","저는 한 번 정하면, 그 사람한테 전부를 거는 편이라.","천천히 알아가요. 급할 거 없어요.","무엇이든 솔직하게 말해줘요. 그게 가장 중요하니까."] },
+
+  { nick:"MidnightChef", real:"권대철", age:40, hw:"탄탄한 근육질", tags:["프라이멀 헌터","엣지플레이","롤플레잉"], filters:["프라이멀"],
+    accent:["#231a14","#4d3320"], sil:"🥃", frame:"#01 / 03", online:true, rating:4.4, count:4, flag:false, recTrait:["프라이멀","롤플레이"],
+    photoDesc:"목을 덮는 갈색 슬릭백 헤어, 갈색 눈, 살짝 어두운 피부에 탄탄한 근육질. 심야 고급 이자카야 사장 겸 셰프.",
+    bio:"술 한 잔, 그리고 밤새 이어질 미친 상황극을 함께할 사람.",
+    kink:"배덕감과 금기를 깨는 상황극에 미쳐 있습니다(특이 설정 부여 후 유린하는 롤플레이 선호). 술로 나른하게 만든 뒤 포식자처럼 집요하게 추적하고, 상대가 풀려버린 눈으로 순종할 때 극도의 쾌감. 끝나면 언제 그랬냐는 듯 능글맞게 해장국을 끓여줘요.",
+    limit:"술 강요 · 합의 없는 설정 · 세이프워드 묵살",
+    intro:"오랜 요식업으로 사람 다루는 덴 능숙합니다. 하드코어한 상황극을 감당할 파트너를 못 만나 늘 차였어요. 같이 한잔하며 밤새 즐길 사람과 정착하고 싶심더. 행위 중엔 묵직하게 리드합니다.",
+    reviews:[{who:"익명 A",txt:"설정극 텐션이 진짜 미쳤음. 추적당하는 그 긴장감이 중독적."},
+             {who:"익명 B",txt:"짐승처럼 굴다 끝나면 해장국 끓여주는 갭. 능글맞은 척하는데 취중진담은 다 진심."}],
+    replies:["와… 이 시간에 연락 온 게 와이래 반갑노.","가게 마감했다. 한잔하러 안 올래?","오늘은 무슨 컨셉으로 놀아줄까. 정해놨나?","천천히 와라. 도망가도 어차피 잡힌다 아이가."] },
+
+  { nick:"리가", real:"최재욱", age:42, hw:"거구 · 근육질", tags:["리가(결박)","웨이트돔","억압플레이"], filters:["결박"],
+    accent:["#16181a","#2c3034"], sil:"🔗", frame:"#01 / 02", online:false, rating:4.7, count:3, flag:false, recTrait:["바운디지","케어"],
+    photoDesc:"눈을 덮는 앞머리, 목을 덮는 흑발, 검은 눈. 작업복 차림의 창고형 철물점 사장. 게으른 맹수 같은 무표정.",
+    bio:"도망칠 수 없는 무력감과, 거대한 품속의 안전감을 동시에.",
+    kink:"밧줄·케이블타이 결박은 전문가 수준입니다. 타격은 극혐, 대신 눈을 가리고 침대에 칭칭 묶어 한 발짝도 못 가게 하는 구속에서 쾌감을 얻어요. 거대한 체중으로 깔아뭉개듯 누르며 안정감을 느낍니다. 거친 외양과 달리 살갗 안 다치게 테이핑부터 하는 섬세함.",
+    limit:"타격·물리적 고통 · 혼자 두기 · 결박 중 방치",
+    intro:"…사랑하던 파트너가 도망간 뒤로 결박에 집착하게 됐다. \"가만있어라. 무릎 다 까진다.\" 묶어두면 마음이 놓인다. 도망 안 갈 거란 믿음만 생기면, 옆에서 평생 지켜줄 수 있다.",
+    reviews:[{who:"익명 A",txt:"말은 투박한데 묶는 손은 진짜 조심스러움. 테이핑부터 해줘서 자국도 안 남음."},
+             {who:"익명 B",txt:"절대적 무력감인데 이상하게 제일 안전했음. 옆을 안 떠나줌."}],
+    replies:["…메시지 봤다.","말 많은 거 안 좋아한다. 대신 옆에 두면 안 놓는다.","가만있어라. 다 내가 한다.","니 다칠까 봐 그란다. 알제."] },
+
+  { nick:"알아서기어", real:"차지혁", age:29, hw:"186cm · 마른 근육", tags:["하드돔","브랫테이머"], filters:["돔","주의"],
+    accent:["#0f0c10","#241a2a"], sil:"⛓️", frame:"#01 / 04", online:true, rating:1.8, count:5, flag:true, recTrait:[],
+    photoDesc:"애쉬그레이 젖은 머리, 연갈색 삼백안, 입술·눈썹·배꼽 피어싱. 목부터 손등까지 블랙워크 타투, 명품 로고 오픈 셔츠와 실버 체인의 퇴폐미.",
+    bio:"매력적인 나쁜 남자… 라고 본인은 어필합니다.",
+    kink:"하드돔/브랫테이머. 거친 플레이와 자극적인 텐션으로 끌어당기는 스타일이라고 프로필엔 적혀 있습니다.",
+    limit:"(프로필상 명시 없음)",
+    intro:"좋게좋게 가자. 내가 알아서 잘 다뤄줄게. — 라고 적혀 있지만, 후기를 꼭 끝까지 읽어보길 권합니다.",
+    reviews:[{who:"익명 A",txt:"⚠ 세이프워드 외쳐도 \"한 번만 더\" 하면서 묵살함. 사진 빌미로 협박당했다는 얘기 돌아요. 거르세요."},
+             {who:"익명 B",txt:"⚠ 애프터케어 전무. 떠나려 하면 새벽에 찾아와 무릎 꿇고 우는 연기. 위험."},
+             {who:"익명 C",txt:"타 앱에서 영구정지 이력 있다고 들었습니다. 신분 도용 의심. 신고 누적 중."}],
+    secret:{role:"톡식 사디스트 / 하드코어 디그레이딩 (프로필 비공개)", txt:"※실제 성향은 프로필에 절대 노출되지 않음. 동의 없는 한계 돌파, 세이프워드 묵살, 러브밤빙 후 방치·읽씹로 스스로 매달리게 만드는 <b>심리적 학대 스페셜리스트</b>. 상대가 안정적인 타돔에게 정착하려 하면 스토킹·협박으로 파멸적 집착. — 이 카드는 시스템상 ⚠ 주의 플래그 처리됨."},
+    replies:["왜 읽씹해. 딴 새끼 만나느라 바빴어?","장난이고~ 보고 싶었어. 한 번만 보자, 진짜 한 번만.","너 내 거잖아. 어디 가려고.","화났어? 미안. 한 번만 더 믿어줘, 응?"] }
+];
+
+/* ============ ROUTER ============ */
+const VIEWS = ['explore','lounge','messages','profile'];
+let messagesInit=false, loungeInit=false, testInit=false;
+function go(v){
+  VIEWS.forEach(x=>{
+    document.getElementById('view-'+x).classList.toggle('show', x===v);
+    const b=document.querySelector(`.nav [data-v="${x}"]`);
+    if(b) b.classList.toggle('active', x===v);
+  });
+  window.scrollTo({top:0,behavior:'instant'});
+  if(v==='lounge'&&!loungeInit){renderPosts();loungeInit=true;}
+  if(v==='messages'&&!messagesInit){renderContacts();messagesInit=true;}
+  if(v==='profile'&&!testInit){renderTestIntro();testInit=true;}
+}
+
+/* ============ EXPLORE (cards + modal) ============ */
+const grid=document.getElementById('grid-list'), overlay=document.getElementById('overlay'), sheet=document.getElementById('sheet');
+let activeFilter='all', query='';
+function starHTML(r){let f=Math.round(r),s='';for(let i=1;i<=5;i++)s+=`<span class="${i<=f?'s-full':'s-empty'}">★</span>`;return s;}
+function cardHTML(p,i){
+  const grad=`linear-gradient(160deg, ${p.accent[1]}, ${p.accent[0]})`;
+  return `<article class="card" data-i="${i}">
+    ${p.flag?'<div class="flag"></div>':''}
+    <div class="photo" style="background:${grad}">
+      <div class="grain"></div><div class="silhouette">${p.sil}</div>
+      <span class="badge-frame">📷 ${p.frame}</span>
+      <span class="heat ${p.online?'on':'off'}"><span class="dot"></span>${p.online?'접속 중':'미접속'}</span>
+      ${p.flag?'<span class="flag-tag">⚠ 주의 플래그</span>':''}
+      <div class="photo-cap">${p.photoDesc}</div>
+    </div>
+    <div class="card-body">
+      <div class="name-row"><span class="nick">${p.nick}</span><span class="meta">${p.age} · ${p.hw.split(' · ')[0]}</span></div>
+      <div class="realname">— ${p.real}</div>
+      <div class="roles">${p.tags.map(t=>`<span class="role">${t}</span>`).join('')}</div>
+      <div class="bio">${p.bio}</div>
+      <div class="card-foot">
+        <span class="stars">${starHTML(p.rating)}<span class="num">${p.rating.toFixed(1)}</span><span class="cnt">(${p.count})</span></span>
+        <span class="open-link">View →</span></div>
+    </div></article>`;
+}
+function renderGrid(){
+  const list=DATA.map((p,i)=>({p,i})).filter(({p})=>{
+    const okF=activeFilter==='all'||p.filters.includes(activeFilter);
+    const hay=(p.nick+p.real+p.tags.join('')+p.kink+p.bio).toLowerCase();
+    return okF&&(!query||hay.includes(query));
+  });
+  grid.innerHTML=list.length?list.map(({p,i})=>cardHTML(p,i)).join('')
+    :`<div class="empty"><div class="big">조건에 맞는 후보가 없어요.</div><div>필터를 풀거나 다른 검색어를 시도해 보세요.</div></div>`;
+}
+function sheetHTML(p,i){
+  const grad=`linear-gradient(150deg, ${p.accent[1]}, ${p.accent[0]})`;
+  const secret=p.secret?`<details class="secret"><summary>🔒 제작자 메모 — 비공개 성향 보기</summary><div class="inner"><b>${p.secret.role}</b><br>${p.secret.txt}</div></details>`:'';
+  return `<div class="sheet-head" style="background:${grad}"><div class="grain"></div>
+      <div class="close" onclick="closeSheet()">×</div>
+      <span class="ph-no">📷 ${p.frame}</span><div class="ph-desc">${p.photoDesc}</div></div>
+    <div class="sheet-id">
+      <span class="heat ${p.online?'on':'off'}" style="position:static;display:inline-flex;margin-bottom:10px"><span class="dot"></span>${p.online?'접속 중':'미접속'}</span>
+      <div class="nick">${p.nick} <span class="realname">/ ${p.real}</span></div>
+      <div class="meta">${p.age}세 · ${p.hw}</div></div>
+    <div class="sheet-body">
+      <div class="field"><div class="k">⛓️ BDSM 성향</div><div class="v">${p.tags.join(' · ')}</div></div>
+      <div class="field"><div class="k">💟 Kink / Desire</div><div class="v">${p.kink}</div></div>
+      <div class="field"><div class="k">🚫 Limit</div><div class="v"><span class="lim">${p.limit}</span></div></div>
+      <div class="field"><div class="k">📝 자기소개</div><div class="v">${p.intro}${secret}</div></div>
+      <div class="field"><div class="k">⭐ 별점 평가</div><div class="v"><span class="stars">${starHTML(p.rating)}<span class="num">${p.rating.toFixed(1)}</span><span class="cnt">누적 ${p.count}건</span></span></div></div>
+      <div class="field"><div class="k">💬 최근 후기</div><div class="v reviews">${p.reviews.map(r=>`<div class="review"><div class="who">${r.who}</div><div class="txt">${r.txt}</div></div>`).join('')}</div></div>
+    </div>
+    <div class="actions">
+      <div class="btn pass" onclick="closeSheet()">❌ PASS</div>
+      <div class="btn msg" onclick="closeSheet();go('messages');openThread(${i})">💌 MESSAGE</div>
+      <div class="btn rate" onclick="alert('별점/후기 작성은 데모에서 비활성화되어 있어요.')">⭐ 후기</div>
+    </div>`;
+}
+function openSheet(i){sheet.innerHTML=sheetHTML(DATA[i],i);overlay.classList.add('show');document.body.style.overflow='hidden';}
+function closeSheet(){overlay.classList.remove('show');document.body.style.overflow='';}
+grid.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)openSheet(+c.dataset.i);});
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeSheet();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+document.getElementById('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
+  document.querySelectorAll('#chips .chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');activeFilter=c.dataset.f;renderGrid();});
+document.getElementById('search').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();renderGrid();});
+
+/* ============ LOUNGE ============ */
+const POSTS=[
+  { cat:"입문", color:"#6b4a35", emoji:"🌱", author:"첫걸음_", time:"2시간 전", tag:"입문 Q&A",
+    title:"디엣 처음인데, 첫 협의(네고)는 어떻게 시작하나요?",
+    body:"앱 깔고 며칠째 눈팅만 하고 있어요. 막상 메시지 보내려니 뭘 먼저 정해야 할지 모르겠습니다.\n세이프워드, 하드리밋… 단어는 아는데 실제로 어떤 순서로 얘기 꺼내는 게 자연스러운지 궁금해요.",
+    likes:42, comments:[
+      {who:"케어우선",color:"#7a3322",txt:"리밋 → 세이프워드 → 원하는 무드 순서로요. \"제 하드리밋은 A,B고 세이프워드는 ○○으로 할게요\"부터 던지면 상대 반응으로 사람 됨됨이도 보입니다."},
+      {who:"오래된서브",color:"#3c3f52",txt:"협의를 귀찮아하거나 \"그런 거 하다 보면 알게 돼\"라는 사람은 바로 거르세요. 진짜 베테랑일수록 협의를 제일 꼼꼼히 합니다."},
+      {who:"익명",color:"#33422f",txt:"문서로 체크리스트 같이 채우자고 하는 분들도 있어요. 처음엔 그게 제일 안전했음."}
+    ]},
+  { cat:"케어", color:"#2b2d3a", emoji:"🫂", author:"포근한밤", time:"5시간 전", tag:"애프터케어",
+    title:"애프터케어가 플레이보다 중요하다는 말, 겪어보니 진짜였습니다",
+    body:"강도 높은 플레이 끝나고 멍하고 눈물 나고… 서브드롭이 이런 거구나 처음 알았어요.\n그때 말없이 물 떠다 주고 담요 덮어주고 등 쓸어준 사람한테 완전히 마음 열리더라고요. 플레이 잘하는 것보다 끝나고 어떻게 챙기는지가 사람을 말해주는 듯.",
+    likes:88, comments:[
+      {who:"라떼홀릭",color:"#6b4a35",txt:"맞아요. 끝나고 차갑게 식는 사람은 진짜 별로… 체온으로 달래준다는 게 어떤 건지 알게 되면 못 돌아감."},
+      {who:"익명",color:"#4d3320",txt:"드롭 올 수 있다고 미리 말해주고, 다음 날까지 안부 물어봐주는 분 만나면 잡으세요. 진짜."}
+    ]},
+  { cat:"안전", color:"#7a1d3a", emoji:"⚠️", author:"등대지기", time:"어제", tag:"안전 · 주의", warn:true,
+    title:"[주의] 이런 돔은 거르세요 — 레드 플래그 모음",
+    body:"좋은 분들이 훨씬 많지만, 다친 분들 보면서 정리해 둡니다.\n· 세이프워드에 \"한 번만 더\"로 답하는 사람\n· 협의를 귀찮아하는 사람\n· 애프터케어가 아예 없는 사람\n· 떠나려 하면 갑자기 무릎 꿇고 우는 등 극단적 연기로 붙잡는 사람\n· 사진/개인정보로 은근히 압박하는 사람\n하나라도 보이면 차단이 답입니다. 별점 낮고 경고 후기 달린 프로필은 시스템 ⚠ 플래그도 확인하세요.",
+    likes:213, comments:[
+      {who:"익명",color:"#241a2a",txt:"마지막 항목… 당해봤습니다. 새벽에 찾아와서 우는 연기에 한 번 흔들렸는데 절대 안 됩니다."},
+      {who:"페인_",color:"#3c3f52",txt:"세이프워드 무시는 그냥 폭행이에요. 성향이고 뭐고 없습니다. 단호하게."},
+      {who:"신중하게",color:"#33422f",txt:"플래그 뜬 계정이 신분 도용으로 우회가입했다는 글도 봤어요. 후기 꼭 끝까지 읽으세요."}
+    ]},
+  { cat:"안전", color:"#2c3034", emoji:"🪢", author:"매듭공방", time:"2일 전", tag:"안전 · 주의",
+    title:"로프/결박 입문자가 꼭 알아야 할 3가지",
+    body:"1. 가위(세이프티 셰어즈)는 항상 손 닿는 곳에. 비상시 1초컷.\n2. 신경 지나가는 부위(손목 안쪽, 겨드랑이)는 강하게 조이지 않기. 저림/감각 둔해지면 즉시 풀기.\n3. 묶은 사람을 절대 혼자 두지 않기.\n거친 인상이어도 살갗 안 다치게 테이핑부터 하는 분들이 진짜 고수더라고요.",
+    likes:67, comments:[
+      {who:"익명",color:"#16181a",txt:"혈색·체온 계속 확인해주는 분이면 믿어도 됩니다. 구속은 신뢰가 9할."},
+      {who:"리거지망생",color:"#2c3034",txt:"세이프티 셰어즈 진짜 필수. 명심하겠습니다."}
+    ]},
+  { cat:"후기", color:"#8d7335", emoji:"⭐", author:"별점요정", time:"3일 전", tag:"후기 문화",
+    title:"후기·별점 문화, 솔직히 어떻게 생각하세요?",
+    body:"누구 만나기 전에 별점이랑 후기 꼭 보고 거르는데, 가끔 악의적 별점테러도 보여서… 다들 후기 어디까지 믿으시나요? 저는 한 줄짜리보다 협의·케어 디테일 적힌 후기를 더 신뢰하는 편이에요.",
+    likes:55, comments:[
+      {who:"익명",color:"#6b4a35",txt:"디테일 있는 후기 위주로 봅니다. \"좋았어요\" 한 줄은 거의 안 믿어요."},
+      {who:"신중하게",color:"#3c3f52",txt:"낮은 별점인데 경고 사유가 구체적이면 그건 진짜일 확률 높아요. 거기서 거르면 됨."}
+    ]},
+  { cat:"잡담", color:"#4d3320", emoji:"🥃", author:"심야손님", time:"4일 전", tag:"잡담",
+    title:"다들 정착할 '단 한 명'은 찾으셨나요?",
+    body:"다중 매칭 허용이라 이것저것 만나보다가, 결국 마음 가는 건 한 명이더라고요. 여러 명 만나보고 비교해 보니 오히려 내가 뭘 원하는지 선명해졌어요. 여러분의 'the one'은 어떤 분인가요?",
+    likes:39, comments:[
+      {who:"포근한밤",color:"#2b2d3a",txt:"전 아직요… 근데 테스트 해보고 제 성향 명확해지니까 사람 보는 눈이 달라졌어요."},
+      {who:"익명",color:"#231a14",txt:"많이 만나보라는 시스템 권장이 진짜 맞는 듯. 신중하게 한 명."}
+    ]}
+];
+let loungeFilter='all';
+function postHTML(p,idx){
+  return `<article class="post" data-idx="${idx}">
+    <div class="post-top">
+      <div class="pavatar" style="background:linear-gradient(135deg,${p.color},#1a1118)">${p.emoji}</div>
+      <div class="pmeta"><span class="pa">${p.author}</span><span class="pt">${p.time}</span></div>
+      <span class="ptag ${p.warn?'warn':''}">${p.tag}</span>
+    </div>
+    <h3>${p.title}</h3>
+    <div class="pbody">${p.body}</div>
+    <div class="post-foot">
+      <button class="pact like" onclick="toggleLike(this,${idx})">🤍 <span>${p.likes}</span></button>
+      <button class="pact" onclick="toggleComments(${idx})">💬 댓글 <span>${p.comments.length}</span></button>
+    </div>
+    <div class="comments" id="cmt-${idx}">
+      ${p.comments.map(c=>`<div class="cmt"><div class="ca" style="background:linear-gradient(135deg,${c.color},#1a1118)">${c.who[0]}</div>
+        <div><span class="cwho">${c.who}</span><div class="ctxt">${c.txt}</div></div></div>`).join('')}
+      <div class="cmt-write">
+        <input type="text" placeholder="따뜻한 댓글을 남겨보세요…" data-idx="${idx}" onkeydown="if(event.key==='Enter')addComment(${idx})">
+        <button onclick="addComment(${idx})">등록</button>
+      </div>
+    </div>
+  </article>`;
+}
+function renderPosts(){
+  const list=POSTS.map((p,i)=>({p,i})).filter(({p})=>loungeFilter==='all'||p.cat===loungeFilter);
+  document.getElementById('post-list').innerHTML=list.length?list.map(({p,i})=>postHTML(p,i)).join('')
+    :`<div class="empty"><div class="big">아직 글이 없어요.</div><div>다른 카테고리를 확인해 보세요.</div></div>`;
+}
+function toggleComments(i){document.getElementById('cmt-'+i).classList.toggle('show');}
+function toggleLike(btn,i){
+  const span=btn.querySelector('span');let n=+span.textContent;
+  if(btn.classList.contains('liked')){btn.classList.remove('liked');btn.firstChild.textContent='🤍 ';span.textContent=n-1;}
+  else{btn.classList.add('liked');btn.firstChild.textContent='❤️ ';span.textContent=n+1;}
+}
+function addComment(i){
+  const wrap=document.getElementById('cmt-'+i);
+  const inp=wrap.querySelector('input');const v=inp.value.trim();if(!v)return;
+  const node=document.createElement('div');node.className='cmt';
+  node.innerHTML=`<div class="ca" style="background:linear-gradient(135deg,var(--wine),var(--gold-dim))">나</div>
+    <div><span class="cwho">나</span><div class="ctxt">${v.replace(/</g,'&lt;')}</div></div>`;
+  wrap.insertBefore(node, wrap.querySelector('.cmt-write'));
+  inp.value='';
+  const btn=document.querySelector(`.post[data-idx="${i}"] .pact[onclick*="toggleComments"] span`);if(btn)btn.textContent=+btn.textContent+1;
+}
+document.getElementById('lounge-tabs').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;
+  document.querySelectorAll('#lounge-tabs .chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');loungeFilter=c.dataset.c;renderPosts();});
+
+/* ============ MESSAGES ============ */
+const convos={}; // index -> [{me, text, time}]
+function nowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+function ensureConvo(i){
+  if(!convos[i]){
+    const p=DATA[i];
+    convos[i]=[{me:false,text:p.replies[0],time:'어제'}];
+  }
+}
+function renderContacts(){
+  document.getElementById('contact-list').innerHTML=DATA.map((p,i)=>{
+    ensureConvo(i);
+    const last=convos[i][convos[i].length-1];
+    const grad=`linear-gradient(135deg,${p.accent[1]},${p.accent[0]})`;
+    return `<div class="contact" data-i="${i}" onclick="openThread(${i})">
+      <div class="cavatar" style="background:${grad}">${p.sil}<span class="od ${p.online?'on':'off'}"></span></div>
+      <div class="cinfo">
+        <div class="cn"><span>${p.nick}</span>${p.flag?'<span class="badge" style="background:var(--wine-soft)">⚠</span>':''}</div>
+        <div class="cp">${last.me?'나: ':''}${last.text}</div>
+      </div></div>`;
+  }).join('');
+}
+let activeThread=null;
+function openThread(i){
+  go('messages');
+  ensureConvo(i);activeThread=i;
+  document.querySelectorAll('.contact').forEach(c=>c.classList.toggle('active',+c.dataset.i===i));
+  document.getElementById('contacts').classList.add('hide-mobile');
+  const p=DATA[i],thread=document.getElementById('thread');
+  thread.classList.add('show-mobile');
+  thread.innerHTML=`
+    <div class="thread-head">
+      <button class="back" onclick="backToContacts()">‹</button>
+      <div class="cavatar" style="width:36px;height:36px;font-size:15px;background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${p.sil}</div>
+      <div><div class="nm">${p.nick}</div><div class="role-mini">${p.tags[0]} · ${p.online?'접속 중':'미접속'}</div></div>
+    </div>
+    <div class="thread-body" id="thread-body"></div>
+    <div class="composer2">
+      <input id="msg-input" type="text" placeholder="메시지를 입력하세요…" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()">전송</button>
+    </div>`;
+  paintThread();
+  setTimeout(()=>document.getElementById('msg-input').focus(),50);
+}
+function backToContacts(){
+  document.getElementById('contacts').classList.remove('hide-mobile');
+  document.getElementById('thread').classList.remove('show-mobile');
+}
+function paintThread(){
+  const body=document.getElementById('thread-body');if(!body)return;
+  body.innerHTML=convos[activeThread].map(m=>
+    `<div class="b ${m.me?'me':'them'}"><span class="tt">${m.time}</span>${m.text.replace(/</g,'&lt;')}</div>`).join('');
+  body.scrollTop=body.scrollHeight;
+}
+function sendMsg(){
+  const inp=document.getElementById('msg-input');const v=inp.value.trim();if(!v||activeThread===null)return;
+  convos[activeThread].push({me:true,text:v,time:nowHM()});inp.value='';paintThread();
+  const i=activeThread,p=DATA[i];
+  const body=document.getElementById('thread-body');
+  const typing=document.createElement('div');typing.className='typing';typing.textContent=`${p.nick} 님이 입력 중…`;
+  body.appendChild(typing);body.scrollTop=body.scrollHeight;
+  setTimeout(()=>{
+    if(activeThread!==i){return;}
+    typing.remove();
+    const pool=p.replies;const reply=pool[Math.floor(Math.random()*pool.length)];
+    convos[i].push({me:false,text:reply,time:nowHM()});paintThread();renderContacts();
+    document.querySelectorAll('.contact').forEach(c=>c.classList.toggle('active',+c.dataset.i===i));
+  }, 900+Math.random()*700);
+}
+
+/* ============ PROFILE + BDSM TEST ============ */
+// 점수 키: 포지션(dom/sub/switch) + 중립 테마(nurture/pain/bondage/degr/primal/role/pet/brat) + 척도(care=애프터케어 중시도)
+// 테마는 중립으로 쌓고, 결과에서 포지션에 따라 '대디돔/리틀', '오너/펫'처럼 이름을 붙인다.
+const QUESTIONS=[
+  { q:"플레이를 떠올릴 때, 더 끌리는 위치는?",
+    opts:[
+      {t:"상대를 이끌고 통제하는 쪽",s:{dom:2}},
+      {t:"믿는 사람에게 나를 맡기고 따르는 쪽",s:{sub:2}},
+      {t:"그날 분위기에 따라 둘 다 — 주고받는 게 좋다",s:{dom:1,sub:1,switch:2}},
+    ]},
+  { q:"'고통'과 '감각'에 대한 내 반응은?",
+    opts:[
+      {t:"상대에게 자극을 주고 반응을 끌어내는 게 짜릿하다",s:{pain:2,dom:1}},
+      {t:"안전한 선 안에서 받는 강한 감각이 좋다",s:{pain:2,sub:1}},
+      {t:"통증보다는 부드러운 스킨십·압박이 더 좋다",s:{nurture:1,bondage:1}},
+    ]},
+  { q:"관계에서 가장 갖고 싶은 느낌은?",
+    opts:[
+      {t:"전적으로 보호받고 보살핌받는, 어리광 부려도 되는 안정감",s:{nurture:2,sub:2}},
+      {t:"목줄을 차고 길들여지는 '귀여운 펫'이 되는 것",s:{pet:2,sub:1}},
+      {t:"도망칠 수 없게 붙잡혀 있는 무력감과 안전감",s:{bondage:2,sub:1}},
+      {t:"내가 규칙을 정하고 상대가 따르는 주도권",s:{dom:2}},
+    ]},
+  { q:"이상적인 밤의 무드를 고른다면?",
+    opts:[
+      {t:"촛불처럼 다정하고 느린, 칭찬이 가득한 밤",s:{nurture:2}},
+      {t:"역할과 설정이 있는, 숨막히는 추격전 같은 밤",s:{primal:2,role:2}},
+      {t:"도구와 룰이 분명한, 강도 높은 세션",s:{pain:1,degr:1}},
+      {t:"묶이고 가려진 채 온전히 내맡기는 밤",s:{bondage:2,sub:1}},
+    ]},
+  { q:"상대가 규칙을 어겼다(혹은 내가 어겼다). 더 나다운 반응은?",
+    opts:[
+      {t:"여유롭게 웃으며 가볍게 훈육하고, 더 다정하게 안아준다",s:{nurture:2,dom:2}},
+      {t:"단호하게 룰대로 처리한다. 안전이 최우선이니까",s:{dom:2}},
+      {t:"…어긴 건 나다. 벌을 기다린다",s:{sub:2,degr:1}},
+      {t:"일부러 깐족대며 반응을 끌어낸다",s:{brat:2,sub:1}},
+    ]},
+  { q:"'수치심(디그레이딩)'에 대한 나의 입장은?",
+    opts:[
+      {t:"다정한 말로 상대를 부끄럽게 만드는 게 좋다",s:{degr:2,dom:1}},
+      {t:"부끄러운 말을 듣는 쪽이 더 짜릿하다",s:{degr:2,sub:1}},
+      {t:"수치보다 칭찬과 인정이 훨씬 좋다",s:{nurture:1}},
+      {t:"별로 — 그건 내 취향이 아니다",s:{bondage:1}},
+    ]},
+  { q:"애프터케어(끝난 뒤 돌봄)는 나에게?",
+    opts:[
+      {t:"본 플레이만큼 중요하다. 안아주고 챙기는 시간이 핵심",s:{care:2}},
+      {t:"충분히 받아야 안심하고 더 깊이 맡길 수 있다",s:{sub:1,care:2}},
+      {t:"내가 책임지고 확실히 챙겨주는 편이다",s:{dom:1,care:2}},
+    ]},
+  { q:"세이프워드에 대한 내 생각은?",
+    opts:[
+      {t:"관계의 절대 원칙. 어기는 건 있을 수 없다",s:{dom:1,sub:1}},
+      {t:"있으니까 오히려 더 과감하게 맡길 수 있다",s:{sub:1,pain:1}},
+      {t:"상대를 지키는 건 온전히 내 책임이다",s:{dom:2}},
+    ]},
+];
+let qIndex=0, scores={};
+const answers=new Array(QUESTIONS.length).fill(null);
+
+function renderTestIntro(){
+  document.getElementById('test-card').innerHTML=`
+    <div class="test-intro">
+      <div class="em">⛓️</div>
+      <h3>나의 BDSM 성향 테스트</h3>
+      <p>8개의 질문에 답하면 당신의 성향을 분석해 드려요. 정답은 없습니다 — 더 끌리는 쪽을 솔직하게 고르세요. 결과는 프로필에 그대로 반영할 수 있어요.</p>
+      <button class="start-btn" onclick="startTest()">테스트 시작하기</button>
+    </div>`;
+}
+function startTest(){qIndex=0;scores={};answers.fill(null);renderQuestion();}
+function renderQuestion(){
+  const q=QUESTIONS[qIndex],pct=Math.round((qIndex)/QUESTIONS.length*100);
+  document.getElementById('test-card').innerHTML=`
+    <div class="test-progress"><div class="bar" style="width:${pct}%"></div></div>
+    <div class="q-wrap">
+      <div class="q-count">Question ${qIndex+1} / ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="opts">
+        ${q.opts.map((o,oi)=>`<button class="opt" onclick="answer(${oi})">${o.t}</button>`).join('')}
+      </div>
+      <div class="q-nav">
+        <button onclick="prevQuestion()" ${qIndex===0?'disabled':''}>‹ 이전</button>
+        <button onclick="renderTestIntro()">처음으로</button>
+      </div>
+    </div>`;
+}
+function answer(oi){
+  // remove previous answer's scores if re-answering
+  if(answers[qIndex]!==null){
+    const prev=QUESTIONS[qIndex].opts[answers[qIndex]].s;
+    for(const k in prev)scores[k]=(scores[k]||0)-prev[k];
+  }
+  answers[qIndex]=oi;
+  const s=QUESTIONS[qIndex].opts[oi].s;
+  for(const k in s)scores[k]=(scores[k]||0)+s[k];
+  if(qIndex<QUESTIONS.length-1){qIndex++;renderQuestion();}
+  else showResult();
+}
+function prevQuestion(){if(qIndex>0){qIndex--;renderQuestion();}}
+
+// 중립 테마 → 포지션별 이름. care는 테마가 아니라 '애프터케어 중시도' 척도로만 사용.
+const THEMES={
+  nurture:{dom:"대디돔",      sub:"리틀",          neutral:"양육·돌봄"},
+  pain:   {dom:"사디스트",    sub:"마조히스트",     neutral:"고통 교환"},
+  bondage:{dom:"리거(바운디지 돔)", sub:"로프버니(구속 선호)", neutral:"구속·결박"},
+  degr:   {dom:"디그레이더",  sub:"디그레이디",     neutral:"디그레이딩"},
+  primal: {dom:"프라이멀 헌터", sub:"프라이멀 프레이", neutral:"프라이멀"},
+  pet:    {dom:"오너",        sub:"펫",            neutral:"펫플레이"},
+  brat:   {dom:"브랫테이머",  sub:"브랫",          neutral:"브랫"},
+  role:   {dom:"롤플레이어",  sub:"롤플레이어",     neutral:"롤플레이"},
+};
+function themeName(key, base){
+  const T=THEMES[key]; if(!T) return key;
+  if(base==="도미넌트") return T.dom;
+  if(base==="서브미시브") return T.sub;
+  return T.neutral; // 스위치
+}
+function showResult(){
+  const dom=scores.dom||0, sub=scores.sub||0, sw=scores.switch||0;
+  let base, baseEm, baseDesc;
+  if(sw>=2 && Math.abs(dom-sub)<=2){base="스위치";baseEm="🔀";baseDesc="상황과 상대에 따라 주도권을 자유롭게 오가는 유연한 성향이에요. 지배와 복종 양쪽의 쾌감을 모두 이해합니다.";}
+  else if(dom>sub){base="도미넌트";baseEm="👑";baseDesc="관계의 주도권을 쥐고 상대를 이끌 때 가장 자연스러운 성향이에요. 통제에는 그만큼의 책임이 따른다는 걸 아는 타입입니다.";}
+  else if(sub>dom){base="서브미시브";baseEm="🎀";baseDesc="믿는 사람에게 자신을 맡기고 따를 때 깊은 만족과 안정을 느끼는 성향이에요. 좋은 주인을 알아보는 눈이 가장 큰 무기입니다.";}
+  else {base="스위치";baseEm="🔀";baseDesc="지배와 복종 사이를 오가는 균형형이에요. 상대에 따라 색이 달라지는 타입입니다.";}
+
+  // 상위 테마 (care 제외)
+  const themeKeys=Object.keys(THEMES).filter(k=>(scores[k]||0)>0).sort((a,b)=>(scores[b]||0)-(scores[a]||0));
+  const top=themeKeys.slice(0,3);
+  const primaryName = top.length? themeName(top[0], base) : "";
+
+  // 포지션에 맞춰 이름 붙인 태그
+  let roleTags=[base];
+  top.forEach(k=>roleTags.push(themeName(k, base)));
+  roleTags=[...new Set(roleTags)];
+
+  // 막대 (애프터케어는 별도 척도)
+  const barData=[
+    {l:"주도 ↔ 복종", a:"도미넌트", b:"서브미시브", twoSided:true, v: 50 + (dom-sub)*11},
+    {l:"양육·돌봄 (대디↔리틀)", a:"낮음", b:"높음", v: (scores.nurture||0)*15+8},
+    {l:"고통 (사디↔마조)", a:"낮음", b:"높음", v: (scores.pain||0)*15+8},
+    {l:"구속 · 결박", a:"낮음", b:"높음", v: (scores.bondage||0)*18+8},
+    {l:"프라이멀 · 롤플레이", a:"낮음", b:"높음", v: ((scores.primal||0)+(scores.role||0))*13+8},
+    {l:"애프터케어 중시", a:"낮음", b:"높음", v: (scores.care||0)*15+10},
+  ].map(x=>({...x,v:Math.max(5,Math.min(95,x.v))}));
+
+  // 추천: 상위 테마 → 캐릭터 recTrait 매칭
+  const recMap={nurture:["케어","펫"],pain:["사디즘","마조히즘"],bondage:["바운디지"],degr:["디그레이딩"],primal:["프라이멀","롤플레이"],pet:["펫"],role:["롤플레이"],brat:[]};
+  let recScores=DATA.map((p,i)=>{
+    if(p.flag) return {i,sc:-99};
+    let sc=0;
+    top.forEach((k,ord)=>{ (recMap[k]||[]).forEach(tag=>{ if((p.recTrait||[]).includes(tag)) sc+=(3-ord); }); });
+    return {i,sc};
+  }).sort((a,b)=>b.sc-a.sc);
+  let recs=recScores.filter(r=>r.sc>0).slice(0,3).map(r=>r.i);
+  if(recs.length<2){ DATA.forEach((p,i)=>{ if(!p.flag && recs.length<2 && !recs.includes(i)) recs.push(i); }); }
+
+  // 제목: 섭이면 "리틀 서브", 돔이면 "대디돔" 식으로 포지션과 모순 없게
+  let myLabel;
+  if(base==="스위치") myLabel = primaryName? `${primaryName} 스위치` : "스위치";
+  else if(primaryName) myLabel = `${primaryName} ${base}`;
+  else myLabel = base;
+
+  window.__testResult={label:myLabel, base, roleTags, em:baseEm};
+
+  document.getElementById('test-card').innerHTML=`
+    <div class="test-progress"><div class="bar" style="width:100%"></div></div>
+    <div class="result">
+      <div class="em">${baseEm}</div>
+      <div class="rlab">Your Result</div>
+      <h3>${myLabel}</h3>
+      <div class="sub">Position: ${base}${top[0]?` · 주요 성향 ${themeName(top[0],base)}`:''}</div>
+      <div class="desc">${baseDesc}${top[0]?` 특히 <b style="color:var(--gold)">${themeName(top[0],base)}</b> 성향이 두드러지고, ${top[1]?`<b style="color:var(--gold)">${themeName(top[1],base)}</b> 요소도 함께 보여요.`:'그 색이 가장 선명합니다.'}`:''}</div>
+      <div class="bars">
+        ${barData.map(b=>{
+          let lab;
+          if(b.twoSided){ lab = `${b.v>=50?b.b:b.a} ${Math.round(b.v>=50?b.v:100-b.v)}%`; }
+          else { lab = `${b.v>=66?'높음':b.v>=33?'보통':'낮음'} ${Math.round(b.v)}%`; }
+          return `<div class="bar-row">
+          <div class="bl"><span>${b.l}</span><b>${lab}</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:0%" data-w="${b.v}"></div></div>
+        </div>`;}).join('')}
+      </div>
+      <div class="rtraits">${roleTags.map(t=>`<span class="role">${t}</span>`).join('')}</div>
+      <div class="rec-title">— 당신과 잘 맞을 후보 —</div>
+      <div class="rec-list">
+        ${recs.map(i=>{const p=DATA[i];return `<div class="rec" onclick="openSheet(${i})">
+          <div class="ra" style="background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${p.sil}</div>
+          <div><div class="rn">${p.nick}</div><div class="rr">${p.tags[0]}</div></div></div>`;}).join('')}
+      </div>
+      <div class="result-actions">
+        <button class="apply-btn" onclick="applyResult()">이 성향으로 프로필 설정</button>
+        <button class="retake-btn" onclick="startTest()">다시 하기</button>
+      </div>
+    </div>`;
+  setTimeout(()=>{document.querySelectorAll('.bar-fill').forEach(f=>f.style.width=f.dataset.w+'%');},80);
+}
+function applyResult(){
+  const r=window.__testResult;if(!r)return;
+  document.getElementById('my-orient').innerHTML=`${r.em} <b style="color:var(--gold)">${r.label}</b>`;
+  document.getElementById('my-roles').innerHTML=r.roleTags.map(t=>`<span class="role">${t}</span>`).join('');
+  document.querySelector('.me-info .mh').textContent='프로필 업데이트됨 · 사진 0/3';
+  document.getElementById('test-card').innerHTML=`
+    <div class="test-intro">
+      <div class="em">✅</div>
+      <h3>프로필에 반영했어요</h3>
+      <p>위 내 프로필의 <b style="color:var(--gold)">${r.label}</b> 성향이 저장되었습니다. 이제 탐색에서 잘 맞는 주인을 찾아보세요.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="start-btn" onclick="go('explore')">후보 탐색하러 가기</button>
+        <button class="retake-btn" style="background:transparent;border:1px solid var(--line);color:var(--muted);padding:14px 28px;border-radius:6px;cursor:pointer;font-family:var(--body);font-size:15px" onclick="startTest()">테스트 다시 하기</button>
+      </div>
+    </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* init */
+renderGrid();
+</script>
+</body>
+</html>
