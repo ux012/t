@@ -31,19 +31,28 @@
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 
-  /* top bar */
-  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
-    padding:18px clamp(20px,5vw,64px);background:rgba(14,10,13,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-  .brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+  /* ── top bar ── */
+  /* FIX 2: gap 추가, padding 축소, overflow:hidden으로 삐져나감 방지 */
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:6px;
+    padding:12px clamp(10px,3vw,64px);background:rgba(14,10,13,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:12px;cursor:pointer;flex-shrink:0}
   .brand .chain{font-size:18px}
-  .wordmark{font-family:var(--display);font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:.42em;text-indent:.42em;color:var(--text)}
-  .nav{display:flex;align-items:center;gap:6px}
-  .nav button{background:none;border:none;color:var(--muted);font-family:var(--body);font-size:14px;
-    cursor:pointer;padding:8px 14px;border-radius:6px;transition:.18s;letter-spacing:.02em}
+  /* FIX 2: wordmark — 작은 화면에서 letter-spacing 줄임, nowrap */
+  .wordmark{font-family:var(--display);font-weight:700;font-size:clamp(14px,2.4vw,26px);
+    letter-spacing:clamp(.18em,.42em,.42em);text-indent:clamp(.18em,.42em,.42em);
+    color:var(--text);white-space:nowrap}
+  /* FIX 2: nav — flex-wrap:nowrap, flex-shrink:0 */
+  .nav{display:flex;align-items:center;gap:3px;flex-wrap:nowrap;flex-shrink:0}
+  /* FIX 2: nav button — clamp 폰트/패딩, white-space:nowrap */
+  .nav button{background:none;border:none;color:var(--muted);font-family:var(--body);
+    font-size:clamp(11px,1.4vw,14px);
+    cursor:pointer;padding:7px clamp(7px,1.1vw,14px);border-radius:6px;transition:.18s;
+    letter-spacing:.02em;white-space:nowrap;flex-shrink:0}
   .nav button:hover{color:var(--text)}
   .nav button.active{color:var(--gold);background:rgba(201,162,75,.08)}
   .nav .me{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--wine),var(--gold-dim));
-    display:grid;place-items:center;font-size:13px;color:#fff;border:1px solid var(--line);cursor:pointer;margin-left:6px}
+    display:grid;place-items:center;font-size:13px;color:#fff;border:1px solid var(--line);
+    cursor:pointer;margin-left:4px;flex-shrink:0}
   .nav .me.active{box-shadow:0 0 0 2px var(--gold)}
 
   .view{display:none;animation:fade .4s ease}
@@ -53,7 +62,8 @@
   /* hero */
   .hero{padding:clamp(48px,8vw,104px) 0 clamp(30px,4vw,48px)}
   .eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.46em;font-size:11.5px;color:var(--gold);margin-bottom:24px}
-  .hero h1{font-family:var(--ko-serif);font-weight:600;font-size:clamp(32px,6vw,72px);line-height:1.08;letter-spacing:-.01em;margin-bottom:24px}
+  /* FIX 2: hero h1 — clamp 최소값 낮춤 */
+  .hero h1{font-family:var(--ko-serif);font-weight:600;font-size:clamp(26px,6vw,72px);line-height:1.08;letter-spacing:-.01em;margin-bottom:24px}
   .hero h1 em{font-family:var(--display);font-style:italic;font-weight:500;color:var(--gold)}
   .hero h1 .one{color:var(--heat)}
   .hero p.lede{max-width:560px;color:var(--muted);font-size:16px;border-left:2px solid var(--wine);padding-left:18px}
@@ -68,7 +78,7 @@
   .sec-head p{color:var(--muted);margin-top:10px;max-width:560px}
 
   /* controls (explore) */
-  .controls{position:sticky;top:69px;z-index:40;background:rgba(14,10,13,.82);backdrop-filter:blur(10px);
+  .controls{position:sticky;top:62px;z-index:40;background:rgba(14,10,13,.82);backdrop-filter:blur(10px);
     border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .controls-inner{padding:16px clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:14px;max-width:1240px;margin:0 auto}
   .search{flex:1 1 220px;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 18px;color:var(--muted)}
@@ -83,11 +93,9 @@
   .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));padding:40px 0 90px}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:.22s ease;position:relative}
   .card:hover{transform:translateY(-4px);border-color:var(--gold-dim);box-shadow:0 18px 40px -22px rgba(0,0,0,.9),0 0 0 1px rgba(201,162,75,.12)}
-  /* 사진 영역: 비율 4 : 4.4 (= 10:11 세로형). 권장 이미지 800×880px */
   .photo{position:relative;aspect-ratio:4/4.4;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
   .grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
   .silhouette{position:absolute;right:-14px;bottom:-10px;font-size:140px;line-height:1;opacity:.10;filter:grayscale(1);user-select:none;pointer-events:none}
-  /* 실제 인물 이미지 (있을 때만 렌더). 그라데이션/실루엣 위를 cover로 덮음 */
   .photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:1}
   .photo-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to top, rgba(8,5,7,.62) 0%, rgba(8,5,7,.12) 38%, transparent 60%)}
   .photo-cap{position:relative;z-index:3;font-family:var(--ko-serif);font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.45;text-shadow:0 1px 8px rgba(0,0,0,.6)}
@@ -187,38 +195,46 @@
   .cmt-write button{background:var(--wine);border:none;color:#fff;border-radius:999px;padding:0 16px;cursor:pointer;font-family:var(--body);font-size:13px}
 
   /* ---------- MESSAGES ---------- */
-  .msg-layout{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;min-height:560px;background:var(--surface)}
+  /* FIX 3: height:calc 로 실제 높이 확보 */
+  .msg-layout{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    height:calc(100vh - 230px);min-height:500px;background:var(--surface)}
   .contacts{border-right:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column}
   .contacts-head{padding:18px 20px;border-bottom:1px solid var(--line)}
   .contacts-head .t{font-family:var(--ko-serif);font-size:16px}
   .contacts-head .s{font-size:12px;color:var(--muted2);margin-top:3px}
-  .contact{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;border-bottom:1px solid rgba(51,39,47,.5);transition:.15s}
+  .contact{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;border-bottom:1px solid rgba(51,39,47,.5);transition:.15px}
   .contact:hover{background:var(--surface)}
   .contact.active{background:var(--surface);box-shadow:inset 3px 0 0 var(--wine)}
-  .cavatar{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:18px;color:#fff;position:relative;overflow:hidden}
-  .cavatar .od{position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg2);z-index:2}
+  /* FIX 1: overflow:hidden 제거 → .od(온라인 dot)가 잘리지 않음 */
+  .cavatar{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:18px;color:#fff;position:relative}
+  /* FIX 1: right/bottom -2px 로 테두리 밖으로 살짝 나오게 + border 두께 늘림 */
+  .cavatar .od{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;border:2.5px solid var(--bg2);z-index:2}
   .cavatar .od.on{background:var(--heat)}.cavatar .od.off{background:var(--muted2)}
   .cinfo{min-width:0;flex:1}
   .cinfo .cn{font-family:var(--ko-serif);font-size:14px;display:flex;justify-content:space-between;gap:6px}
   .cinfo .cn .badge{font-size:10px;color:#fff;background:var(--wine);border-radius:999px;padding:1px 7px;font-family:var(--body)}
   .cinfo .cp{font-size:12px;color:var(--muted2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
 
-  .thread{display:flex;flex-direction:column}
+  /* FIX 3: thread flex column, height:100%, min-height:0 필수 */
+  .thread{display:flex;flex-direction:column;height:100%;min-height:0}
   .thread-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;color:var(--muted2)}
   .thread-empty .big{font-family:var(--ko-serif);font-size:22px;color:var(--muted);margin-bottom:10px}
   .thread-empty .em{font-size:46px;margin-bottom:18px;opacity:.5}
-  .thread-head{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--bg2)}
+  /* FIX 3: flex-shrink:0 으로 헤더가 찌그러지지 않게 */
+  .thread-head{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--bg2);flex-shrink:0}
   .thread-head .back{display:none;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
   .thread-head .nm{font-family:var(--ko-serif);font-size:15px}
   .thread-head .role-mini{font-size:11px;color:var(--gold)}
   .thread-head .cavatar{overflow:hidden}
-  .thread-body{flex:1;padding:22px 20px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:430px}
+  /* FIX 3: flex:1 + min-height:0 으로 스크롤 영역이 남은 공간 전부 차지 / max-height 제거 */
+  .thread-body{flex:1;min-height:0;padding:22px 20px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
   .b{max-width:74%;padding:11px 15px;font-size:14px;line-height:1.55;border-radius:14px}
   .b.them{align-self:flex-start;background:var(--surface2);border:1px solid var(--line);border-bottom-left-radius:5px}
   .b.me{align-self:flex-end;background:var(--wine);color:#fff;border-bottom-right-radius:5px}
   .b .tt{display:block;font-family:var(--display);font-size:9.5px;letter-spacing:.1em;opacity:.6;margin-bottom:3px}
   .typing{align-self:flex-start;color:var(--muted2);font-size:13px;font-style:italic}
-  .composer2{display:flex;gap:9px;padding:14px 18px;border-top:1px solid var(--line);background:var(--bg2)}
+  /* FIX 3: flex-shrink:0 으로 composer가 밀려나지 않게 */
+  .composer2{display:flex;gap:9px;padding:14px 18px;border-top:1px solid var(--line);background:var(--bg2);flex-shrink:0}
   .composer2 input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:12px 18px;color:var(--text);font-family:var(--body);font-size:14px;outline:none}
   .composer2 input:focus{border-color:var(--gold-dim)}
   .composer2 button{background:var(--wine);border:none;color:#fff;border-radius:999px;padding:0 22px;cursor:pointer;font-family:var(--body);font-size:14px}
@@ -284,15 +300,33 @@
   footer{border-top:1px solid var(--line);padding:34px clamp(20px,5vw,64px);text-align:center;color:var(--muted2);font-size:12px}
   footer .wordmark{font-size:15px;letter-spacing:.4em;color:var(--muted);display:inline-block;margin-bottom:8px}
 
+  /* ── 반응형 ── */
+  /* 760px: 메시지 세로 레이아웃 */
   @media(max-width:760px){
-    .msg-layout{grid-template-columns:1fr}
+    /* FIX 3: 모바일 높이 — 100svh 기반으로 정확한 높이 확보 */
+    .msg-layout{grid-template-columns:1fr;height:calc(100svh - 160px);min-height:420px}
     .contacts{display:flex}
     .contacts.hide-mobile{display:none}
     .thread.show-mobile{display:flex}
     .thread{display:none}
     .thread-head .back{display:block}
   }
-  @media(max-width:560px){ .nav button:not(.me-tab){padding:8px 9px;font-size:13px} }
+  /* 480px: nav 버튼 더 작게, wordmark 축소, h1 모바일 크기 */
+  @media(max-width:480px){
+    /* FIX 2: 버튼 크기 / 여백 더 줄임 */
+    .nav button:not(.me-tab){padding:7px 6px;font-size:11.5px}
+    /* FIX 2: wordmark letter-spacing 모바일 축소 */
+    .wordmark{letter-spacing:.16em;text-indent:.16em;font-size:14px}
+    /* FIX 2: hero h1 모바일에서 자연스럽게 줄바꿈 */
+    .hero h1{font-size:clamp(22px,7.5vw,40px);white-space:normal;word-break:keep-all}
+    .nav .me{width:30px;height:30px;font-size:12px}
+  }
+  /* 360px: 극소형 화면 */
+  @media(max-width:360px){
+    .nav button:not(.me-tab){padding:6px 5px;font-size:10.5px}
+    .nav .me{width:28px;height:28px;font-size:11px;margin-left:2px}
+    .brand .chain{font-size:14px}
+  }
 </style>
 </head>
 <body>
@@ -423,11 +457,6 @@
 </footer>
 
 <script>
-/* ============ CHARACTER DATA ============
-   img: 인물 이미지 경로. HTML 파일과 같은 위치에 images/ 폴더를 만들고 파일을 넣으세요.
-        권장 사이즈 800×880px (비율 4:4.4=10:11, 세로형), object-fit:cover 적용.
-        파일이 없으면 자동으로 기존 그라데이션 배경으로 폴백됩니다.
-============================================ */
 const DATA = [
   { nick:"카페라떼", real:"이지한", age:34, hw:"183cm · 78kg", tags:["오너","다정한 디그레이더","돔"], filters:["돔"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/ljh_pr.png",
@@ -528,10 +557,10 @@ const DATA = [
     replies:["왜 읽씹해. 딴 새끼 만나느라 바빴어?","장난이고~ 보고 싶었어. 한 번만 보자, 진짜 한 번만.","너 내 거잖아. 어디 가려고.","화났어? 미안. 한 번만 더 믿어줘, 응?"] }
 ];
 
-/* 인물 이미지를 원형/배너 등에 공통으로 렌더하는 헬퍼. 로드 실패 시 이모지 실루엣으로 폴백. */
+/* FIX 1: border-radius:50% 명시 — .cavatar에 overflow:hidden 없으므로 img에 직접 설정 */
 function avatarInner(p){
   return p.img
-    ? `<img src="${p.img}" alt="${p.real}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" onerror="this.replaceWith(document.createTextNode('${p.sil}'))">`
+    ? `<img src="${p.img}" alt="${p.real}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.replaceWith(document.createTextNode('${p.sil}'))">`
     : p.sil;
 }
 
@@ -550,7 +579,7 @@ function go(v){
   if(v==='profile'&&!testInit){renderTestIntro();testInit=true;}
 }
 
-/* ============ EXPLORE (cards + modal) ============ */
+/* ============ EXPLORE ============ */
 const grid=document.getElementById('grid-list'), overlay=document.getElementById('overlay'), sheet=document.getElementById('sheet');
 let activeFilter='all', query='';
 function starHTML(r){let f=Math.round(r),s='';for(let i=1;i<=5;i++)s+=`<span class="${i<=f?'s-full':'s-empty'}">★</span>`;return s;}
@@ -587,7 +616,6 @@ function renderGrid(){
 }
 function sheetHTML(p,i){
   const grad=`linear-gradient(150deg, ${p.accent[1]}, ${p.accent[0]})`;
-  // 이미지가 있으면 상단 배너에 cover 배경 + 어두운 스크림(글자 가독성), 없으면 그라데이션
   const headBg = p.img
     ? `background:linear-gradient(to top, rgba(8,5,7,.88), rgba(8,5,7,.18)), url('${p.img}'), ${grad};`
     : `background:${grad};`;
@@ -717,7 +745,7 @@ document.getElementById('lounge-tabs').addEventListener('click',e=>{const c=e.ta
   document.querySelectorAll('#lounge-tabs .chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');loungeFilter=c.dataset.c;renderPosts();});
 
 /* ============ MESSAGES ============ */
-const convos={}; // index -> [{me, text, time}]
+const convos={};
 function nowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
 function ensureConvo(i){
   if(!convos[i]){
@@ -749,7 +777,7 @@ function openThread(i){
   thread.innerHTML=`
     <div class="thread-head">
       <button class="back" onclick="backToContacts()">‹</button>
-      <div class="cavatar" style="width:36px;height:36px;font-size:15px;background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${avatarInner(p)}</div>
+      <div class="cavatar" style="width:36px;height:36px;font-size:15px;overflow:hidden;background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${avatarInner(p)}</div>
       <div><div class="nm">${p.nick}</div><div class="role-mini">${p.tags[0]} · ${p.online?'접속 중':'미접속'}</div></div>
     </div>
     <div class="thread-body" id="thread-body"></div>
@@ -787,8 +815,6 @@ function sendMsg(){
 }
 
 /* ============ PROFILE + BDSM TEST ============ */
-// 점수 키: 포지션(dom/sub/switch) + 중립 테마(nurture/pain/bondage/degr/primal/role/pet/brat) + 척도(care=애프터케어 중시도)
-// 테마는 중립으로 쌓고, 결과에서 포지션에 따라 '대디돔/리틀', '오너/펫'처럼 이름을 붙인다.
 const QUESTIONS=[
   { q:"플레이를 떠올릴 때, 더 끌리는 위치는?",
     opts:[
@@ -885,64 +911,63 @@ function answer(oi){
 }
 function prevQuestion(){if(qIndex>0){qIndex--;renderQuestion();}}
 
-// 중립 테마 → 포지션별 이름. care는 테마가 아니라 '애프터케어 중시도' 척도로만 사용.
 const THEMES={
-  nurture:{dom:"대디돔",      sub:"리틀",          neutral:"양육·돌봄"},
-  pain:   {dom:"사디스트",    sub:"마조히스트",     neutral:"고통 교환"},
-  bondage:{dom:"리거(바운디지 돔)", sub:"로프버니(구속 선호)", neutral:"구속·결박"},
-  degr:   {dom:"디그레이더",  sub:"디그레이디",     neutral:"디그레이딩"},
-  primal: {dom:"프라이멀 헌터", sub:"프라이멀 프레이", neutral:"프라이멀"},
-  pet:    {dom:"오너",        sub:"펫",            neutral:"펫플레이"},
-  brat:   {dom:"브랫테이머",  sub:"브랫",          neutral:"브랫"},
-  role:   {dom:"롤플레이어",  sub:"롤플레이어",     neutral:"롤플레이"},
+  nurture:{dom:"대디돔",sub:"리틀",neutral:"양육·돌봄"},
+  pain:{dom:"사디스트",sub:"마조히스트",neutral:"고통 교환"},
+  bondage:{dom:"리거(바운디지 돔)",sub:"로프버니(구속 선호)",neutral:"구속·결박"},
+  degr:{dom:"디그레이더",sub:"디그레이디",neutral:"디그레이딩"},
+  primal:{dom:"프라이멀 헌터",sub:"프라이멀 프레이",neutral:"프라이멀"},
+  pet:{dom:"오너",sub:"펫",neutral:"펫플레이"},
+  brat:{dom:"브랫테이머",sub:"브랫",neutral:"브랫"},
+  role:{dom:"롤플레이어",sub:"롤플레이어",neutral:"롤플레이"},
 };
-function themeName(key, base){
-  const T=THEMES[key]; if(!T) return key;
-  if(base==="도미넌트") return T.dom;
-  if(base==="서브미시브") return T.sub;
-  return T.neutral; // 스위치
+function themeName(key,base){
+  const T=THEMES[key];if(!T)return key;
+  if(base==="도미넌트")return T.dom;
+  if(base==="서브미시브")return T.sub;
+  return T.neutral;
 }
 function showResult(){
-  const dom=scores.dom||0, sub=scores.sub||0, sw=scores.switch||0;
-  let base, baseEm, baseDesc;
-  if(sw>=2 && Math.abs(dom-sub)<=2){base="스위치";baseEm="🔀";baseDesc="상황과 상대에 따라 주도권을 자유롭게 오가는 유연한 성향이에요. 지배와 복종 양쪽의 쾌감을 모두 이해합니다.";}
+  const dom=scores.dom||0,sub=scores.sub||0,sw=scores.switch||0;
+  let base,baseEm,baseDesc;
+  if(sw>=2&&Math.abs(dom-sub)<=2){base="스위치";baseEm="🔀";baseDesc="상황과 상대에 따라 주도권을 자유롭게 오가는 유연한 성향이에요. 지배와 복종 양쪽의 쾌감을 모두 이해합니다.";}
   else if(dom>sub){base="도미넌트";baseEm="👑";baseDesc="관계의 주도권을 쥐고 상대를 이끌 때 가장 자연스러운 성향이에요. 통제에는 그만큼의 책임이 따른다는 걸 아는 타입입니다.";}
   else if(sub>dom){base="서브미시브";baseEm="🎀";baseDesc="믿는 사람에게 자신을 맡기고 따를 때 깊은 만족과 안정을 느끼는 성향이에요. 좋은 주인을 알아보는 눈이 가장 큰 무기입니다.";}
-  else {base="스위치";baseEm="🔀";baseDesc="지배와 복종 사이를 오가는 균형형이에요. 상대에 따라 색이 달라지는 타입입니다.";}
+  else{base="스위치";baseEm="🔀";baseDesc="지배와 복종 사이를 오가는 균형형이에요. 상대에 따라 색이 달라지는 타입입니다.";}
 
   const themeKeys=Object.keys(THEMES).filter(k=>(scores[k]||0)>0).sort((a,b)=>(scores[b]||0)-(scores[a]||0));
   const top=themeKeys.slice(0,3);
-  const primaryName = top.length? themeName(top[0], base) : "";
+  const primaryName=top.length?themeName(top[0],base):"";
 
   let roleTags=[base];
-  top.forEach(k=>roleTags.push(themeName(k, base)));
+  top.forEach(k=>roleTags.push(themeName(k,base)));
   roleTags=[...new Set(roleTags)];
 
   const barData=[
-    {l:"주도 ↔ 복종", a:"도미넌트", b:"서브미시브", twoSided:true, v: 50 + (dom-sub)*11},
-    {l:"양육·돌봄 (대디↔리틀)", a:"낮음", b:"높음", v: (scores.nurture||0)*15+8},
-    {l:"고통 (사디↔마조)", a:"낮음", b:"높음", v: (scores.pain||0)*15+8},
-    {l:"구속 · 결박", a:"낮음", b:"높음", v: (scores.bondage||0)*18+8},
-    {l:"프라이멀 · 롤플레이", a:"낮음", b:"높음", v: ((scores.primal||0)+(scores.role||0))*13+8},
-    {l:"애프터케어 중시", a:"낮음", b:"높음", v: (scores.care||0)*15+10},
+    {l:"주도 ↔ 복종",a:"도미넌트",b:"서브미시브",twoSided:true,v:50+(dom-sub)*11},
+    {l:"양육·돌봄 (대디↔리틀)",a:"낮음",b:"높음",v:(scores.nurture||0)*15+8},
+    {l:"고통 (사디↔마조)",a:"낮음",b:"높음",v:(scores.pain||0)*15+8},
+    {l:"구속 · 결박",a:"낮음",b:"높음",v:(scores.bondage||0)*18+8},
+    {l:"프라이멀 · 롤플레이",a:"낮음",b:"높음",v:((scores.primal||0)+(scores.role||0))*13+8},
+    {l:"애프터케어 중시",a:"낮음",b:"높음",v:(scores.care||0)*15+10},
   ].map(x=>({...x,v:Math.max(5,Math.min(95,x.v))}));
 
   const recMap={nurture:["케어","펫"],pain:["사디즘","마조히즘"],bondage:["바운디지"],degr:["디그레이딩"],primal:["프라이멀","롤플레이"],pet:["펫"],role:["롤플레이"],brat:[]};
   let recScores=DATA.map((p,i)=>{
-    if(p.flag) return {i,sc:-99};
+    if(p.flag)return{i,sc:-99};
     let sc=0;
-    top.forEach((k,ord)=>{ (recMap[k]||[]).forEach(tag=>{ if((p.recTrait||[]).includes(tag)) sc+=(3-ord); }); });
-    return {i,sc};
+    top.forEach((k,ord)=>{(recMap[k]||[]).forEach(tag=>{if((p.recTrait||[]).includes(tag))sc+=(3-ord);});});
+    return{i,sc};
   }).sort((a,b)=>b.sc-a.sc);
   let recs=recScores.filter(r=>r.sc>0).slice(0,3).map(r=>r.i);
-  if(recs.length<2){ DATA.forEach((p,i)=>{ if(!p.flag && recs.length<2 && !recs.includes(i)) recs.push(i); }); }
+  if(recs.length<2){DATA.forEach((p,i)=>{if(!p.flag&&recs.length<2&&!recs.includes(i))recs.push(i);});}
 
   let myLabel;
-  if(base==="스위치") myLabel = primaryName? `${primaryName} 스위치` : "스위치";
-  else if(primaryName) myLabel = `${primaryName} ${base}`;
-  else myLabel = base;
+  if(base==="스위치")myLabel=primaryName?`${primaryName} 스위치`:"스위치";
+  else if(primaryName)myLabel=`${primaryName} ${base}`;
+  else myLabel=base;
 
-  window.__testResult={label:myLabel, base, roleTags, em:baseEm};
+  window.__testResult={label:myLabel,base,roleTags,em:baseEm};
 
   document.getElementById('test-card').innerHTML=`
     <div class="test-progress"><div class="bar" style="width:100%"></div></div>
@@ -955,8 +980,8 @@ function showResult(){
       <div class="bars">
         ${barData.map(b=>{
           let lab;
-          if(b.twoSided){ lab = `${b.v>=50?b.b:b.a} ${Math.round(b.v>=50?b.v:100-b.v)}%`; }
-          else { lab = `${b.v>=66?'높음':b.v>=33?'보통':'낮음'} ${Math.round(b.v)}%`; }
+          if(b.twoSided){lab=`${b.v>=50?b.b:b.a} ${Math.round(b.v>=50?b.v:100-b.v)}%`;}
+          else{lab=`${b.v>=66?'높음':b.v>=33?'보통':'낮음'} ${Math.round(b.v)}%`;}
           return `<div class="bar-row">
           <div class="bl"><span>${b.l}</span><b>${lab}</b></div>
           <div class="bar-track"><div class="bar-fill" style="width:0%" data-w="${b.v}"></div></div>
