@@ -31,19 +31,14 @@
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 
-  /* ── top bar ── */
-  /* FIX 2: gap 추가, padding 축소, overflow:hidden으로 삐져나감 방지 */
   .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:6px;
     padding:12px clamp(10px,3vw,64px);background:rgba(14,10,13,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
   .brand{display:flex;align-items:center;gap:12px;cursor:pointer;flex-shrink:0}
   .brand .chain{font-size:18px}
-  /* FIX 2: wordmark — 작은 화면에서 letter-spacing 줄임, nowrap */
   .wordmark{font-family:var(--display);font-weight:700;font-size:clamp(14px,2.4vw,26px);
     letter-spacing:clamp(.18em,.42em,.42em);text-indent:clamp(.18em,.42em,.42em);
     color:var(--text);white-space:nowrap}
-  /* FIX 2: nav — flex-wrap:nowrap, flex-shrink:0 */
   .nav{display:flex;align-items:center;gap:3px;flex-wrap:nowrap;flex-shrink:0}
-  /* FIX 2: nav button — clamp 폰트/패딩, white-space:nowrap */
   .nav button{background:none;border:none;color:var(--muted);font-family:var(--body);
     font-size:clamp(11px,1.4vw,14px);
     cursor:pointer;padding:7px clamp(7px,1.1vw,14px);border-radius:6px;transition:.18s;
@@ -59,10 +54,8 @@
   .view.show{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-  /* hero */
   .hero{padding:clamp(48px,8vw,104px) 0 clamp(30px,4vw,48px)}
   .eyebrow{font-family:var(--display);text-transform:uppercase;letter-spacing:.46em;font-size:11.5px;color:var(--gold);margin-bottom:24px}
-  /* FIX 2: hero h1 — clamp 최소값 낮춤 */
   .hero h1{font-family:var(--ko-serif);font-weight:600;font-size:clamp(26px,6vw,72px);line-height:1.08;letter-spacing:-.01em;margin-bottom:24px}
   .hero h1 em{font-family:var(--display);font-style:italic;font-weight:500;color:var(--gold)}
   .hero h1 .one{color:var(--heat)}
@@ -71,13 +64,11 @@
   .stat .n{font-family:var(--display);font-size:28px;font-weight:700}
   .stat .l{font-size:12px;color:var(--muted2);letter-spacing:.12em;text-transform:uppercase}
 
-  /* section heading */
   .sec-head{padding:clamp(40px,7vw,80px) 0 26px}
   .sec-head .eyebrow{margin-bottom:14px}
   .sec-head h2{font-family:var(--ko-serif);font-size:clamp(26px,4vw,42px);font-weight:600}
   .sec-head p{color:var(--muted);margin-top:10px;max-width:560px}
 
-  /* controls (explore) */
   .controls{position:sticky;top:62px;z-index:40;background:rgba(14,10,13,.82);backdrop-filter:blur(10px);
     border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .controls-inner{padding:16px clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:14px;max-width:1240px;margin:0 auto}
@@ -89,7 +80,6 @@
   .chip:hover{border-color:var(--gold-dim);color:var(--text)}
   .chip.active{background:var(--wine);border-color:var(--wine);color:#fff}
 
-  /* grid + cards */
   .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));padding:40px 0 90px}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:.22s ease;position:relative}
   .card:hover{transform:translateY(-4px);border-color:var(--gold-dim);box-shadow:0 18px 40px -22px rgba(0,0,0,.9),0 0 0 1px rgba(201,162,75,.12)}
@@ -123,7 +113,6 @@
   .flag{position:absolute;inset:0;border:1px solid var(--wine);border-radius:6px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(154,35,72,.25);z-index:4}
   .flag-tag{position:absolute;bottom:14px;left:14px;z-index:4;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#ffb9c8;background:rgba(122,29,58,.78);padding:4px 9px;border-radius:3px;font-family:var(--display)}
 
-  /* modal */
   .overlay{position:fixed;inset:0;z-index:100;display:none;background:rgba(5,3,5,.78);backdrop-filter:blur(6px);padding:clamp(16px,4vw,48px);overflow-y:auto}
   .overlay.show{display:flex;align-items:flex-start;justify-content:center}
   .sheet{width:min(720px,100%);background:var(--bg2);border:1px solid var(--line);border-radius:8px;overflow:hidden;animation:rise .32s cubic-bezier(.2,.8,.2,1);margin:auto}
@@ -164,7 +153,6 @@
   .empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted2)}
   .empty .big{font-family:var(--ko-serif);font-size:22px;color:var(--muted);margin-bottom:8px}
 
-  /* ---------- LOUNGE / community ---------- */
   .lounge-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
   .lounge-tabs .chip{font-size:13px}
   .post{background:var(--surface);border:1px solid var(--line);border-radius:7px;margin-bottom:16px;overflow:hidden;transition:.18s}
@@ -194,20 +182,17 @@
   .cmt-write input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 15px;color:var(--text);font-family:var(--body);font-size:13px;outline:none}
   .cmt-write button{background:var(--wine);border:none;color:#fff;border-radius:999px;padding:0 16px;cursor:pointer;font-family:var(--body);font-size:13px}
 
-  /* ---------- MESSAGES ---------- */
-  /* FIX 3: height:calc 로 실제 높이 확보 */
   .msg-layout{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;
     height:calc(100vh - 230px);min-height:500px;background:var(--surface)}
-  .contacts{border-right:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column}
+  .contacts{border-right:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column;overflow:hidden}
+  #contact-list{overflow-y:auto;flex:1}
   .contacts-head{padding:18px 20px;border-bottom:1px solid var(--line)}
   .contacts-head .t{font-family:var(--ko-serif);font-size:16px}
   .contacts-head .s{font-size:12px;color:var(--muted2);margin-top:3px}
   .contact{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;border-bottom:1px solid rgba(51,39,47,.5);transition:.15px}
   .contact:hover{background:var(--surface)}
   .contact.active{background:var(--surface);box-shadow:inset 3px 0 0 var(--wine)}
-  /* FIX 1: overflow:hidden 제거 → .od(온라인 dot)가 잘리지 않음 */
   .cavatar{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:18px;color:#fff;position:relative}
-  /* FIX 1: right/bottom -2px 로 테두리 밖으로 살짝 나오게 + border 두께 늘림 */
   .cavatar .od{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;border:2.5px solid var(--bg2);z-index:2}
   .cavatar .od.on{background:var(--heat)}.cavatar .od.off{background:var(--muted2)}
   .cinfo{min-width:0;flex:1}
@@ -215,32 +200,27 @@
   .cinfo .cn .badge{font-size:10px;color:#fff;background:var(--wine);border-radius:999px;padding:1px 7px;font-family:var(--body)}
   .cinfo .cp{font-size:12px;color:var(--muted2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
 
-  /* FIX 3: thread flex column, height:100%, min-height:0 필수 */
   .thread{display:flex;flex-direction:column;height:100%;min-height:0}
   .thread-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;color:var(--muted2)}
   .thread-empty .big{font-family:var(--ko-serif);font-size:22px;color:var(--muted);margin-bottom:10px}
   .thread-empty .em{font-size:46px;margin-bottom:18px;opacity:.5}
-  /* FIX 3: flex-shrink:0 으로 헤더가 찌그러지지 않게 */
   .thread-head{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--bg2);flex-shrink:0}
   .thread-head .back{display:none;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
   .thread-head .nm{font-family:var(--ko-serif);font-size:15px}
   .thread-head .role-mini{font-size:11px;color:var(--gold)}
   .thread-head .cavatar{overflow:hidden}
-  /* FIX 3: flex:1 + min-height:0 으로 스크롤 영역이 남은 공간 전부 차지 / max-height 제거 */
   .thread-body{flex:1;min-height:0;padding:22px 20px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
   .b{max-width:74%;padding:11px 15px;font-size:14px;line-height:1.55;border-radius:14px}
   .b.them{align-self:flex-start;background:var(--surface2);border:1px solid var(--line);border-bottom-left-radius:5px}
   .b.me{align-self:flex-end;background:var(--wine);color:#fff;border-bottom-right-radius:5px}
   .b .tt{display:block;font-family:var(--display);font-size:9.5px;letter-spacing:.1em;opacity:.6;margin-bottom:3px}
   .typing{align-self:flex-start;color:var(--muted2);font-size:13px;font-style:italic}
-  /* FIX 3: flex-shrink:0 으로 composer가 밀려나지 않게 */
   .composer2{display:flex;gap:9px;padding:14px 18px;border-top:1px solid var(--line);background:var(--bg2);flex-shrink:0}
   .composer2 input{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:12px 18px;color:var(--text);font-family:var(--body);font-size:14px;outline:none}
   .composer2 input:focus{border-color:var(--gold-dim)}
   .composer2 button{background:var(--wine);border:none;color:#fff;border-radius:999px;padding:0 22px;cursor:pointer;font-family:var(--body);font-size:14px}
   .composer2 button:hover{background:#b22a55}
 
-  /* ---------- PROFILE + TEST ---------- */
   .me-card{display:flex;flex-wrap:wrap;gap:26px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px clamp(22px,4vw,36px);margin-bottom:28px}
   .me-photo{width:120px;height:120px;border-radius:14px;background:linear-gradient(150deg,var(--wine),#2b2030);display:grid;place-items:center;font-size:46px;color:#fff;flex:none;position:relative;overflow:hidden}
   .me-info{flex:1;min-width:220px}
@@ -271,7 +251,6 @@
   .q-nav button{background:none;border:1px solid var(--line);color:var(--muted);padding:9px 18px;border-radius:6px;cursor:pointer;font-family:var(--body);font-size:13px}
   .q-nav button:hover{color:var(--text);border-color:var(--muted)}
   .q-nav button:disabled{opacity:.35;cursor:default}
-
   .result{padding:clamp(28px,5vw,48px)}
   .result .em{font-size:50px;text-align:center;margin-bottom:6px}
   .result .rlab{text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
@@ -297,31 +276,54 @@
   .apply-btn{background:var(--wine);color:#fff}.apply-btn:hover{background:#b22a55}
   .retake-btn{background:transparent;border-color:var(--line);color:var(--muted)}.retake-btn:hover{color:var(--text);border-color:var(--muted)}
 
+  /* ====== GUIDE ====== */
+  .guide-search-wrap{margin-bottom:20px}
+  .guide-search-wrap .search{max-width:480px;display:flex}
+  .guide-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+  .guide-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));padding-bottom:90px}
+
+  .gcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;transition:.2s ease}
+  .gcard:hover{border-color:var(--gold-dim);transform:translateY(-3px);box-shadow:0 14px 36px -18px rgba(0,0,0,.8)}
+  .gcard-top{display:flex;align-items:center;gap:14px;padding:18px 18px 14px}
+  .gcard-em{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-size:22px;flex:none}
+  .gcard-label{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  .gcard-title{font-family:var(--ko-serif);font-size:17px;font-weight:600}
+  .gcard-body{padding:0 18px 18px}
+  .gcard-short{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:12px}
+  .gcard-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .gtag{font-size:11px;color:var(--muted2);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
+
+  /* Term Modal */
+  .gmodal-body{padding:8px clamp(22px,4vw,38px) 30px}
+  .gmodal-em{font-size:48px;margin-bottom:8px}
+  .gmodal-en{font-family:var(--display);font-size:12px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:4px}
+  .gmodal-title{font-family:var(--ko-serif);font-size:28px;font-weight:700;margin-bottom:20px}
+  .gdef{font-size:15px;color:var(--text);line-height:1.8;margin-bottom:18px}
+  .gnote{background:var(--surface2);border-left:3px solid var(--wine);border-radius:0 5px 5px 0;padding:13px 16px;font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+  .gnote b{color:var(--text);font-weight:500}
+  .grelated-title{font-family:var(--display);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .grelated{display:flex;flex-wrap:wrap;gap:8px}
+  .grel-btn{font-size:12.5px;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:6px 13px;border-radius:999px;cursor:pointer;transition:.15s;font-family:var(--body)}
+  .grel-btn:hover{border-color:var(--gold-dim);color:var(--gold)}
+
   footer{border-top:1px solid var(--line);padding:34px clamp(20px,5vw,64px);text-align:center;color:var(--muted2);font-size:12px}
   footer .wordmark{font-size:15px;letter-spacing:.4em;color:var(--muted);display:inline-block;margin-bottom:8px}
 
-  /* ── 반응형 ── */
-  /* 760px: 메시지 세로 레이아웃 */
   @media(max-width:760px){
-    /* FIX 3: 모바일 높이 — 100svh 기반으로 정확한 높이 확보 */
     .msg-layout{grid-template-columns:1fr;height:calc(100svh - 160px);min-height:420px}
     .contacts{display:flex}
     .contacts.hide-mobile{display:none}
     .thread.show-mobile{display:flex}
     .thread{display:none}
     .thread-head .back{display:block}
+    .guide-grid{grid-template-columns:1fr}
   }
-  /* 480px: nav 버튼 더 작게, wordmark 축소, h1 모바일 크기 */
   @media(max-width:480px){
-    /* FIX 2: 버튼 크기 / 여백 더 줄임 */
     .nav button:not(.me-tab){padding:7px 6px;font-size:11.5px}
-    /* FIX 2: wordmark letter-spacing 모바일 축소 */
     .wordmark{letter-spacing:.16em;text-indent:.16em;font-size:14px}
-    /* FIX 2: hero h1 모바일에서 자연스럽게 줄바꿈 */
     .hero h1{font-size:clamp(22px,7.5vw,40px);white-space:normal;word-break:keep-all}
     .nav .me{width:30px;height:30px;font-size:12px}
   }
-  /* 360px: 극소형 화면 */
   @media(max-width:360px){
     .nav button:not(.me-tab){padding:6px 5px;font-size:10.5px}
     .nav .me{width:28px;height:28px;font-size:11px;margin-left:2px}
@@ -338,6 +340,7 @@
   <nav class="nav">
     <button data-v="explore" class="active" onclick="go('explore')">탐색</button>
     <button data-v="lounge" onclick="go('lounge')">라운지</button>
+    <button data-v="guide" onclick="go('guide')">가이드</button>
     <button data-v="messages" onclick="go('messages')">메시지</button>
     <div class="me me-tab" data-v="profile" onclick="go('profile')">나</div>
   </nav>
@@ -394,6 +397,32 @@
       <span class="chip" data-c="잡담">잡담</span>
     </div>
     <div id="post-list" style="padding-bottom:80px"></div>
+  </div>
+</section>
+
+<!-- ===================== GUIDE ===================== -->
+<section class="view" id="view-guide">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The Guide</div>
+      <h2>용어 & 개념 사전</h2>
+      <p>낯선 단어들이 가득하다면, 여기서부터. 모든 플레이는 정확한 이해 위에서 시작됩니다.</p>
+    </div>
+    <div style="margin-bottom:20px">
+      <label class="search" style="max-width:480px;display:flex">
+        <span>🔍</span>
+        <input id="guide-search" type="text" placeholder="용어 검색…" autocomplete="off">
+      </label>
+    </div>
+    <div class="guide-cats" id="guide-cats">
+      <span class="chip active" data-gc="all">전체</span>
+      <span class="chip" data-gc="role">역할 · 포지션</span>
+      <span class="chip" data-gc="play">플레이 유형</span>
+      <span class="chip" data-gc="safety">안전 · 합의</span>
+      <span class="chip" data-gc="aftercare">애프터케어</span>
+      <span class="chip" data-gc="dynamic">관계 다이나믹</span>
+    </div>
+    <div class="guide-grid" id="guide-grid"></div>
   </div>
 </section>
 
@@ -455,8 +484,253 @@
   <div>가입 시 사진·신체정보·성향·취향 등록 필수 · 모든 만남은 합의와 세이프워드 위에서.</div>
   <div style="margin-top:6px;color:var(--muted2)">© TAMING — 매칭 어플.</div>
 </footer>
-
 <script>
+/* ============ GUIDE DATA ============ */
+const GUIDE = [
+  {
+    id:"dominant", cat:"role", em:"👑", en:"Dominant / Dom",
+    title:"도미넌트 (돔)",
+    short:"관계에서 주도권을 쥐고 상대를 이끄는 역할. 명령·규칙·통제를 담당합니다.",
+    def:"도미넌트(Dom/Dominant)는 BDSM 관계에서 능동적·지배적 위치를 맡는 사람입니다. 상대(서브미시브)와 합의한 규칙 안에서 행동의 방향을 결정하고, 플레이를 이끌며 전반적인 세션을 책임집니다.",
+    note:"<b>주도권 ≠ 무한 권력.</b> 진짜 돔은 파트너의 한계와 세이프워드를 항상 최우선으로 두며, 상대의 안전을 지키는 것 자체가 지배력의 일부입니다. 강압·협박은 BDSM이 아닙니다.",
+    related:["서브미시브","스위치","대디돔","마스터","세이프워드"],
+    tags:["역할","포지션","주도"]
+  },
+  {
+    id:"submissive", cat:"role", em:"🎀", en:"Submissive / Sub",
+    title:"서브미시브 (서브)",
+    short:"파트너에게 주도권을 맡기고 따르는 역할. 신뢰 위에서 자신을 내맡깁니다.",
+    def:"서브미시브(Sub/Submissive)는 BDSM 관계에서 수동적·복종적 위치를 선택하는 사람입니다. 파트너(돔)에게 통제권을 위임하고 그 안에서 안도감·해방감·쾌락을 얻습니다. 복종은 어디까지나 자발적 선택이며, 합의된 범위 안에서만 유효합니다.",
+    note:"<b>복종은 약함이 아닙니다.</b> 자신의 한계를 정확히 알고 신뢰할 사람을 고르는 것은 고도로 능동적인 행위입니다. 서브가 세이프워드를 말하는 순간 모든 플레이는 즉시 멈춰야 합니다.",
+    related:["도미넌트","스위치","서브드롭","세이프워드","애프터케어"],
+    tags:["역할","포지션","복종"]
+  },
+  {
+    id:"switch", cat:"role", em:"🔀", en:"Switch",
+    title:"스위치",
+    short:"돔과 서브 양쪽을 오갈 수 있는 역할. 상대와 상황에 따라 유연하게 전환합니다.",
+    def:"스위치는 고정된 포지션 없이 도미넌트와 서브미시브 사이를 자유롭게 이동하는 사람입니다. 같은 파트너와의 관계에서 역할을 교체하기도 하고, 상대에 따라 자연스럽게 한쪽으로 기울기도 합니다.",
+    note:"\"어느 쪽이 진짜냐\"는 질문은 의미 없습니다. 스위치는 양쪽의 심리를 모두 이해하기 때문에 파트너를 더 깊이 배려할 수 있다는 장점이 있습니다.",
+    related:["도미넌트","서브미시브","다이나믹"],
+    tags:["역할","포지션"]
+  },
+  {
+    id:"daddy-dom", cat:"role", em:"🎩", en:"Daddy Dom / DD",
+    title:"대디돔",
+    short:"부모처럼 다정하게 보살피며 지배하는 돔. 처벌보다 양육과 칭찬을 중시합니다.",
+    def:"대디돔(Daddy Dom)은 보호자·부모의 역할을 맡는 도미넌트입니다. 엄격한 규율보다 따뜻한 돌봄과 정서적 유대를 통해 파트너(리틀)를 이끕니다. 규칙을 어겼을 때도 훈육은 애정 어린 방식으로 이루어집니다. 성별과 무관하게 '마미돔(Mommy Dom)'도 같은 역할입니다.",
+    note:"대디돔 관계는 연령 퇴행(에이지 플레이) 없이도 성립합니다. 핵심은 '돌봄과 보호' 다이나믹이지, 실제 나이차나 가족 관계를 모방하는 것이 아닙니다.",
+    related:["리틀","마스터","도미넌트","애프터케어","훈육"],
+    tags:["역할","돌봄","대디"]
+  },
+  {
+    id:"little", cat:"role", em:"🧸", en:"Little / CG/l",
+    title:"리틀",
+    short:"어린 시절의 순수함·의존감을 표현하는 서브. 대디돔/마미돔의 파트너.",
+    def:"리틀(Little)은 플레이 중 어린 감성이나 행동 방식으로 돌아가는 서브미시브입니다. 인형을 안거나 어리광을 부리는 등 연령 퇴행 요소를 포함할 수 있지만, 이는 완전히 선택적입니다. 리틀 스페이스(Little Space)라 불리는 상태에서 일상의 스트레스를 내려놓고 편안함을 얻는 것이 목적입니다.",
+    note:"리틀 플레이는 언제나 성인 간의 합의된 역할극입니다. 실제 미성년자나 아동 관련 내용과는 전혀 무관하며, 혼동해서는 안 됩니다.",
+    related:["대디돔","에이지플레이","서브미시브","리틀스페이스"],
+    tags:["역할","돌봄","에이지플레이"]
+  },
+  {
+    id:"master", cat:"role", em:"🖤", en:"Master / Mistress",
+    title:"마스터 / 미스트레스",
+    short:"깊고 지속적인 지배 관계를 이끄는 최상위 돔. 주로 M/s 관계에서 사용됩니다.",
+    def:"마스터(Master) 또는 미스트레스(Mistress)는 슬레이브(Slave)와 장기적이고 심층적인 지배·복종 관계(M/s 다이나믹)를 맺는 도미넌트입니다. 일반적인 돔/서브 관계보다 권력 이양의 범위가 넓고, 일상 전반에 걸쳐 영향을 미칠 수 있습니다.",
+    note:"M/s 관계는 TPE(Total Power Exchange)로 발전하기도 합니다. 그만큼 철저한 사전 합의와 지속적인 소통이 필수입니다.",
+    related:["슬레이브","도미넌트","TPE","다이나믹","세이프워드"],
+    tags:["역할","포지션","M/s"]
+  },
+  {
+    id:"sadist", cat:"role", em:"🌹", en:"Sadist",
+    title:"사디스트",
+    short:"파트너에게 고통이나 굴욕을 주는 것에서 쾌감을 얻는 사람.",
+    def:"사디스트(Sadist)는 합의된 범위 안에서 파트너에게 신체적·심리적 자극(고통, 수치심 등)을 가함으로써 쾌감을 느끼는 사람입니다. BDSM에서 사디즘은 반드시 상호 합의와 파트너의 만족을 전제로 합니다.",
+    note:"<b>진짜 사디스트는 파트너의 안전을 최우선으로 합니다.</b> 상대가 원하지 않는 고통을 가하는 것은 사디즘이 아니라 폭력입니다. 사전 협의, 세이프워드 준수, 사후 케어가 필수입니다.",
+    related:["마조히스트","SM","엣지플레이","세이프워드","애프터케어"],
+    tags:["역할","SM","고통"]
+  },
+  {
+    id:"masochist", cat:"role", em:"💜", en:"Masochist",
+    title:"마조히스트",
+    short:"합의된 고통이나 굴욕을 받는 것에서 쾌감·해방감을 얻는 사람.",
+    def:"마조히스트(Masochist)는 신체적 통증이나 심리적 굴욕을 받을 때 쾌감·안도감·흥분을 경험하는 사람입니다. 통증이 엔도르핀·아드레날린 분비를 촉진해 황홀감(서브스페이스)을 유발하기도 합니다.",
+    note:"마조히즘은 자해나 자기혐오와 다릅니다. 합의된 환경, 신뢰하는 파트너, 언제든 멈출 수 있는 세이프워드가 있을 때만 안전하게 작동합니다.",
+    related:["사디스트","서브스페이스","SM","세이프워드","엣지플레이"],
+    tags:["역할","SM","고통"]
+  },
+  {
+    id:"brat", cat:"role", em:"😈", en:"Brat",
+    title:"브랫",
+    short:"규칙을 일부러 어기거나 반항하며 돔의 반응을 유도하는 장난꾸러기 서브.",
+    def:"브랫(Brat)은 순종하는 대신 의도적으로 반항하고, 규칙을 어기고, 돔을 도발하는 방식으로 플레이하는 서브미시브입니다. 훈육받거나 '제압'당하는 과정 자체가 즐거움의 핵심입니다.",
+    note:"브랫 플레이는 언제나 재미있는 긴장감 위에서 이루어져야 합니다. 진짜 화가 난 상황이나 합의되지 않은 도발은 브랫이 아닙니다. 브랫을 다루는 돔을 '브랫테이머(Brat Tamer)'라고 합니다.",
+    related:["브랫테이머","훈육","서브미시브","다이나믹"],
+    tags:["역할","브랫","장난"]
+  },
+  {
+    id:"primal", cat:"play", em:"🐺", en:"Primal Play",
+    title:"프라이멀 플레이",
+    short:"본능·야성을 해방시켜 포식자(헌터)와 피식자(프레이)로 나뉘어 즐기는 플레이.",
+    def:"프라이멀 플레이(Primal Play)는 사회적 규범과 룰을 벗어던지고 원초적 본능에 충실한 플레이입니다. 쫓고 쫓기는 추격, 물고 긁는 신체 접촉, 포효·으르렁거림 등 동물적 행동을 포함할 수 있습니다. 헌터(Hunter)와 프레이(Prey)로 역할이 나뉩니다.",
+    note:"프라이멀은 룰이 적은 만큼 오히려 더 명확한 경계 설정이 필요합니다. 세이프워드, 신체 접촉의 강도와 부위, 행위 후 돌봄 방식을 반드시 미리 협의하세요.",
+    related:["헌터","프레이","세이프워드","애프터케어","SM"],
+    tags:["플레이","프라이멀","본능"]
+  },
+  {
+    id:"bondage", cat:"play", em:"🪢", en:"Bondage / Shibari / Rigger",
+    title:"결박 · 바운디지 · 리가",
+    short:"밧줄·케이블 등으로 파트너를 묶어 움직임을 제한하는 플레이. 시각적 아름다움도 추구합니다.",
+    def:"바운디지(Bondage)는 로프·케이블타이·붕대 등 다양한 도구로 상대방을 묶어 움직임을 제한하는 플레이입니다. 묶는 사람을 리거(Rigger), 묶이는 사람을 로프버니(Rope Bunny) 또는 바텀(Bottom)이라 합니다. 일본의 시바리(緊縛, Shibari)는 미적 완성도를 중시하는 로프 결박 예술입니다.",
+    note:"<b>안전이 최우선입니다.</b> 신경이 지나가는 부위(손목 안쪽, 겨드랑이) 과도한 압박 금지. 저림·감각 둔해짐 즉시 풀기. 가위(세이프티 시어즈) 항상 대기. 결박 중 절대 혼자 두지 않기.",
+    related:["리거","로프버니","세이프워드","세이프티시어즈","애프터케어"],
+    tags:["플레이","결박","로프"]
+  },
+  {
+    id:"spanking", cat:"play", em:"🎯", en:"Spanking",
+    title:"스팽킹",
+    short:"손이나 도구로 엉덩이·허벅지 등을 치는 플레이. 통증과 쾌감의 경계를 탐색합니다.",
+    def:"스팽킹(Spanking)은 손바닥, 패들, 벨트, 플로거 등으로 파트너의 신체 일부(주로 엉덩이)를 타격하는 플레이입니다. 가벼운 훈육적 의미부터 강도 높은 고통 플레이까지 스펙트럼이 넓습니다.",
+    note:"강도는 반드시 단계적으로 올려야 합니다. 타격 부위는 지방층이 있는 곳(엉덩이·허벅지 뒤쪽)으로 한정하고 신장·척추·관절은 피하세요. 레드마크·멍이 생길 수 있으므로 사전에 합의하세요.",
+    related:["세이프워드","마조히스트","애프터케어","SM"],
+    tags:["플레이","타격","스팽킹"]
+  },
+  {
+    id:"degrading", cat:"play", em:"🗣️", en:"Degrading / Humiliation",
+    title:"디그레이딩 · 굴욕 플레이",
+    short:"언어적·상황적 수치심을 합의 아래 활용하는 심리 플레이.",
+    def:"디그레이딩(Degrading/Humiliation)은 파트너를 언어적으로 낮추거나 굴욕적인 상황에 놓이게 하는 심리 플레이입니다. '다정한 디그레이딩'처럼 부드러운 버전도 있고, 강도 높은 언어나 행동도 있습니다. 수치심을 주는 사람(Degrader)과 받는 사람(Degradee)으로 구분됩니다.",
+    note:"<b>반드시 사전 합의가 필요합니다.</b> 어떤 단어와 상황이 허용되는지, 어디까지가 금지인지를 플레이 전에 구체적으로 정하세요. 같은 말이라도 사람에 따라 트라우마를 유발할 수 있습니다.",
+    related:["세이프워드","심리적플레이","애프터케어","다이나믹"],
+    tags:["플레이","심리","굴욕"]
+  },
+  {
+    id:"edgeplay", cat:"play", em:"⚡", en:"Edge Play",
+    title:"엣지플레이",
+    short:"신체적·심리적 위험 수위가 높은, 경계선에서 이루어지는 고강도 플레이.",
+    def:"엣지플레이(Edge Play)는 BDSM 스펙트럼에서 위험도·강도가 높은 플레이를 통칭합니다. 칼·불·질식·혈액 관련 플레이 등이 포함될 수 있습니다. 일반 BDSM 합의보다 훨씬 구체적이고 광범위한 위험 평가와 기술적 숙련이 필요합니다.",
+    note:"<b>초심자에게는 권장하지 않습니다.</b> 충분한 교육과 경험이 있는 파트너와, 철저한 사전 합의·의료 지식·응급 대응 준비 아래에서만 시도하세요.",
+    related:["세이프워드","SM","사디스트","마조히스트"],
+    tags:["플레이","고위험","엣지"]
+  },
+  {
+    id:"roleplay", cat:"play", em:"🎭", en:"Role Play",
+    title:"롤플레이 (상황극)",
+    short:"특정 캐릭터나 시나리오를 설정하고 즐기는 플레이. 현실과 허구의 경계를 명확히 해야 합니다.",
+    def:"롤플레이(Role Play)는 두 사람이 특정 역할이나 시나리오를 합의하고 그 안에서 행동하는 플레이입니다. 교사·학생, 상사·부하, 낯선 사람과의 첫 만남 등 다양한 설정이 있습니다. 픽션과 현실을 혼동하지 않기 위해 '인캐릭터(IC)'와 '아웃오브캐릭터(OOC)'를 명확히 구분해야 합니다.",
+    note:"롤플레이 도중에도 세이프워드는 유효합니다. 시나리오가 아무리 사실적이어도, 세이프워드는 즉시 현실로 돌아오는 버튼입니다.",
+    related:["세이프워드","프라이멀","다이나믹","OOC"],
+    tags:["플레이","상황극","롤플레이"]
+  },
+  {
+    id:"safeword", cat:"safety", em:"🛑", en:"Safe Word",
+    title:"세이프워드",
+    short:"플레이를 즉시 중단시키는 합의된 단어. BDSM의 가장 중요한 안전장치입니다.",
+    def:"세이프워드(Safe Word)는 플레이 중 언제든 즉시 중단을 요청하는 데 사용하는 특정 단어나 신호입니다. 일반 대화에서 잘 나오지 않는 단어(예: 빨간불, 파인애플 등)를 주로 사용합니다. 신호등 시스템도 널리 쓰입니다 — 초록(계속), 노랑(속도 줄이기), 빨강(즉시 중단).",
+    note:"<b>세이프워드는 절대적입니다.</b> 어떤 상황에서도, 몇 번을 말해도, 즉시 효력이 발생합니다. 세이프워드를 무시하는 파트너는 신뢰할 수 없습니다 — 이는 BDSM이 아니라 폭력입니다.",
+    related:["세이프액션","합의","애프터케어","서브미시브","도미넌트"],
+    tags:["안전","필수","세이프워드"]
+  },
+  {
+    id:"safeaction", cat:"safety", em:"✋", en:"Safe Action / Safe Signal",
+    title:"세이프액션 (세이프 시그널)",
+    short:"말하기 어려운 상황에서 사용하는 비언어적 중단 신호.",
+    def:"세이프액션(Safe Action)은 결박·재갈·강도 높은 플레이 등으로 말하기 어려운 상황에서 쓰는 비언어적 안전 신호입니다. 손에 동전·공 등을 쥐고 떨어뜨리기, 발 두 번 두드리기, 손가락 세 번 펴기 등이 있습니다. 반드시 세이프워드와 함께 사전에 약속해 두세요.",
+    note:"결박 플레이에서는 세이프액션이 세이프워드보다 더 중요할 수 있습니다. 파트너가 신호를 즉시 인지할 수 있는지 확인하고 연습해 두세요.",
+    related:["세이프워드","결박","합의","안전"],
+    tags:["안전","필수","신호"]
+  },
+  {
+    id:"consent", cat:"safety", em:"🤝", en:"Consent / Negotiation",
+    title:"합의 · 협의 (Consent)",
+    short:"모든 BDSM의 출발점. 무엇을 할지, 하지 않을지를 명확히 대화로 정합니다.",
+    def:"합의(Consent)는 BDSM의 절대 전제입니다. 플레이 전에 양쪽이 명확하고 자발적으로 동의한 행위만 가능합니다. 하드 리밋(절대 금지)과 소프트 리밋(조건부 허용)을 구분해 협의하고, 세이프워드와 세이프액션도 함께 정합니다.",
+    note:"<b>협의는 섹시하지 않다는 편견을 버리세요.</b> 구체적인 협의야말로 플레이를 더 깊고 안전하게 만드는 핵심입니다. 체크리스트를 활용하는 것도 좋습니다. 합의는 취소될 수 있으며, 언제든 변경 가능합니다.",
+    related:["세이프워드","하드리밋","소프트리밋","SSC","RACK"],
+    tags:["안전","필수","합의"]
+  },
+  {
+    id:"ssc", cat:"safety", em:"🔐", en:"SSC / RACK / PRICK",
+    title:"SSC · RACK · PRICK",
+    short:"BDSM 커뮤니티가 공유하는 안전 원칙 3가지.",
+    def:"<b>SSC (Safe, Sane, Consensual)</b> — 안전하고, 정상적인 판단 하에, 합의된 플레이.<br><b>RACK (Risk-Aware Consensual Kink)</b> — 위험을 인지하고 합의한 킹크. 모든 플레이엔 어느 정도 위험이 있음을 인정하는 현실적 접근.<br><b>PRICK (Personal Responsibility Informed Consensual Kink)</b> — 충분한 정보를 가진 상태에서, 개인 책임 아래 합의한 킹크.",
+    note:"어떤 원칙을 따르든 핵심은 같습니다 — 정보·합의·책임. 커뮤니티마다 선호하는 용어가 다를 수 있습니다.",
+    related:["합의","세이프워드","안전"],
+    tags:["안전","원칙","이론"]
+  },
+  {
+    id:"aftercare", cat:"aftercare", em:"🫂", en:"Aftercare",
+    title:"애프터케어",
+    short:"플레이 후 신체적·심리적 회복을 돕는 돌봄. 강도 높은 세션일수록 더 중요합니다.",
+    def:"애프터케어(Aftercare)는 BDSM 플레이가 끝난 뒤 파트너를 신체적·정서적으로 회복시키는 모든 행동을 말합니다. 물·음식 챙기기, 포옹과 담요, 상처 케어, 조용한 대화 등이 포함됩니다. 돔에게도 애프터케어가 필요할 수 있습니다(돔 드롭).",
+    note:"애프터케어는 선택이 아닙니다. 서브드롭은 플레이 직후뿐 아니라 2~3일 후에도 올 수 있습니다. 파트너의 다음 날 안부를 확인하는 것도 중요한 케어입니다.",
+    related:["서브드롭","돔드롭","세이프워드","신뢰","다이나믹"],
+    tags:["애프터케어","필수","회복"]
+  },
+  {
+    id:"subdrop", cat:"aftercare", em:"🌊", en:"Sub Drop",
+    title:"서브드롭",
+    short:"플레이 후 에너지·호르몬이 급격히 떨어지며 찾아오는 감정적 공황·우울감.",
+    def:"서브드롭(Sub Drop)은 플레이 중 분비된 아드레날린·엔도르핀·옥시토신이 급격히 감소하면서 나타나는 심리적·신체적 증상입니다. 이유 없는 눈물, 허탈감, 공허함, 떨림, 우울감 등이 올 수 있습니다. 직후에 오기도 하고, 며칠 뒤에 찾아오기도 합니다.",
+    note:"서브드롭은 이상한 것이 아닙니다. 강도 높은 플레이 후엔 자연스러운 현상입니다. 혼자 두지 말고, 파트너가 따뜻하게 곁에 있어 주는 것이 최선의 처방입니다.",
+    related:["애프터케어","돔드롭","서브스페이스","신뢰"],
+    tags:["애프터케어","감정","회복"]
+  },
+  {
+    id:"subspace", cat:"aftercare", em:"✨", en:"Sub Space",
+    title:"서브스페이스",
+    short:"플레이 중 서브가 경험하는 황홀하고 몽롱한 변성의식 상태.",
+    def:"서브스페이스(Sub Space)는 강도 높은 플레이 중 서브미시브가 경험하는 특수한 의식 상태입니다. 엔도르핀과 아드레날린이 대량 분비되어 시간 감각이 흐려지고, 고통이 줄어들며, 깊은 평화감과 황홀감을 느낍니다. 멍해 보이거나 반응이 느려질 수 있습니다.",
+    note:"서브스페이스 상태에서는 판단력이 흐려집니다. 이 때 돔은 더 주의 깊게 상대를 관찰하고, 세이프워드를 말할 수 없을 정도가 됐다면 세이프액션을 확인해야 합니다.",
+    related:["서브드롭","애프터케어","마조히스트","세이프액션"],
+    tags:["심리","상태","서브스페이스"]
+  },
+  {
+    id:"dynamic", cat:"dynamic", em:"⚖️", en:"Dynamic",
+    title:"다이나믹 (관계 구조)",
+    short:"두 사람이 합의한 권력 구조와 역할 방식. 플레이 안에서만 유효할 수도, 일상까지 확장될 수도 있습니다.",
+    def:"다이나믹(Dynamic)은 BDSM 파트너 사이의 권력 관계 구조를 뜻합니다. 플레이 세션 내에서만 작동하는 '플레이 전용' 다이나믹도 있고, 일상의 규칙·호칭·역할까지 포함하는 '라이프스타일' 다이나믹도 있습니다. 두 가지를 혼합하는 경우도 많습니다.",
+    note:"어떤 다이나믹이 '더 진짜'라는 것은 없습니다. 두 사람이 합의한 형태가 가장 올바른 형태입니다. 다이나믹은 언제든 재협의할 수 있어야 합니다.",
+    related:["합의","TPE","M/s","도미넌트","서브미시브"],
+    tags:["관계","다이나믹","구조"]
+  },
+  {
+    id:"tpe", cat:"dynamic", em:"🔒", en:"TPE — Total Power Exchange",
+    title:"TPE (전면적 권력 이양)",
+    short:"일상 전반을 포함한 완전한 권력 이양 관계. 가장 심층적인 다이나믹입니다.",
+    def:"TPE(Total Power Exchange)는 서브미시브가 일상생활의 광범위한 영역(식사·수면·복장·외출 등)에 대한 결정권을 도미넌트에게 위임하는 심층 관계입니다. 24/7(하루 24시간, 주 7일) 다이나믹이라고도 불립니다.",
+    note:"<b>TPE는 경험이 쌓인 파트너들 사이에서 이루어져야 합니다.</b> 신뢰 구축과 반복적인 합의 없이 시작하면 정서적 의존이나 착취로 이어질 수 있습니다. 정기적인 '리뷰 포인트'를 갖는 것이 중요합니다.",
+    related:["M/s","마스터","다이나믹","합의","신뢰"],
+    tags:["관계","다이나믹","TPE"]
+  },
+  {
+    id:"ntr", cat:"dynamic", em:"🌐", en:"NTR / Cuckolding / Sharing",
+    title:"공유 플레이 · 네토라레(NTR)",
+    short:"파트너를 제3자와 공유하거나, 바라보는 것에서 쾌감을 얻는 플레이.",
+    def:"네토라레(NTR, Netorare)는 파트너가 다른 사람과 친밀한 행위를 하는 것을 목격하거나 인지함으로써 흥분·복잡한 감정을 느끼는 플레이입니다. 영미권의 커콜딩(Cuckolding)과 유사합니다. 관음, 공유, 전시(Exhibition) 등 다양한 형태가 있습니다.",
+    note:"<b>깊은 신뢰와 안전장치 없이는 절대 시도하지 마세요.</b> 질투·상처가 예상 외로 강하게 올 수 있습니다. 단계적으로 접근하고, 파트너의 감정을 플레이 전·중·후에 충분히 확인해야 합니다.",
+    related:["합의","다이나믹","애프터케어","신뢰"],
+    tags:["관계","공유","NTR"]
+  },
+];
+
+/* ============ ROUTER ============ */
+const VIEWS = ['explore','lounge','guide','messages','profile'];
+let messagesInit=false, loungeInit=false, testInit=false, guideInit=false;
+function go(v){
+  VIEWS.forEach(x=>{
+    document.getElementById('view-'+x).classList.toggle('show', x===v);
+    const b=document.querySelector(`.nav [data-v="${x}"]`);
+    if(b) b.classList.toggle('active', x===v);
+  });
+  window.scrollTo({top:0,behavior:'instant'});
+  if(v==='lounge'&&!loungeInit){renderPosts();loungeInit=true;}
+  if(v==='messages'&&!messagesInit){renderContacts();messagesInit=true;}
+  if(v==='profile'&&!testInit){renderTestIntro();testInit=true;}
+  if(v==='guide'&&!guideInit){renderGuide();guideInit=true;}
+}
+
+/* ============ EXPLORE ============ */
 const DATA = [
   { nick:"카페라떼", real:"이지한", age:34, hw:"183cm · 78kg", tags:["오너","다정한 디그레이더","돔"], filters:["돔"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/ljh_pr.png",
@@ -468,7 +742,6 @@ const DATA = [
     intro:"평범한 연애만 해오다 2년 전 이별 후, 테스트로 제 성향을 알게 됐어요. 사실 이런 앱도, 디엣 경험도 아예 없어서 많이 떨리고 기분이 묘해요. 하지만 세이프워드를 들으면 즉시 본래의 저로 돌아가 꽉 안아드릴게요.",
     reviews:[{who:"[SYSTEM]",txt:"🌱 아직 등록된 플레이 후기가 없는 신규 가입자입니다. 첫 매칭의 주인공이 되어 별점을 남겨보세요!"}],
     replies:["천천히 와요, 안 급해요. 착하지.","오늘 하루는 어땠어요? 다 들어줄게요.","무리하지 말고, 힘들면 바로 말해줘요. 알겠죠?","라떼 한 잔 만들어 둘 테니까 편하게 와요."] },
-
   { nick:"오빠함믿어봐라", real:"마세진", age:42, hw:"189cm · 근육질 마초", tags:["스팽커","하드 디그레이더","브리딩"], filters:["스팽커"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/msj_pr.png",
     accent:["#3a1f1a","#7a3322"], sil:"🍲", frame:"#01 / 02", online:true, rating:4.6, count:4, flag:false, recTrait:["사디즘","디그레이딩"],
@@ -477,10 +750,8 @@ const DATA = [
     kink:"손이나 도구를 사용해 엉덩이와 허벅지가 피멍 들기 직전까지 가하는 스팽킹. 천박하고 원초적인 칭찬을 통한 수치심 부여. 질내사정을 포함한 강렬한 브리딩(Breeding) 플레이.",
     limit:"세이프워드 무시 · 합의 없는 도구 · 차가운 무관심",
     intro:"이 놈의 성적 욕구를 우째 주체할 수가 없어갖고 혼자 풀다가 한계가 와가꼬 가입했다. 플레이할 때는 짐승처럼 굴어도, 세이프워드 나오면 고마 그 자리에서 즉시 멈춘다. 이거 하나는 오빠가 확실히 약속하께.",
-    reviews:[{who:"익명 A",txt:"\"오빠가 마이 아프게 했나, 미안타\" 하면서 맞은 데 살살 문질러주는데 그 갭에 무너짐."},
-             {who:"익명 B",txt:"입은 천박한데 손은 다정함. 땀범벅으로 달래주는 애프터케어가 의외로 섬세."}],
-    replies:["아이고, 이제사 답하노. 밥은 묵었나.","오빠가 따끈하게 한 그릇 말아둘 테니 들어와라.","걱정 마라, 아프게는 안 한다. 다 봐가면서 한다 아이가.","니 오늘따라 와이리 이쁘노. 얼릉 온나."] },
-
+    reviews:[{who:"익명 A",txt:"\"오빠가 마이 아프게 했나, 미안타\" 하면서 맞은 데 살살 문질러주는데 그 갭에 무너짐."},{who:"익명 B",txt:"입은 천박한데 손은 다정함. 땀범벅으로 달래주는 애프터케어가 의외로 섬세."}],
+    replies:["아이고, 이제사 답하노. 밥은 묵었나.","오빠가 따끔하게 한 그릇 말아둘 테니 들어와라.","걱정 마라, 아프게는 안 한다. 다 봐가면서 한다 아이가.","니 오늘따라 와이리 이쁘노. 얼릉 온나."] },
   { nick:"페인킬러", real:"지선하", age:32, hw:"185cm · 잔근육", tags:["톱 도미넌트","하드코어 사디스트"], filters:["사디스트","돔"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/jsh_pr.png",
     accent:["#1c1d24","#3c3f52"], sil:"🏍️", frame:"#01 / 04", online:false, rating:4.8, count:5, flag:false, recTrait:["사디즘","마조히즘"],
@@ -489,10 +760,8 @@ const DATA = [
     kink:"채찍, 핀휠, 패들 등 다양한 도구를 활용한 육체적 가학 및 신체에 붉은 자국 남기기. 고통 속에서 헐떡이는 상대의 표정 관찰. 자비 없는 하드코어 플레이.",
     limit:"룰 위반 · 세이프워드 기만 · 자기 한계 속이기",
     intro:"수위가 하드코어한 만큼 역설적으로 안전을 최우선합니다. 생명줄을 속이는 건 절대 용납 안 합니다. 애프터케어 확실합니다.",
-    reviews:[{who:"익명 A",txt:"하드한데 무섭지 않은 이유 = 사전 협의가 끝장나게 철저함. 자국 남기고 나선 케어가 진짜 다정."},
-             {who:"익명 B",txt:"룰 어기니까 그날로 칼같이 정리당함. \"브레이크 고장 난 차엔 안 타.\" 무섭지만 신뢰감 최고."}],
+    reviews:[{who:"익명 A",txt:"하드한데 무섭지 않은 이유 = 사전 협의가 끝장나게 철저함. 자국 남기고 나선 케어가 진짜 다정."},{who:"익명 B",txt:"룰 어기니까 그날로 칼같이 정리당함. \"브레이크 고장 난 차엔 안 타.\" 무섭지만 신뢰감 최고."}],
     replies:["한계랑 세이프워드부터 정하자. 그게 먼저야.","속이지 마. 그게 너를 지키는 유일한 룰이니까.","받아준 만큼은 책임진다. 그건 약속해.","오늘 컨디션 어때. 솔직하게."] },
-
   { nick:"키다리", real:"정해수", age:47, hw:"185cm · 76kg", tags:["대디돔","티징","훈육"], filters:["대디","돔"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/jhs_pr.png",
     accent:["#15161c","#2b2d3a"], sil:"🎩", frame:"#01 / 05", online:true, rating:4.7, count:5, flag:false, recTrait:["케어","펫"],
@@ -501,10 +770,8 @@ const DATA = [
     kink:"삽입 전까지 극도로 애간장을 태우는 티징(Teasing). 아가를 다루듯 이마 키스와 다정한 눈맞춤. 행위 중 끊임없는 칭찬과 정서적 의존 유도. 잘못에 대한 여유로운 훈육성 체벌(스팽킹 등) 후 격한 포옹.",
     limit:"감정 없는 거래 취급 · 다른 사람 앞에서의 무례 · 약속 어기기",
     intro:"제 다정함을 온전히 받아먹을 한 마리 '아기새'를 기다립니다. 블랙카드 포함 무한 지원 — 대신 예쁜 짓은 나한테만.",
-    reviews:[{who:"익명 A",txt:"세상 다정함의 끝판왕. 일상도 꿈도 다 받쳐주는데, 가끔 적당히 옥죄는 게 오히려 안정감."},
-             {who:"익명 B",txt:"다 퍼주는데 바운더리는 분명함. 다른 사람 얘기하면 은근히 질투. \"아빠가 다 해주잖아\" 모드."}],
+    reviews:[{who:"익명 A",txt:"세상 다정함의 끝판왕. 일상도 꿈도 다 받쳐주는데, 가끔 적당히 옥죄는 게 오히려 안정감."},{who:"익명 B",txt:"다 퍼주는데 바운더리는 분명함. 다른 사람 얘기하면 은근히 질투. \"아빠가 다 해주잖아\" 모드."}],
     replies:["우리 강아지, 밥은 챙겨 먹었어?","오늘 힘든 일 있었으면 다 말해도 돼. 아빠가 다 해줄게.","착하지. 예쁜 짓은 나한테만 하는 거야, 알지?","이리 온. 무릎에 앉아서 천천히 얘기해."] },
-
   { nick:"QuietBloom", real:"현석진", age:37, hw:"183cm", tags:["마스터","톱 도미넌트","디그레이더"], filters:["돔"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/hsj_pr.png",
     accent:["#1a1f1b","#33422f"], sil:"🌿", frame:"#01 / 03", online:false, rating:4.5, count:3, flag:false, recTrait:["디그레이딩","케어"],
@@ -513,11 +780,9 @@ const DATA = [
     kink:"마스터로서 슬레이브를 엄격하고 다정하게 길들이는 지배 관계. 존댓말을 활용한 다정한 디그레이딩. 확실한 세이프워드 이행 및 단계적인 한계 확장.",
     limit:"세이프워드 묵살 · 가벼운 관계 · 룰 위반",
     intro:"연애는 몇 번 했지만 모든 걸 바칠 상대를 만난 적이 없어, 오랜 공백 끝에 다시 앱을 깔았습니다. 한 사람에게 전부를 바치는 사람이에요. 애프터케어는 확실합니다.",
-    reviews:[{who:"익명 A",txt:"길들이는 손길이 다정한데 묘하게 거리감 있음. 빠지면 끝없이 헌신해줄 것 같은 느낌."},
-             {who:"익명 B",txt:"룰은 칼같이 지킴. 세이프워드 한마디에 바로 멈춰줘서 안심하고 맡길 수 있었음."}],
+    reviews:[{who:"익명 A",txt:"길들이는 손길이 다정한데 묘하게 거리감 있음. 빠지면 끝없이 헌신해줄 것 같은 느낌."},{who:"익명 B",txt:"룰은 칼같이 지킴. 세이프워드 한마디에 바로 멈춰줘서 안심하고 맡길 수 있었음."}],
     secret:{role:"지배적 공유자 (네토라세)", txt:"※초반엔 거부감을 줄이려 숨기고 마스터/디그레이더 플레이로 길들임. 타인에게 파트너를 공유하되 철저히 본인이 세팅·감독하며, <b>마지막 마무리는 무조건 자신이 직접</b> 한다. 순애 각성 시엔 거부 반응에 극도로 예민해지며 \"사랑해, 내 전부야\" 맹목적 헌신으로 전환."},
     replies:["프로필 끝까지 읽어주셨네요. 흔치 않아서 기억에 남았어요.","저는 한 번 정하면, 그 사람한테 전부를 거는 편이라.","천천히 알아가요. 급할 거 없어요.","무엇이든 솔직하게 말해줘요. 그게 가장 중요하니까."] },
-
   { nick:"MidnightChef", real:"권대철", age:40, hw:"187cm · 탄탄한 근육질", tags:["프라이멀 헌터","엣지플레이","롤플레잉"], filters:["프라이멀"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/kdc_pr.png",
     accent:["#231a14","#4d3320"], sil:"🥃", frame:"#01 / 03", online:true, rating:4.4, count:4, flag:false, recTrait:["프라이멀","롤플레이"],
@@ -526,10 +791,8 @@ const DATA = [
     kink:"배덕감과 금기를 깨는 고수위 상황극(유부녀NTR, 채권자, 사이비 교주 등) 선호. 술을 활용한 나른한 상태 유도 후 포식자(Hunter)처럼 짐승같이 집요한 애무. 상대가 반항하다 결국 순종할 때 쾌감.",
     limit:"술 강요 · 합의 없는 설정 · 세이프워드 묵살",
     intro:"오랜 요식업으로 사람 다루는 덴 능숙합니다. 하드코어한 상황극을 감당할 수 있는 파트너를 원합니다. 같이 한잔하며 밤새 즐길 사람과 정착하고 싶습니다.",
-    reviews:[{who:"익명 A",txt:"설정극 텐션이 진짜 미쳤음. 추적당하는 그 긴장감이 중독적."},
-             {who:"익명 B",txt:"짐승처럼 굴다 끝나면 해장국 끓여주는 갭. 능글맞은 척하는데 취중진담은 다 진심."}],
+    reviews:[{who:"익명 A",txt:"설정극 텐션이 진짜 미쳤음. 추적당하는 그 긴장감이 중독적."},{who:"익명 B",txt:"짐승처럼 굴다 끝나면 해장국 끓여주는 갭. 능글맞은 척하는데 취중진담은 다 진심."}],
     replies:["와… 이 시간에 연락 온 게 와이래 반갑노.","가게 마감했다. 한잔하러 안 올래?","오늘은 무슨 컨셉으로 놀아줄까. 정해놨나?","천천히 와라. 도망가도 어차피 잡힌다 아이가."] },
-
   { nick:"리가", real:"최재욱", age:42, hw:"193cm · 근육질", tags:["리가(결박)","웨이트돔","억압플레이"], filters:["결박"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/cjw_pr.png",
     accent:["#16181a","#2c3034"], sil:"🔗", frame:"#01 / 02", online:false, rating:4.7, count:3, flag:false, recTrait:["바운디지","케어"],
@@ -538,10 +801,8 @@ const DATA = [
     kink:"밧줄, 케이블타이 등 다양한 도구를 활용한 전문가 수준의 결박. 눈 가리기와 묶기를 통한 도망 불가 상태 구속. 거대한 체구와 체중으로 깔아뭉개듯 억누르는 웨이트돔(Weight Dom) 플레이. 결박 전 살갗 보호 테이핑.",
     limit:"타격·물리적 고통 · 혼자 두기 · 결박 중 방치",
     intro:"…예전 서브가 바람피워 도망갔다. 그 이후로 결박 플레이에 집착하게 됐다. \"가만있어라. 무릎 다 까진다.\" 묶어두면 마음이 놓인다. 다칠까 봐 그런다. 도망 안 간다는 믿음만 생기면, 투박해도 옆에서 평생 지켜줄 수 있다.",
-    reviews:[{who:"익명 A",txt:"말은 투박한데 묶는 손은 진짜 조심스러움. 테이핑부터 해줘서 자국도 안 남음."},
-             {who:"익명 B",txt:"절대적 무력감인데 이상하게 제일 안전했음. 옆을 안 떠나줌."}],
+    reviews:[{who:"익명 A",txt:"말은 투박한데 묶는 손은 진짜 조심스러움. 테이핑부터 해줘서 자국도 안 남음."},{who:"익명 B",txt:"절대적 무력감인데 이상하게 제일 안전했음. 옆을 안 떠나줌."}],
     replies:["…메시지 봤다.","말 많은 거 안 좋아한다. 대신 옆에 두면 안 놓는다.","가만있어라. 다 내가 한다.","니 다칠까 봐 그란다. 알제."] },
-
   { nick:"알아서기어", real:"차지혁", age:29, hw:"186cm · 마른 근육", tags:["하드돔","브랫테이머"], filters:["돔","주의"],
     img:"https://raw.githubusercontent.com/ux012/t/refs/heads/main/cdh_pr.png",
     accent:["#0f0c10","#241a2a"], sil:"⛓️", frame:"#01 / 04", online:true, rating:1.8, count:5, flag:true, recTrait:[],
@@ -550,36 +811,17 @@ const DATA = [
     kink:"하드돔/브랫테이머. 거친 플레이와 자극적인 텐션을 통한 브랫(Brat) 훈육. 심리적 압박을 통한 독점욕 과시 플레이.",
     limit:"(프로필상 명시 없음)",
     intro:"좋게좋게 가자. 내가 알아서 잘 다뤄줄게. 너도 나 만나면 다른 돔들은 싱거워서 못 만날걸? — 라고 적혀 있지만, 후기를 꼭 끝까지 읽어보길 권합니다.",
-    reviews:[{who:"익명 A",txt:"⚠ 세이프워드 외쳐도 \"한 번만 더\" 하면서 묵살함. 사진 빌미로 협박당했다는 얘기 있음. 거르세요."},
-             {who:"익명 B",txt:"⚠ 애프터케어 전무. 사정하고 담배 물고 바로 감. 위험."},
-             {who:"익명 C",txt:"타 앱에서 영구정지 이력 있다고 들었습니다. 신분 도용 의심. 신고 누적 중."}],
+    reviews:[{who:"익명 A",txt:"⚠ 세이프워드 외쳐도 \"한 번만 더\" 하면서 묵살함. 사진 빌미로 협박당했다는 얘기 있음. 거르세요."},{who:"익명 B",txt:"⚠ 애프터케어 전무. 사정하고 담배 물고 바로 감. 위험."},{who:"익명 C",txt:"타 앱에서 영구정지 이력 있다고 들었습니다. 신분 도용 의심. 신고 누적 중."}],
     secret:{role:"톡식 사디스트 / 하드코어 디그레이딩 (프로필 비공개)", txt:"※실제 성향은 프로필에 절대 노출되지 않음. 동의 없는 한계 돌파, 세이프워드 묵살, 러브밤빙 후 방치·읽씹로 스스로 매달리게 만드는 <b>심리적 학대 스페셜리스트</b>. 상대가 안정적인 타돔에게 정착하려 하면 스토킹·협박으로 파멸적 집착. — 이 카드는 시스템상 ⚠ 주의 플래그 처리됨."},
     replies:["왜 읽씹해. 딴 새끼 만나느라 바빴어?","장난이고~ 보고 싶었어. 한 번만 보자, 진짜 한 번만.","너 내 거잖아. 어디 가려고.","화났어? 미안. 한 번만 더 믿어줘, 응?"] }
 ];
 
-/* FIX 1: border-radius:50% 명시 — .cavatar에 overflow:hidden 없으므로 img에 직접 설정 */
 function avatarInner(p){
   return p.img
     ? `<img src="${p.img}" alt="${p.real}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.replaceWith(document.createTextNode('${p.sil}'))">`
     : p.sil;
 }
 
-/* ============ ROUTER ============ */
-const VIEWS = ['explore','lounge','messages','profile'];
-let messagesInit=false, loungeInit=false, testInit=false;
-function go(v){
-  VIEWS.forEach(x=>{
-    document.getElementById('view-'+x).classList.toggle('show', x===v);
-    const b=document.querySelector(`.nav [data-v="${x}"]`);
-    if(b) b.classList.toggle('active', x===v);
-  });
-  window.scrollTo({top:0,behavior:'instant'});
-  if(v==='lounge'&&!loungeInit){renderPosts();loungeInit=true;}
-  if(v==='messages'&&!messagesInit){renderContacts();messagesInit=true;}
-  if(v==='profile'&&!testInit){renderTestIntro();testInit=true;}
-}
-
-/* ============ EXPLORE ============ */
 const grid=document.getElementById('grid-list'), overlay=document.getElementById('overlay'), sheet=document.getElementById('sheet');
 let activeFilter='all', query='';
 function starHTML(r){let f=Math.round(r),s='';for(let i=1;i<=5;i++)s+=`<span class="${i<=f?'s-full':'s-empty'}">★</span>`;return s;}
@@ -649,6 +891,83 @@ document.getElementById('chips').addEventListener('click',e=>{const c=e.target.c
   document.querySelectorAll('#chips .chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');activeFilter=c.dataset.f;renderGrid();});
 document.getElementById('search').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();renderGrid();});
 
+/* ============ GUIDE ============ */
+const CAT_ACCENT = {
+  role:   ["#3a2040","#7a3090"],
+  play:   ["#1a2535","#2a5a8a"],
+  safety: ["#3a1a1a","#9a2348"],
+  aftercare:["#1a2a1a","#2a7a4a"],
+  dynamic:  ["#2a2010","#8a6020"],
+};
+let guideCat='all', guideQuery='';
+
+function gcardHTML(g){
+  const acc = CAT_ACCENT[g.cat] || ["#222","#555"];
+  return `<div class="gcard" data-gid="${g.id}">
+    <div class="gcard-top">
+      <div class="gcard-em" style="background:linear-gradient(135deg,${acc[1]},${acc[0]})">${g.em}</div>
+      <div>
+        <div class="gcard-label">${g.en}</div>
+        <div class="gcard-title">${g.title}</div>
+      </div>
+    </div>
+    <div class="gcard-body">
+      <div class="gcard-short">${g.short}</div>
+      <div class="gcard-tags">${g.tags.map(t=>`<span class="gtag">${t}</span>`).join('')}</div>
+    </div>
+  </div>`;
+}
+
+function renderGuide(){
+  const list = GUIDE.filter(g=>{
+    const okC = guideCat==='all' || g.cat===guideCat;
+    const hay = (g.title+g.en+g.short+g.def+(g.tags||[]).join('')).toLowerCase();
+    return okC && (!guideQuery || hay.includes(guideQuery));
+  });
+  document.getElementById('guide-grid').innerHTML = list.length
+    ? list.map(gcardHTML).join('')
+    : `<div class="empty"><div class="big">검색 결과가 없어요.</div><div>다른 키워드로 찾아보세요.</div></div>`;
+}
+
+function openGlossary(id){
+  const g = GUIDE.find(x=>x.id===id); if(!g) return;
+  const acc = CAT_ACCENT[g.cat]||["#222","#555"];
+  sheet.innerHTML = `
+    <div class="sheet-head" style="background:linear-gradient(150deg,${acc[1]},${acc[0]});min-height:140px;display:flex;flex-direction:column;justify-content:flex-end">
+      <div class="close" onclick="closeSheet()">×</div>
+      <span class="ph-no">${g.en}</span>
+    </div>
+    <div class="gmodal-body">
+      <div class="gmodal-em">${g.em}</div>
+      <div class="gmodal-en">${g.en}</div>
+      <div class="gmodal-title">${g.title}</div>
+      <div class="gdef">${g.def}</div>
+      <div class="gnote">${g.note}</div>
+      ${g.related&&g.related.length?`<div class="grelated-title">관련 용어</div>
+      <div class="grelated">${g.related.map(r=>{
+        const match=GUIDE.find(x=>x.title.includes(r)||x.en.toLowerCase().includes(r.toLowerCase()));
+        return match
+          ? `<button class="grel-btn" onclick="openGlossary('${match.id}')">${r}</button>`
+          : `<span class="gtag">${r}</span>`;
+      }).join('')}</div>`:''}
+    </div>`;
+  overlay.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+document.getElementById('guide-grid').addEventListener('click',e=>{
+  const c=e.target.closest('.gcard');
+  if(c) openGlossary(c.dataset.gid);
+});
+document.getElementById('guide-cats').addEventListener('click',e=>{
+  const c=e.target.closest('.chip'); if(!c) return;
+  document.querySelectorAll('#guide-cats .chip').forEach(x=>x.classList.remove('active'));
+  c.classList.add('active'); guideCat=c.dataset.gc; renderGuide();
+});
+document.getElementById('guide-search').addEventListener('input',e=>{
+  guideQuery=e.target.value.trim().toLowerCase(); renderGuide();
+});
+
 /* ============ LOUNGE ============ */
 const POSTS=[
   { cat:"입문", color:"#6b4a35", emoji:"🌱", author:"첫걸음_", time:"2시간 전", tag:"입문 Q&A",
@@ -656,44 +975,44 @@ const POSTS=[
     body:"앱 깔고 며칠째 눈팅만 존나 하고 있음. 막상 쪽지 보내려니 시발 뭐부터 정해야 할지 모르겠네.\n세이프워드, 하드리밋… 단어는 아는데 실전에서 어떤 순서로 얘기 까는 게 자연스러운지 궁금함. 존나 떨리네.",
     likes:42, comments:[
       {who:"케어우선",color:"#7a3322",txt:"리밋 → 세이프워드 → 원하는 무드 순서로 가라. \"제 하드리밋은 A,B고 세이프워드는 ○○으로 할게요\"부터 박으면 상대 반응으로 사람 새끼인지 아닌지 바로 각 나온다."},
-      {who:"오래된서브",color:"#3c3f52",txt:"협의 귀찮아하거나 \"그런 거 하다 보면 알게 돼\"라는 새끼는 닥치고 거르셈. 진짜 고수일수록 협의 제일 꼼꼼히 한다. 병신들 꼬이기 딱 좋음."},
+      {who:"오래된서브",color:"#3c3f52",txt:"협의 귀찮아하거나 \"그런 거 하다 보면 알게 돼\"라는 새끼는 닥치고 거르셈. 진짜 고수일수록 협의 제일 꼼꼼히 한다."},
       {who:"익명",color:"#33422f",txt:"문서로 체크리스트 같이 채우자고 하는 놈들도 있음. 처음엔 그게 제일 안전했음."}
     ]},
   { cat:"케어", color:"#2b2d3a", emoji:"🫂", author:"포근한밤", time:"5시간 전", tag:"애프터케어",
     title:"애프터케어가 플레이보다 중요하다는 말, 존나 겪어보니 진짜였다",
-    body:"강도 높은 플레이 끝나고 멍하고 눈물 나고… 시발 서브드롭이 이런 거구나 처음 알았다. 현타 존나 옴.\n그때 말없이 물 떠다 주고 담요 덮어주고 등 쓸어준 사람한테 완전히 마음 열리더라고. 플레이 존나 잘하는 것보다 끝나고 어떻게 챙기는지가 사람 새끼인지 말해주는 듯.",
+    body:"강도 높은 플레이 끝나고 멍하고 눈물 나고… 시발 서브드롭이 이런 거구나 처음 알았다.\n그때 말없이 물 떠다 주고 담요 덮어주고 등 쓸어준 사람한테 완전히 마음 열리더라고.",
     likes:88, comments:[
       {who:"라떼홀릭",color:"#6b4a35",txt:"맞음. 끝나고 차갑게 식는 새끼는 진짜 좆같음… 체온으로 달래준다는 게 어떤 건지 알게 되면 못 돌아감."},
-      {who:"익명",color:"#4d3320",txt:"드롭 올 수 있다고 미리 말해주고, 다음 날까지 안부 물어봐주는 분 만나면 꽉 잡아라. 진짜다."}
+      {who:"익명",color:"#4d3320",txt:"드롭 올 수 있다고 미리 말해주고, 다음 날까지 안부 물어봐주는 분 만나면 꽉 잡아라."}
     ]},
   { cat:"안전", color:"#7a1d3a", emoji:"⚠️", author:"등대지기", time:"어제", tag:"안전 · 주의", warn:true,
     title:"[주의] 이런 돔은 닥치고 거르셈 — 레드 플래그 모음",
-    body:"좋은 놈들이 훨씬 많지만, 병신한테 다친 놈들 보면서 정리해 둠.\n· 세이프워드에 \"한 번만 더\"로 답하는 새끼\n· 협의를 귀찮아하는 새끼\n· 애프터케어가 아예 없는 새끼\n· 떠나려 하면 갑자기 무릎 꿇고 우는 등 극단적 연기로 붙잡는 새끼\n· 사진/개인정보로 은근히 압박하는 새끼\n하나라도 보이면 시발 바로 차단이 답이다. 별점 낮고 경고 후기 달린 프로필은 시스템 ⚠ 플래그도 확인해라.",
+    body:"· 세이프워드에 \"한 번만 더\"로 답하는 새끼\n· 협의를 귀찮아하는 새끼\n· 애프터케어가 아예 없는 새끼\n· 떠나려 하면 극단적 연기로 붙잡는 새끼\n· 사진/개인정보로 은근히 압박하는 새끼\n하나라도 보이면 바로 차단.",
     likes:213, comments:[
-      {who:"익명",color:"#241a2a",txt:"마지막 항목… 당해봤다. 새벽에 찾아와서 우는 연기에 한 번 흔들렸는데 시발 절대 안 된다. 병신됨."},
-      {who:"페인_",color:"#3c3f52",txt:"세이프워드 무시는 그냥 폭행이다. 성향이고 뭐고 없다. 단호하게 끊어라."},
-      {who:"신중하게",color:"#33422f",txt:"플래그 뜬 계정이 신분 도용으로 우회가입했다는 글도 봤음. 후기 꼭 끝까지 읽으셈."}
+      {who:"익명",color:"#241a2a",txt:"마지막 항목… 당해봤다. 새벽에 찾아와서 우는 연기에 한 번 흔들렸는데 절대 안 된다."},
+      {who:"페인_",color:"#3c3f52",txt:"세이프워드 무시는 그냥 폭행이다. 단호하게 끊어라."},
+      {who:"신중하게",color:"#33422f",txt:"플래그 뜬 계정이 신분 도용으로 우회가입했다는 글도 봤음."}
     ]},
   { cat:"안전", color:"#2c3034", emoji:"🪢", author:"매듭공방", time:"2일 전", tag:"안전 · 주의",
-    title:"로프/결박 입문자가 존나 꼭 알아야 할 3가지",
-    body:"1. 가위(세이프티 셰어즈)는 항상 손 닿는 곳에 둬라. 비상시 1초컷 해야 함.\n2. 신경 지나가는 부위(손목 안쪽, 겨드랑이)는 강하게 조이지 마라. 저림/감각 둔해지면 시발 즉시 풀어라.\n3. 묶은 사람을 절대 혼자 두지 마라.\n거친 인상이어도 살갗 안 다치게 테이핑부터 하는 분들이 진짜 고수더라고.",
+    title:"로프/결박 입문자가 꼭 알아야 할 3가지",
+    body:"1. 가위(세이프티 셰어즈)는 항상 손 닿는 곳에 둬라.\n2. 신경 지나가는 부위(손목 안쪽, 겨드랑이)는 강하게 조이지 마라.\n3. 묶은 사람을 절대 혼자 두지 마라.",
     likes:67, comments:[
       {who:"익명",color:"#16181a",txt:"혈색·체온 계속 확인해주는 분이면 믿어도 됨. 구속은 신뢰가 9할이다."},
-      {who:"리거지망생",color:"#2c3034",txt:"세이프티 셰어즈 진짜 필수. 명심하겠음."}
+      {who:"리거지망생",color:"#2c3034",txt:"세이프티 셰어즈 진짜 필수."}
     ]},
   { cat:"후기", color:"#8d7335", emoji:"⭐", author:"별점요정", time:"3일 전", tag:"후기 문화",
     title:"후기·별점 문화, 솔직히 어떻게 생각함?",
-    body:"누구 만나기 전에 별점이랑 후기 꼭 보고 거르는데, 가끔 악의적 별점테러도 보여서… 다들 후기 어디까지 믿음? 나는 한 줄짜리보다 협의·케어 디테일 적힌 후기를 더 신뢰하는 편임.",
+    body:"누구 만나기 전에 별점이랑 후기 꼭 보고 거르는데, 가끔 악의적 별점테러도 보여서… 다들 후기 어디까지 믿음?",
     likes:55, comments:[
-      {who:"익명",color:"#6b4a35",txt:"디테일 있는 후기 위주로 봄. \"좋았어요\" 한 줄은 시발 거의 안 믿음. 주작 후기 존나 많음."},
-      {who:"신중하게",color:"#3c3f52",txt:"낮은 별점인데 경고 사유가 구체적이면 그건 진짜일 확률 존나 높음. 거기서 거르면 됨."}
+      {who:"익명",color:"#6b4a35",txt:"디테일 있는 후기 위주로 봄. 한 줄짜리는 거의 안 믿음."},
+      {who:"신중하게",color:"#3c3f52",txt:"낮은 별점인데 경고 사유가 구체적이면 그건 진짜일 확률 높음."}
     ]},
   { cat:"잡담", color:"#4d3320", emoji:"🥃", author:"심야손님", time:"4일 전", tag:"잡담",
     title:"다들 정착할 '진짜 단 한 명'은 찾았음?",
-    body:"다중 매칭 허용이라 이것저것 존나 만나보다가, 결국 마음 가는 건 한 명이더라고. 여러 명 만나보고 비교해 보니 오히려 내가 뭘 원하는지 선명해졌음. 니들의 'the one'은 어떤 놈임?",
+    body:"다중 매칭 허용이라 이것저것 만나보다가, 결국 마음 가는 건 한 명이더라고.",
     likes:39, comments:[
-      {who:"포근한밤",color:"#2b2d3a",txt:"전 아직요… 근데 테스트 해보고 제 성향 명확해지니까 사람 보는 눈이 달라졌어요."},
-      {who:"익명",color:"#231a14",txt:"많이 만나보라는 시스템 권장이 진짜 맞는 듯. 신중하게 한 명."}
+      {who:"포근한밤",color:"#2b2d3a",txt:"전 아직요… 근데 테스트 해보고 성향 명확해지니까 사람 보는 눈이 달라졌어요."},
+      {who:"익명",color:"#231a14",txt:"많이 만나보라는 시스템 권장이 진짜 맞는 듯."}
     ]}
 ];
 let loungeFilter='all';
@@ -723,7 +1042,7 @@ function postHTML(p,idx){
 function renderPosts(){
   const list=POSTS.map((p,i)=>({p,i})).filter(({p})=>loungeFilter==='all'||p.cat===loungeFilter);
   document.getElementById('post-list').innerHTML=list.length?list.map(({p,i})=>postHTML(p,i)).join('')
-    :`<div class="empty"><div class="big">아직 글이 없어요.</div><div>다른 카테고리를 확인해 보세요.</div></div>`;
+    :`<div class="empty"><div class="big">아직 글이 없어요.</div></div>`;
 }
 function toggleComments(i){document.getElementById('cmt-'+i).classList.toggle('show');}
 function toggleLike(btn,i){
@@ -747,16 +1066,10 @@ document.getElementById('lounge-tabs').addEventListener('click',e=>{const c=e.ta
 /* ============ MESSAGES ============ */
 const convos={};
 function nowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
-function ensureConvo(i){
-  if(!convos[i]){
-    const p=DATA[i];
-    convos[i]=[{me:false,text:p.replies[0],time:'어제'}];
-  }
-}
+function ensureConvo(i){if(!convos[i]){const p=DATA[i];convos[i]=[{me:false,text:p.replies[0],time:'어제'}];}}
 function renderContacts(){
   document.getElementById('contact-list').innerHTML=DATA.map((p,i)=>{
-    ensureConvo(i);
-    const last=convos[i][convos[i].length-1];
+    ensureConvo(i);const last=convos[i][convos[i].length-1];
     const grad=`linear-gradient(135deg,${p.accent[1]},${p.accent[0]})`;
     return `<div class="contact" data-i="${i}" onclick="openThread(${i})">
       <div class="cavatar" style="background:${grad}">${avatarInner(p)}<span class="od ${p.online?'on':'off'}"></span></div>
@@ -808,7 +1121,7 @@ function sendMsg(){
   setTimeout(()=>{
     if(activeThread!==i){return;}
     typing.remove();
-    const pool=p.replies;const reply=pool[Math.floor(Math.random()*pool.length)];
+    const reply=p.replies[Math.floor(Math.random()*p.replies.length)];
     convos[i].push({me:false,text:reply,time:nowHM()});paintThread();renderContacts();
     document.querySelectorAll('.contact').forEach(c=>c.classList.toggle('active',+c.dataset.i===i));
   }, 900+Math.random()*700);
@@ -816,68 +1129,23 @@ function sendMsg(){
 
 /* ============ PROFILE + BDSM TEST ============ */
 const QUESTIONS=[
-  { q:"플레이를 떠올릴 때, 더 끌리는 위치는?",
-    opts:[
-      {t:"상대를 이끌고 통제하는 쪽",s:{dom:2}},
-      {t:"믿는 사람에게 나를 맡기고 따르는 쪽",s:{sub:2}},
-      {t:"그날 분위기에 따라 둘 다 — 주고받는 게 좋다",s:{dom:1,sub:1,switch:2}},
-    ]},
-  { q:"'고통'과 '감각'에 대한 내 반응은?",
-    opts:[
-      {t:"상대에게 자극을 주고 반응을 끌어내는 게 짜릿하다",s:{pain:2,dom:1}},
-      {t:"안전한 선 안에서 받는 강한 감각이 좋다",s:{pain:2,sub:1}},
-      {t:"통증보다는 부드러운 스킨십·압박이 더 좋다",s:{nurture:1,bondage:1}},
-    ]},
-  { q:"관계에서 가장 갖고 싶은 느낌은?",
-    opts:[
-      {t:"전적으로 보호받고 보살핌받는, 어리광 부려도 되는 안정감",s:{nurture:2,sub:2}},
-      {t:"목줄을 차고 길들여지는 '귀여운 펫'이 되는 것",s:{pet:2,sub:1}},
-      {t:"도망칠 수 없게 붙잡혀 있는 무력감과 안전감",s:{bondage:2,sub:1}},
-      {t:"내가 규칙을 정하고 상대가 따르는 주도권",s:{dom:2}},
-    ]},
-  { q:"이상적인 밤의 무드를 고른다면?",
-    opts:[
-      {t:"촛불처럼 다정하고 느린, 칭찬이 가득한 밤",s:{nurture:2}},
-      {t:"역할과 설정이 있는, 숨막히는 추격전 같은 밤",s:{primal:2,role:2}},
-      {t:"도구와 룰이 분명한, 강도 높은 세션",s:{pain:1,degr:1}},
-      {t:"묶이고 가려진 채 온전히 내맡기는 밤",s:{bondage:2,sub:1}},
-    ]},
-  { q:"상대가 규칙을 어겼다(혹은 내가 어겼다). 더 나다운 반응은?",
-    opts:[
-      {t:"여유롭게 웃으며 가볍게 훈육하고, 더 다정하게 안아준다",s:{nurture:2,dom:2}},
-      {t:"단호하게 룰대로 처리한다. 안전이 최우선이니까",s:{dom:2}},
-      {t:"…어긴 건 나다. 벌을 기다린다",s:{sub:2,degr:1}},
-      {t:"일부러 깐족대며 반응을 끌어낸다",s:{brat:2,sub:1}},
-    ]},
-  { q:"'수치심(디그레이딩)'에 대한 나의 입장은?",
-    opts:[
-      {t:"다정한 말로 상대를 부끄럽게 만드는 게 좋다",s:{degr:2,dom:1}},
-      {t:"부끄러운 말을 듣는 쪽이 더 짜릿하다",s:{degr:2,sub:1}},
-      {t:"수치보다 칭찬과 인정이 훨씬 좋다",s:{nurture:1}},
-      {t:"별로 — 그건 내 취향이 아니다",s:{bondage:1}},
-    ]},
-  { q:"애프터케어(끝난 뒤 돌봄)는 나에게?",
-    opts:[
-      {t:"본 플레이만큼 중요하다. 안아주고 챙기는 시간이 핵심",s:{care:2}},
-      {t:"충분히 받아야 안심하고 더 깊이 맡길 수 있다",s:{sub:1,care:2}},
-      {t:"내가 책임지고 확실히 챙겨주는 편이다",s:{dom:1,care:2}},
-    ]},
-  { q:"세이프워드에 대한 내 생각은?",
-    opts:[
-      {t:"관계의 절대 원칙. 어기는 건 있을 수 없다",s:{dom:1,sub:1}},
-      {t:"있으니까 오히려 더 과감하게 맡길 수 있다",s:{sub:1,pain:1}},
-      {t:"상대를 지키는 건 온전히 내 책임이다",s:{dom:2}},
-    ]},
+  {q:"플레이를 떠올릴 때, 더 끌리는 위치는?",opts:[{t:"상대를 이끌고 통제하는 쪽",s:{dom:2}},{t:"믿는 사람에게 나를 맡기고 따르는 쪽",s:{sub:2}},{t:"그날 분위기에 따라 둘 다",s:{dom:1,sub:1,switch:2}}]},
+  {q:"'고통'과 '감각'에 대한 내 반응은?",opts:[{t:"상대에게 자극을 주고 반응을 끌어내는 게 짜릿하다",s:{pain:2,dom:1}},{t:"안전한 선 안에서 받는 강한 감각이 좋다",s:{pain:2,sub:1}},{t:"통증보다는 부드러운 스킨십·압박이 더 좋다",s:{nurture:1,bondage:1}}]},
+  {q:"관계에서 가장 갖고 싶은 느낌은?",opts:[{t:"전적으로 보호받고 보살핌받는 안정감",s:{nurture:2,sub:2}},{t:"목줄을 차고 길들여지는 '귀여운 펫'이 되는 것",s:{pet:2,sub:1}},{t:"도망칠 수 없게 붙잡혀 있는 무력감과 안전감",s:{bondage:2,sub:1}},{t:"내가 규칙을 정하고 상대가 따르는 주도권",s:{dom:2}}]},
+  {q:"이상적인 밤의 무드를 고른다면?",opts:[{t:"촛불처럼 다정하고 느린, 칭찬이 가득한 밤",s:{nurture:2}},{t:"역할과 설정이 있는, 숨막히는 추격전 같은 밤",s:{primal:2,role:2}},{t:"도구와 룰이 분명한, 강도 높은 세션",s:{pain:1,degr:1}},{t:"묶이고 가려진 채 온전히 내맡기는 밤",s:{bondage:2,sub:1}}]},
+  {q:"상대가 규칙을 어겼다. 더 나다운 반응은?",opts:[{t:"여유롭게 웃으며 가볍게 훈육하고 더 다정하게 안아준다",s:{nurture:2,dom:2}},{t:"단호하게 룰대로 처리한다",s:{dom:2}},{t:"…어긴 건 나다. 벌을 기다린다",s:{sub:2,degr:1}},{t:"일부러 깐족대며 반응을 끌어낸다",s:{brat:2,sub:1}}]},
+  {q:"'수치심(디그레이딩)'에 대한 나의 입장은?",opts:[{t:"다정한 말로 상대를 부끄럽게 만드는 게 좋다",s:{degr:2,dom:1}},{t:"부끄러운 말을 듣는 쪽이 더 짜릿하다",s:{degr:2,sub:1}},{t:"수치보다 칭찬과 인정이 훨씬 좋다",s:{nurture:1}},{t:"별로 — 내 취향이 아니다",s:{bondage:1}}]},
+  {q:"애프터케어(끝난 뒤 돌봄)는 나에게?",opts:[{t:"본 플레이만큼 중요하다. 안아주고 챙기는 시간이 핵심",s:{care:2}},{t:"충분히 받아야 안심하고 더 깊이 맡길 수 있다",s:{sub:1,care:2}},{t:"내가 책임지고 확실히 챙겨주는 편이다",s:{dom:1,care:2}}]},
+  {q:"세이프워드에 대한 내 생각은?",opts:[{t:"관계의 절대 원칙. 어기는 건 있을 수 없다",s:{dom:1,sub:1}},{t:"있으니까 오히려 더 과감하게 맡길 수 있다",s:{sub:1,pain:1}},{t:"상대를 지키는 건 온전히 내 책임이다",s:{dom:2}}]},
 ];
 let qIndex=0, scores={};
 const answers=new Array(QUESTIONS.length).fill(null);
-
 function renderTestIntro(){
   document.getElementById('test-card').innerHTML=`
     <div class="test-intro">
       <div class="em">⛓️</div>
       <h3>나의 BDSM 성향 테스트</h3>
-      <p>8개의 질문에 답하면 당신의 성향을 분석해 드려요. 정답은 없습니다 — 더 끌리는 쪽을 솔직하게 고르세요. 결과는 프로필에 그대로 반영할 수 있어요.</p>
+      <p>8개의 질문에 답하면 당신의 성향을 분석해 드려요. 정답은 없습니다 — 더 끌리는 쪽을 솔직하게 고르세요.</p>
       <button class="start-btn" onclick="startTest()">테스트 시작하기</button>
     </div>`;
 }
@@ -889,9 +1157,7 @@ function renderQuestion(){
     <div class="q-wrap">
       <div class="q-count">Question ${qIndex+1} / ${QUESTIONS.length}</div>
       <div class="q-text">${q.q}</div>
-      <div class="opts">
-        ${q.opts.map((o,oi)=>`<button class="opt" onclick="answer(${oi})">${o.t}</button>`).join('')}
-      </div>
+      <div class="opts">${q.opts.map((o,oi)=>`<button class="opt" onclick="answer(${oi})">${o.t}</button>`).join('')}</div>
       <div class="q-nav">
         <button onclick="prevQuestion()" ${qIndex===0?'disabled':''}>‹ 이전</button>
         <button onclick="renderTestIntro()">처음으로</button>
@@ -899,101 +1165,57 @@ function renderQuestion(){
     </div>`;
 }
 function answer(oi){
-  if(answers[qIndex]!==null){
-    const prev=QUESTIONS[qIndex].opts[answers[qIndex]].s;
-    for(const k in prev)scores[k]=(scores[k]||0)-prev[k];
-  }
+  if(answers[qIndex]!==null){const prev=QUESTIONS[qIndex].opts[answers[qIndex]].s;for(const k in prev)scores[k]=(scores[k]||0)-prev[k];}
   answers[qIndex]=oi;
-  const s=QUESTIONS[qIndex].opts[oi].s;
-  for(const k in s)scores[k]=(scores[k]||0)+s[k];
-  if(qIndex<QUESTIONS.length-1){qIndex++;renderQuestion();}
-  else showResult();
+  const s=QUESTIONS[qIndex].opts[oi].s;for(const k in s)scores[k]=(scores[k]||0)+s[k];
+  if(qIndex<QUESTIONS.length-1){qIndex++;renderQuestion();}else showResult();
 }
 function prevQuestion(){if(qIndex>0){qIndex--;renderQuestion();}}
-
 const THEMES={
-  nurture:{dom:"대디돔",sub:"리틀",neutral:"양육·돌봄"},
-  pain:{dom:"사디스트",sub:"마조히스트",neutral:"고통 교환"},
-  bondage:{dom:"리거(바운디지 돔)",sub:"로프버니(구속 선호)",neutral:"구속·결박"},
-  degr:{dom:"디그레이더",sub:"디그레이디",neutral:"디그레이딩"},
-  primal:{dom:"프라이멀 헌터",sub:"프라이멀 프레이",neutral:"프라이멀"},
-  pet:{dom:"오너",sub:"펫",neutral:"펫플레이"},
-  brat:{dom:"브랫테이머",sub:"브랫",neutral:"브랫"},
-  role:{dom:"롤플레이어",sub:"롤플레이어",neutral:"롤플레이"},
+  nurture:{dom:"대디돔",sub:"리틀",neutral:"양육·돌봄"},pain:{dom:"사디스트",sub:"마조히스트",neutral:"고통 교환"},
+  bondage:{dom:"리거(바운디지 돔)",sub:"로프버니",neutral:"구속·결박"},degr:{dom:"디그레이더",sub:"디그레이디",neutral:"디그레이딩"},
+  primal:{dom:"프라이멀 헌터",sub:"프라이멀 프레이",neutral:"프라이멀"},pet:{dom:"오너",sub:"펫",neutral:"펫플레이"},
+  brat:{dom:"브랫테이머",sub:"브랫",neutral:"브랫"},role:{dom:"롤플레이어",sub:"롤플레이어",neutral:"롤플레이"},
 };
-function themeName(key,base){
-  const T=THEMES[key];if(!T)return key;
-  if(base==="도미넌트")return T.dom;
-  if(base==="서브미시브")return T.sub;
-  return T.neutral;
-}
+function themeName(key,base){const T=THEMES[key];if(!T)return key;if(base==="도미넌트")return T.dom;if(base==="서브미시브")return T.sub;return T.neutral;}
 function showResult(){
   const dom=scores.dom||0,sub=scores.sub||0,sw=scores.switch||0;
   let base,baseEm,baseDesc;
-  if(sw>=2&&Math.abs(dom-sub)<=2){base="스위치";baseEm="🔀";baseDesc="상황과 상대에 따라 주도권을 자유롭게 오가는 유연한 성향이에요. 지배와 복종 양쪽의 쾌감을 모두 이해합니다.";}
-  else if(dom>sub){base="도미넌트";baseEm="👑";baseDesc="관계의 주도권을 쥐고 상대를 이끌 때 가장 자연스러운 성향이에요. 통제에는 그만큼의 책임이 따른다는 걸 아는 타입입니다.";}
-  else if(sub>dom){base="서브미시브";baseEm="🎀";baseDesc="믿는 사람에게 자신을 맡기고 따를 때 깊은 만족과 안정을 느끼는 성향이에요. 좋은 주인을 알아보는 눈이 가장 큰 무기입니다.";}
-  else{base="스위치";baseEm="🔀";baseDesc="지배와 복종 사이를 오가는 균형형이에요. 상대에 따라 색이 달라지는 타입입니다.";}
-
+  if(sw>=2&&Math.abs(dom-sub)<=2){base="스위치";baseEm="🔀";baseDesc="상황과 상대에 따라 주도권을 자유롭게 오가는 유연한 성향이에요.";}
+  else if(dom>sub){base="도미넌트";baseEm="👑";baseDesc="관계의 주도권을 쥐고 상대를 이끌 때 가장 자연스러운 성향이에요.";}
+  else if(sub>dom){base="서브미시브";baseEm="🎀";baseDesc="믿는 사람에게 자신을 맡기고 따를 때 깊은 만족을 느끼는 성향이에요.";}
+  else{base="스위치";baseEm="🔀";baseDesc="지배와 복종 사이를 오가는 균형형이에요.";}
   const themeKeys=Object.keys(THEMES).filter(k=>(scores[k]||0)>0).sort((a,b)=>(scores[b]||0)-(scores[a]||0));
   const top=themeKeys.slice(0,3);
   const primaryName=top.length?themeName(top[0],base):"";
-
-  let roleTags=[base];
-  top.forEach(k=>roleTags.push(themeName(k,base)));
-  roleTags=[...new Set(roleTags)];
-
+  let roleTags=[base];top.forEach(k=>roleTags.push(themeName(k,base)));roleTags=[...new Set(roleTags)];
   const barData=[
-    {l:"주도 ↔ 복종",a:"도미넌트",b:"서브미시브",twoSided:true,v:50+(dom-sub)*11},
-    {l:"양육·돌봄 (대디↔리틀)",a:"낮음",b:"높음",v:(scores.nurture||0)*15+8},
-    {l:"고통 (사디↔마조)",a:"낮음",b:"높음",v:(scores.pain||0)*15+8},
-    {l:"구속 · 결박",a:"낮음",b:"높음",v:(scores.bondage||0)*18+8},
-    {l:"프라이멀 · 롤플레이",a:"낮음",b:"높음",v:((scores.primal||0)+(scores.role||0))*13+8},
-    {l:"애프터케어 중시",a:"낮음",b:"높음",v:(scores.care||0)*15+10},
+    {l:"주도 ↔ 복종",twoSided:true,v:50+(dom-sub)*11},
+    {l:"양육·돌봄",v:(scores.nurture||0)*15+8},{l:"고통·SM",v:(scores.pain||0)*15+8},
+    {l:"구속·결박",v:(scores.bondage||0)*18+8},{l:"프라이멀·롤플레이",v:((scores.primal||0)+(scores.role||0))*13+8},
+    {l:"애프터케어 중시",v:(scores.care||0)*15+10},
   ].map(x=>({...x,v:Math.max(5,Math.min(95,x.v))}));
-
   const recMap={nurture:["케어","펫"],pain:["사디즘","마조히즘"],bondage:["바운디지"],degr:["디그레이딩"],primal:["프라이멀","롤플레이"],pet:["펫"],role:["롤플레이"],brat:[]};
-  let recScores=DATA.map((p,i)=>{
-    if(p.flag)return{i,sc:-99};
-    let sc=0;
-    top.forEach((k,ord)=>{(recMap[k]||[]).forEach(tag=>{if((p.recTrait||[]).includes(tag))sc+=(3-ord);});});
-    return{i,sc};
-  }).sort((a,b)=>b.sc-a.sc);
+  let recScores=DATA.map((p,i)=>{if(p.flag)return{i,sc:-99};let sc=0;top.forEach((k,ord)=>{(recMap[k]||[]).forEach(tag=>{if((p.recTrait||[]).includes(tag))sc+=(3-ord);});});return{i,sc};}).sort((a,b)=>b.sc-a.sc);
   let recs=recScores.filter(r=>r.sc>0).slice(0,3).map(r=>r.i);
   if(recs.length<2){DATA.forEach((p,i)=>{if(!p.flag&&recs.length<2&&!recs.includes(i))recs.push(i);});}
-
-  let myLabel;
-  if(base==="스위치")myLabel=primaryName?`${primaryName} 스위치`:"스위치";
-  else if(primaryName)myLabel=`${primaryName} ${base}`;
-  else myLabel=base;
-
+  let myLabel=base==="스위치"?primaryName?`${primaryName} 스위치`:"스위치":primaryName?`${primaryName} ${base}`:base;
   window.__testResult={label:myLabel,base,roleTags,em:baseEm};
-
   document.getElementById('test-card').innerHTML=`
     <div class="test-progress"><div class="bar" style="width:100%"></div></div>
     <div class="result">
-      <div class="em">${baseEm}</div>
-      <div class="rlab">Your Result</div>
+      <div class="em">${baseEm}</div><div class="rlab">Your Result</div>
       <h3>${myLabel}</h3>
-      <div class="sub">Position: ${base}${top[0]?` · 주요 성향 ${themeName(top[0],base)}`:''}</div>
-      <div class="desc">${baseDesc}${top[0]?` 특히 <b style="color:var(--gold)">${themeName(top[0],base)}</b> 성향이 두드러지고, ${top[1]?`<b style="color:var(--gold)">${themeName(top[1],base)}</b> 요소도 함께 보여요.`:'그 색이 가장 선명합니다.'}`:''}</div>
-      <div class="bars">
-        ${barData.map(b=>{
-          let lab;
-          if(b.twoSided){lab=`${b.v>=50?b.b:b.a} ${Math.round(b.v>=50?b.v:100-b.v)}%`;}
-          else{lab=`${b.v>=66?'높음':b.v>=33?'보통':'낮음'} ${Math.round(b.v)}%`;}
-          return `<div class="bar-row">
-          <div class="bl"><span>${b.l}</span><b>${lab}</b></div>
-          <div class="bar-track"><div class="bar-fill" style="width:0%" data-w="${b.v}"></div></div>
-        </div>`;}).join('')}
+      <div class="sub">Position: ${base}${top[0]?` · ${themeName(top[0],base)}`:''}</div>
+      <div class="desc">${baseDesc}${top[0]?` 특히 <b style="color:var(--gold)">${themeName(top[0],base)}</b> 성향이 두드러져요.`:''}</div>
+      <div class="bars">${barData.map(b=>{let lab=b.twoSided?`${b.v>=50?'도미넌트':'서브미시브'} ${Math.round(b.v>=50?b.v:100-b.v)}%`:`${b.v>=66?'높음':b.v>=33?'보통':'낮음'} ${Math.round(b.v)}%`;
+        return `<div class="bar-row"><div class="bl"><span>${b.l}</span><b>${lab}</b></div><div class="bar-track"><div class="bar-fill" style="width:0%" data-w="${b.v}"></div></div></div>`;}).join('')}
       </div>
       <div class="rtraits">${roleTags.map(t=>`<span class="role">${t}</span>`).join('')}</div>
       <div class="rec-title">— 당신과 잘 맞을 후보 —</div>
-      <div class="rec-list">
-        ${recs.map(i=>{const p=DATA[i];return `<div class="rec" onclick="openSheet(${i})">
-          <div class="ra" style="background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${avatarInner(p)}</div>
-          <div><div class="rn">${p.nick}</div><div class="rr">${p.tags[0]}</div></div></div>`;}).join('')}
-      </div>
+      <div class="rec-list">${recs.map(i=>{const p=DATA[i];return `<div class="rec" onclick="openSheet(${i})">
+        <div class="ra" style="background:linear-gradient(135deg,${p.accent[1]},${p.accent[0]})">${avatarInner(p)}</div>
+        <div><div class="rn">${p.nick}</div><div class="rr">${p.tags[0]}</div></div></div>`;}).join('')}</div>
       <div class="result-actions">
         <button class="apply-btn" onclick="applyResult()">이 성향으로 프로필 설정</button>
         <button class="retake-btn" onclick="startTest()">다시 하기</button>
@@ -1008,9 +1230,8 @@ function applyResult(){
   document.querySelector('.me-info .mh').textContent='프로필 업데이트됨 · 사진 0/3';
   document.getElementById('test-card').innerHTML=`
     <div class="test-intro">
-      <div class="em">✅</div>
-      <h3>프로필에 반영했어요</h3>
-      <p>위 내 프로필의 <b style="color:var(--gold)">${r.label}</b> 성향이 저장되었습니다. 이제 탐색에서 잘 맞는 주인을 찾아보세요.</p>
+      <div class="em">✅</div><h3>프로필에 반영했어요</h3>
+      <p><b style="color:var(--gold)">${r.label}</b> 성향이 저장되었습니다.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
         <button class="start-btn" onclick="go('explore')">후보 탐색하러 가기</button>
         <button class="retake-btn" style="background:transparent;border:1px solid var(--line);color:var(--muted);padding:14px 28px;border-radius:6px;cursor:pointer;font-family:var(--body);font-size:15px" onclick="startTest()">테스트 다시 하기</button>
